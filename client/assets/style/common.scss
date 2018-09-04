@@ -1,0 +1,19 @@
+
+@keyframes spinner-spin8
+{
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate_icon {
+  height: 18px;
+  width: 18px;
+  background-position: 0 0;
+  background-size: 100% 100%;
+  background-image: url('~@assets/image/loading.png');
+  animation: 1s spinner-spin8 linear infinite normal;
+}

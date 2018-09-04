@@ -3,6 +3,7 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const webpack = require('webpack')
 
 module.exports = {
+  entry: path.resolve(process.cwd(), "client/index.js"),
   module: {
     rules: [
       {
@@ -11,13 +12,35 @@ module.exports = {
         use: {
           loader: "babel-loader"
         }
+      },
+      {
+        test: /\.(png|jpg)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(css|less|scss)$/,
+        use: [ 'style-loader', 'css-loader', 'sass-loader' ]
       }
     ]
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'client'),
+      '@scss': path.resolve(__dirname, 'client/assets', 'style'),
+      '@assets': path.resolve(__dirname, 'client', 'assets')
+    }
   },
   devServer: {
     contentBase: path.resolve(process.cwd(), "dist"),//本地服务器所加载的页面所在的目录
     historyApiFallback: true,//不跳转
-    host:'127.0.0.1',
+    host:'localhost',
     port: 7000,
     hot: true,
     inline: true,//实时刷新
@@ -35,8 +58,9 @@ module.exports = {
   },
   plugins: [
       new HtmlWebPackPlugin({
-          template: path.resolve(process.cwd(), "src/index.html"),
-          filename: "index.html"
+          template: path.resolve(process.cwd(), "client/index.html"),
+          filename: "index.html",
+          favicon: path.resolve(process.cwd(), "client/assets/image/favicon.ico")
       }),
       new webpack.HotModuleReplacementPlugin()
   ]
