@@ -1,6 +1,8 @@
 
 :local(.dynamic-list){
   width: 613px;
+  border-bottom: 1px solid #efefef;
+  border-radius: 10px;
   .header {
     display: flex;
     align-items: center;

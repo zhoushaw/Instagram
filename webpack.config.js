@@ -1,9 +1,17 @@
 const path = require('path')
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const webpack = require('webpack')
-
+const clientPath = path.resolve(__dirname, 'client')
 module.exports = {
-  entry: path.resolve(process.cwd(), "client/index.js"),
+  entry:{
+    main: path.resolve(clientPath, "index.js"),
+    login: path.resolve(clientPath, "js/instagram/login/index.js"),
+  }, 
+  output: {
+      publicPath: '/',
+      path: path.resolve(process.cwd(), "dist"),
+      filename: 'js/[name].js'
+  },
   module: {
     rules: [
       {
@@ -32,9 +40,9 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'client'),
-      '@scss': path.resolve(__dirname, 'client/assets', 'style'),
-      '@assets': path.resolve(__dirname, 'client', 'assets')
+      '@': clientPath,
+      '@scss': path.resolve(clientPath, 'assets/style'),
+      '@assets': path.resolve(clientPath, 'assets')
     }
   },
   devServer: {

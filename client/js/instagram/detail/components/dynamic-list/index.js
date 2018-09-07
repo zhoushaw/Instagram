@@ -9,7 +9,7 @@ class DynamicList extends React.Component {
   render() {
     return (
       <div className={Style['dynamic-list']}>
-        <article class="article">
+        <article className="article">
           <header className="header">
             <div className="avatar"></div>
             <div className="user_abstract">
