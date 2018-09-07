@@ -1,0 +1,44 @@
+
+:local(.dynamic-list){
+  width: 613px;
+  .header {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    width: 613px;
+    background: #fff;
+    .avatar {
+      margin-left: 17px;
+      display: inline-block;
+      height: 32px;
+      width: 32px;
+      background: #efefef;
+      border-radius: 50%;
+    }
+    .user_abstract {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 32px;
+      margin-left: 12px;
+      .username {
+        width: 140px;
+        height: 10px;
+        background: #efefef;
+      }
+      .abstract {
+        margin-top: 5px;
+        width: 100px;
+        height: 10px;
+        background: #efefef;
+      }
+    }
+  }
+  .container {
+    height: 615px;
+    width: 613px;
+    background-color: #f0f0f0;
+    background-image: url('~@assets/image/light.gif');
+    background-size: 100% 100%;
+  }
+}

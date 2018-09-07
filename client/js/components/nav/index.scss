@@ -1,7 +1,7 @@
 
 @import '~@scss/mixin.scss';
 
-.page-header {
+:local(.page-header){
   position: fixed;
   top: 0;
   width: 100%;
@@ -10,13 +10,14 @@
   border-bottom: 1px solid rgba(0,0,0,.0975);
   transition: height .2s ease-in-out;
   .header {
+    box-sizing: border-box;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
     height: 77px;
     justify-content: center;
     align-items: center;
-    max-width: 1010px;
+    width: 1010px;
     padding: 0 40px;
     transition: height .2s ease-in-out;
     &.toggle {
