@@ -2,7 +2,8 @@
 :local(.dynamic-list){
   width: 613px;
   border-bottom: 1px solid #efefef;
-  border-radius: 10px;
+  overflow: hidden;
+  border-radius: 3px;
   .header {
     display: flex;
     align-items: center;
@@ -26,7 +27,7 @@
       .username {
         width: 140px;
         height: 10px;
-        background: #efefef;
+        background-color: #efefef;
       }
       .abstract {
         margin-top: 5px;

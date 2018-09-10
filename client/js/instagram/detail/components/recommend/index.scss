@@ -15,23 +15,23 @@
       background: #efefef;
       border-radius: 50%;
     }
-    .user_abstract {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: 32px;
-      margin-left: 12px;
-      .username {
-        width: 140px;
-        height: 10px;
-        background: #efefef;
-      }
-      .abstract {
-        margin-top: 5px;
-        width: 100px;
-        height: 10px;
-        background: #efefef;
-      }
+  }
+  .user_abstract {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 32px;
+    margin-left: 12px;
+    .username {
+      width: 140px;
+      height: 10px;
+      background: #efefef;
+    }
+    .abstract {
+      margin-top: 5px;
+      width: 100px;
+      height: 10px;
+      background: #efefef;
     }
   }
   .container {
@@ -41,8 +41,9 @@
     border-bottom: 1px solid #efefef;
     .title {
       height: 46px;
-      font-size: 15px;
-      color: #999999;
+      color: #999;
+      font-size: 14px;
+      font-weight: bold;
       line-height: 46px;
     }
     .friend_photo {
@@ -59,24 +60,6 @@
           width: 50px;
           background: #efefef;
           border-radius: 50%;
-        }
-        .user_abstract {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          height: 32px;
-          margin-left: 12px;
-          .username {
-            width: 140px;
-            height: 10px;
-            background: #efefef;
-          }
-          .abstract {
-            margin-top: 5px;
-            width: 100px;
-            height: 10px;
-            background: #efefef;
-          }
         }
       }
     }

@@ -10,53 +10,33 @@ class Recommend extends React.Component {
   }
 
   render () {
+    let friend_list = ['','','','','']
+
     return (
       <div className={Style.recommend}>
         <header className="header">
           <div className="avatar"></div>
           <div className="user_abstract">
-            <p className="username"></p>
-            <p className="abstract"></p>
+            <div className="username"></div>
+            <div className="abstract"></div>
           </div>
         </header>
         <section className="container">
           <nav className="title">快拍</nav>
           <ul className="friend_photo">
-            <li className="list">
-              <div className="avatar"></div>
-              <div className="user_abstract">
-                <p className="username"></p>
-                <p className="abstract"></p>
-              </div>
-            </li>
-            <li className="list">
-              <div className="avatar"></div>
-              <div className="user_abstract">
-                <p className="username"></p>
-                <p className="abstract"></p>
-              </div>
-            </li>
-            <li className="list">
-              <div className="avatar"></div>
-              <div className="user_abstract">
-                <p className="username"></p>
-                <p className="abstract"></p>
-              </div>
-            </li>
-            <li className="list">
-              <div className="avatar"></div>
-              <div className="user_abstract">
-                <p className="username"></p>
-                <p className="abstract"></p>
-              </div>
-            </li>
-            <li className="list">
-              <div className="avatar"></div>
-              <div className="user_abstract">
-                <p className="username"></p>
-                <p className="abstract"></p>
-              </div>
-            </li>
+            {
+              friend_list.map((item, index)=>{
+                return (
+                  <li className="list" key={index}>
+                    <div className="avatar"></div>
+                    <div className="user_abstract">
+                      <div className="username"></div>
+                      <div className="abstract"></div>
+                    </div>
+                  </li>
+                )
+              })
+            }
           </ul>
         </section>
         <section className="introduce">

@@ -13,8 +13,8 @@ class DynamicList extends React.Component {
           <header className="header">
             <div className="avatar"></div>
             <div className="user_abstract">
-              <p className="username"></p>
-              <p className="abstract"></p>
+              <div className="username"></div>
+              <div className="abstract"></div>
             </div>
           </header>
           <div className="container">
