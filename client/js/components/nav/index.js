@@ -73,5 +73,11 @@ class Nav extends React.Component{
         let onScroll = this.onScroll()
         window.addEventListener("scroll", onScroll)
     }
+
+    componentWillUnmount () {
+        this.setState = (state,callback)=>{
+            return;
+        };
+    }
 }
 export default Nav
