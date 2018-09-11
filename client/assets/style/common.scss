@@ -17,3 +17,7 @@
   background-image: url('~@assets/image/loading.png');
   animation: 1s spinner-spin8 linear infinite normal;
 }
+
+.clear-bg {
+  background: rgba(0,0,0,0) !important;
+}

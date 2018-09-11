@@ -35,11 +35,8 @@
         min-width: 40px;
         color: #003569;
         text-decoration: none;
-        transition: opacity .2s ease-in-out;
+        transition: all .3s ease-in-out;
         @include sprite-2x( 495px 483px,0 -230px);
-      }
-      .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-        opacity: 0;
       }
       .icon {
         position: absolute;
