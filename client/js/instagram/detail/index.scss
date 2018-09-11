@@ -7,4 +7,44 @@
   display: flex;
   justify-content: space-between;
   flex-direction: row;
+  @keyframes LoadingBarProgress {
+    0% {
+        background-position: 0% 0;
+    }
+    100% {
+        background-position: 125% 0;
+    }
+  }
+
+  @keyframes LoadingBarEnter {
+    0% {
+        transform: scaleX(0);
+    }
+    100% {
+        transform: scaleX(1);
+    }
+  }
+  .loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    // background: #27c4f5 -webkit-gradient(linear,left top,right top,from(#27c4f5),color-stop(#a307ba),color-stop(#fd8d32),color-stop(#70c050),to(#27c4f5));
+    background-image: linear-gradient(to right, rgb(39, 196, 245), rgb(163, 7, 186), rgb(253, 141, 50), rgb(112, 192, 80), rgb(39, 196, 245));
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: 500%;
+    // background-repeat-x: initial;
+    // background-repeat-y: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: rgb(39, 196, 245);
+    z-index: 2;
+    animation: 2s linear infinite LoadingBarProgress,.5s ease-out LoadingBarEnter;
+    transform-origin: left;
+    width: 100%;
+  }
 }
+

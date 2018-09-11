@@ -8,29 +8,14 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isSignUp: true,
-            photoSrc: '1'
+            isSignUp: true
         }
-        this.initSlideshow()
     }
 
     toggleSign () {
         this.setState({
             isSignUp: !this.state.isSignUp
         })
-    }
-
-    initSlideshow () {
-        const photoList = ['1','2','3','4','5']
-        let currIndex = 0;
-        setInterval(() => {
-            if (currIndex>=photoList.length-1) {
-                currIndex = 0;
-            }
-            this.setState({
-                photoSrc: photoList[currIndex]
-            })
-        }, 2000);
     }
 
     render () {

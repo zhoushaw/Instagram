@@ -15,6 +15,7 @@ class Detail extends React.Component {
         <Nav />
         <div className="page-container">
           <div className={Style['home-detail']}>
+            <span className="loading"></span>
             <DynamicList />
             <Recommend />
           </div>
