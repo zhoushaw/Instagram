@@ -42,7 +42,8 @@ module.exports = {
     alias: {
       '@': clientPath,
       '@scss': path.resolve(clientPath, 'assets/style'),
-      '@assets': path.resolve(clientPath, 'assets')
+      '@assets': path.resolve(clientPath, 'assets'),
+      '@components': path.resolve(clientPath, 'js/components')
     }
   },
   devServer: {

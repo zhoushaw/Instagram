@@ -1,0 +1,57 @@
+:local(.user-infos) {
+  display: flex;
+  align-items: flex-start;
+  height: 155px;
+  .avator {
+    display: inline-block;
+    height: 155px;
+    width: 155px;
+    margin: 0 100px 0 70px;
+    border-radius: 50%;
+    background-image: url('https://scontent-sin6-1.cdninstagram.com/vp/a00492556bf7956b3ce845a285dbecf7/5C61746D/t51.2885-19/s150x150/33885471_1992324384411933_7383797600782123008_n.jpg');
+    background-size: 100% 100%;
+    cursor: pointer;
+  }
+  .user-infos {
+    display: inline-block;
+    .operate {
+      .user-account {
+        margin-right: 20px;
+        font-size: 24px;
+        color: #222222;
+      }
+      .modify {
+        padding: 3px 15px;
+        margin-right: 12px;
+        font-size: 14px;
+        font-weight: bold;
+        border: 1px solid #dedede;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .icon {
+        font-size: 20px;
+        cursor: pointer;
+      }
+    }
+    .attention-status {
+      height: 45px;
+      line-height:45px;
+      color: #00091c;
+      span {
+        margin-right: 40px;
+        font-size: 16px;
+        font-weight: bold;
+        b {
+          margin-right: 7px;
+          font-weight: bold;
+          font-size: 16px;
+        }
+      }
+    }
+    .user-name {
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+}

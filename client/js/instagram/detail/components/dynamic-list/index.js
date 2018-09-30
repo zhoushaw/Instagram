@@ -8,22 +8,22 @@ class DynamicList extends React.Component {
       dynamicList: [
         {
           userInfo: {
-            avatar: 'https://scontent-nrt1-1.cdninstagram.com/vp/411304988011e5a322e837c6d44b5b35/5C2DA515/t51.2885-19/s320x320/33885471_1992324384411933_7383797600782123008_n.jpg',
+            avatar: 'https://s10.mogucdn.com/mlcdn/c45406/180930_634a7ck1ikea6k139lbgbi343ha2c_150x150.jpg',
             username: 'codingzx',
             abstract: 'life is great'
           },
           imagList: [
-            'https://scontent-sit4-1.cdninstagram.com/vp/516f31d8340a4a897b578bacd551a734/5C303C28/t51.2885-15/e35/40426112_159256018310402_4973568210772759512_n.jpg'
+            'https://s10.mogucdn.com/mlcdn/c45406/180930_34f03e7j4jkdbc9671jjc37ghf08c_1080x1080.jpg'
           ]
         },
         {
           userInfo: {
-            avatar: 'https://scontent-sit4-1.cdninstagram.com/vp/f4f32317694a66123c6082dfa49be204/5C22525E/t51.2885-19/s150x150/35000476_1933742596676449_6448191077596790784_n.jpg',
+            avatar: 'https://s10.mogucdn.com/mlcdn/c45406/180930_634a7ck1ikea6k139lbgbi343ha2c_150x150.jpg',
             username: 'kagoyuta',
             abstract: 'life is great'
           },
           imagList: [
-            'https://scontent-sit4-1.cdninstagram.com/vp/516f31d8340a4a897b578bacd551a734/5C303C28/t51.2885-15/e35/40426112_159256018310402_4973568210772759512_n.jpg'
+            'https://s10.mogucdn.com/mlcdn/c45406/180930_34f03e7j4jkdbc9671jjc37ghf08c_1080x1080.jpg'
           ]
         }
       ],

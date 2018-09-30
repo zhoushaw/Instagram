@@ -1,8 +1,8 @@
 import React from 'react'
-import DynamicList from './components/dynamic-list/index'
-import Recommend from './components/recommend/index'
-import Nav from '@components/nav/index.js'
 import Style from './index.scss'
+import Nav from '../../components/nav/index.js'
+import UserInfos from './components/userInfos/index.js'
+import FavoriteList from './components/favoriteList/index.js'
 
 class Detail extends React.Component {
   constructor(props) {
@@ -14,10 +14,9 @@ class Detail extends React.Component {
       <main>
         <Nav />
         <div className="page-container">
-          <div className={Style['home-detail']}>
-            <span className="loading"></span>
-            <DynamicList />
-            <Recommend />
+          <div className={Style['personal-about']}>
+            <UserInfos />
+            <FavoriteList />
           </div>
         </div>
       </main>

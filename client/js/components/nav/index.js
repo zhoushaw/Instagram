@@ -41,7 +41,7 @@ class Nav extends React.Component{
                     <div className="navigate">
                     <a className="explore" href=""></a>
                     <a className="love" href=""></a>
-                    <a className="user" href=""></a>
+                    <a className="user" href="/about"></a>
                     </div>
                 </div>
             </nav>
