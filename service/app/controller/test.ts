@@ -4,8 +4,9 @@ export default class Test extends Controller {
   async list() {
     const {ctx} = this
     try {
-      var response = await ctx.service.test.list()
-      await this.ctx.render('news/list.tpl', response)
+      // let successCode = await ctx.service.test.addUser()
+      // console.log(successCode)
+      ctx.service.test.addUser()
     } catch(err) {
       console.log(err)
     }
