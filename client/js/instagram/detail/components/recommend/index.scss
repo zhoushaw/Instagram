@@ -12,38 +12,57 @@
       display: inline-block;
       height: 50px;
       width: 50px;
-      background: #efefef;
+      overflow: hidden;
       border-radius: 50%;
+      background-size: 100% 100%;
+      background-color: #efefef;
     }
-    .user_abstract {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: 32px;
-      margin-left: 12px;
-      .username {
-        width: 140px;
-        height: 10px;
-        background: #efefef;
-      }
-      .abstract {
-        margin-top: 5px;
-        width: 100px;
-        height: 10px;
-        background: #efefef;
-      }
+  }
+  .user_abstract {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 50px;
+    margin-left: 12px;
+    .username {
+      width: 140px;
+      min-height: 10px;
+      background: #efefef;
+      line-height: 10px;
+      color: #262626;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .abstract {
+      width: 100px;
+      min-height: 10px;
+      margin-top: 10px;
+      background: #efefef;
+      font-size: 12px;
+      line-height: 10px;
+      white-space: nowrap;
+      color: #999;
     }
   }
   .container {
     width: 300px;
-    height: 350px;
+    max-height: 350px;
     overflow: scroll;
     border-bottom: 1px solid #efefef;
     .title {
       height: 46px;
-      font-size: 15px;
-      color: #999999;
+      color: #999;
+      font-size: 14px;
+      font-weight: bold;
       line-height: 46px;
+    }
+    .notice {
+      color: #c7c7c7;
+      font-size: 14px;
+      line-height: 18px;
+      margin-bottom: 16px;
+      margin-top: 4px;
+      width: 100%;
     }
     .friend_photo {
       li {
@@ -59,24 +78,6 @@
           width: 50px;
           background: #efefef;
           border-radius: 50%;
-        }
-        .user_abstract {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          height: 32px;
-          margin-left: 12px;
-          .username {
-            width: 140px;
-            height: 10px;
-            background: #efefef;
-          }
-          .abstract {
-            margin-top: 5px;
-            width: 100px;
-            height: 10px;
-            background: #efefef;
-          }
         }
       }
     }

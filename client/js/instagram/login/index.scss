@@ -1,0 +1,74 @@
+
+:local(.login){
+    .login_info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 30px auto 0;
+        max-width: 935px;
+        height: 768px;
+        padding-bottom: 44px;
+        width: 100%;
+        .descript {
+            position: relative;
+            width: 454px;
+            height: 618px;
+            background-position: 0 0;
+            background-size: 454px 618px;
+            height: 618px;
+            margin-left: -35px;
+            // margin-right: -15px;
+            background-image: url('~@assets/image/login/loginbg.png');
+            background-repeat: no-repeat;
+            @keyframes ma {
+                0% {
+                    background-image: url('~@assets/image/login/1.jpg');
+                }
+                25% {
+                    background-image: url('~@assets/image/login/2.jpg');
+                }
+                50% {
+                    background-image: url('~@assets/image/login/3.jpg');
+                }
+                75% {
+                    background-image: url('~@assets/image/login/4.jpg');
+                }
+                100% {
+                    background-image: url('~@assets/image/login/5.jpg');
+                }
+            }
+            .photo {
+                height: 428px;
+                width: 240px;
+                position: absolute;
+                left: 151px;
+                top: 99px;
+                background-image: url('~@assets/image/login/1.jpg');
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                animation:ma 10s infinite alternate;
+            }
+        }
+        .login_dialog {
+            // height: 712px;
+            width: 350px;
+            .toggle_ways {
+                width: 350px;
+                height: 70px;
+                line-height: 50px;
+                text-align: center;
+                background-color: #fff;
+                border: 1px solid #e6e6e6;
+                border-radius: 1px;
+                margin: 0 0 10px;
+                padding: 10px 0;
+                border-radius: 3px;
+                font-size: 14px;
+                .notice {
+                    color: #6492e6;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

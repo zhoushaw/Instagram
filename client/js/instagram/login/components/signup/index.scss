@@ -1,0 +1,108 @@
+@import '~@scss/mixin.scss';
+
+:local(.signup){
+    width: 350px;
+    min-height: 480px;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 1px;
+    margin: 0 0 10px;
+    padding: 10px 0;
+    border-radius: 3px;
+    .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 22px auto 12px;
+        height: 51px;
+        width: 100%;
+        .instagram {
+            display: inline-block;
+            height: 51px;
+            width: 175px;
+            background-repeat: no-repeat;
+            @include sprite-2x( 495px 483px,0 -98px);
+        }
+    }
+    .slogan {
+        text-align: center;
+        color: #8c8c8c;
+        font-weight: 600;
+        line-height: 20px;
+        font-size: 17px;
+        margin: 0 40px 10px;
+    }
+    .facebook-login {
+        width: 267px;
+        margin: 10px 42px;
+        font-weight: bold;
+    }
+    .or-line {
+        display: flex;
+        align-items: center;
+        width: 267px;
+        margin: 18px auto;
+        .name {
+            margin: 0 15px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #8c8c8c;
+        }
+        .line {
+            height: 1px;
+            background: #f2f2f2;
+            flex: 1;
+        }
+    }
+    .form-input {
+        position: relative;
+        display: inline-block;
+        margin: 0 auto 12px 0 !important;
+        width: 267px;
+        height: 37px;
+        background: #fafafa;
+        label {
+            transition: all 0.3s;
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin-left: 32px;
+            z-index: 1;
+            color: #c2c1c2;
+        }
+        input {
+            display: inline-block;
+            margin: 0 auto !important;
+            width: 267px;
+            height: 37px;
+            background: #fafafa;
+            text-indent: 0px;    
+            font: 400 11px system-ui;
+        }
+        &.active {
+            label {
+                transform: scale(.83333) translateY(-10px);
+                transform-origin: left;
+            }
+            input {
+                padding: 14px 0 0 31px!important;
+                // padding-top: 14px;
+                font-size: 12px;
+            }
+        }
+    }
+    .register-form {
+        width: 267px;
+        // height: 180px;
+        margin: 0 auto;
+        .ant-form-item {
+            margin-bottom: 5px;
+        }
+        .register-form-forgot {
+            float: right;
+        }
+        .register-form-button {
+            width: 100%;
+        }
+    }
+}

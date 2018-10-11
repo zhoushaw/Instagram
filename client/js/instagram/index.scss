@@ -1,13 +1,19 @@
 
-// .layout {
-//   width: 1010px;
-//   height: 100%;
-//   margin: 0 auto;
-// }
-body{
-  background: #fafafa;
+body {
+  height: 100%;
+  width: 100%;
+  background: #fafafa !important;
+}
+#app {
+  // height: 100%;
+  width: 100%;
+}
+.page {
+  height: 100%;
+  width: 100%;
 }
 .page-container {
-  margin: 78px;
+  background: #fafafa;
+  margin-top: 78px;
   padding-top: 58px;
 }

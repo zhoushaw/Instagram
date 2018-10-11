@@ -1,19 +1,22 @@
+import { BrowserRouter as Router,Switch,Route,Redirect} from "react-router-dom";
 import React from 'react'
+import Login from './login/index.js'
+import Detail from './detail/index'
+import About from './about/index'
+import NotFoundPage from './404/index'
 import '@scss/base.scss'
 import './index.scss'
-import Nav from '../components/nav/index.js'
-import { Route } from "react-router-dom";
-import Detail from './detail/index'
-
 
 const Intagram = () => {
   return (
-    <div>
-      <Nav />
-      <div className="page-container">
-        <Detail />
-      </div>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Detail}/>
+        <Route exact path="/login" component={Login}/>
+        <Route exact path="/about" component={About}/>
+        <Route exact path = '*' component={NotFoundPage} />
+      </Switch>
+    </Router>
   )
 }
 
