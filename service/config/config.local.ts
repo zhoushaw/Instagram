@@ -16,7 +16,7 @@ export default () => {
       // 密码
       password: 'touwohaozhesi',
       // 数据库名
-      database: 'mysql',
+      database: 'learn',
     },
     // 是否加载到 app 上，默认开启
     app: true,

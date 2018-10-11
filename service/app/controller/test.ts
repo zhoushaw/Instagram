@@ -4,9 +4,14 @@ export default class Test extends Controller {
   async list() {
     const {ctx} = this
     try {
-      // let successCode = await ctx.service.test.addUser()
-      // console.log(successCode)
-      ctx.service.test.addUser()
+      // 存储用户账号密码
+      let {username, password} = ctx.query
+      let userJson = {
+        username,
+        password
+      }
+      ctx.service.test.addUser(userJson)
+      ctx.body = 'hello world';
     } catch(err) {
       console.log(err)
     }

@@ -3,16 +3,29 @@ import { Service } from 'egg';
 /**
  * Test Service
  */
+interface AddUserParams {
+  username: string,
+  password: string
+}
 export default class Test extends Service {
 
   /**
    * sayHi to you
    * @param name - your name
    */
-  public async addUser() {
+  public async addUser(userMsg: AddUserParams) {
     // INSERT
-    const result = await this.app.mysql.insert('test', { account: 'Hello World', password: '123456' })
-    console.log(result.affectedRows === 1 && '插入成功')
+    let {username} = userMsg
+    // 是否可以查询到
+    const queryResult = await this.app.mysql.get('users', { username });
+    if (queryResult) {
+      return false
+    } else {
+      
+    }
+    
+    // const result = await this.app.mysql.insert('users', { username: 'Hell', passwords: '123456' })
+    // console.log(result.affectedRows === 1 && '插入成功')
     // const result = await this.mysql.insert('posts', { title: 'Hello World' }); //insert a record title 'Hello World' to 'posts' table
   }
 }
