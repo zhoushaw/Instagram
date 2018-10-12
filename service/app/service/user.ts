@@ -3,7 +3,8 @@ import { Service } from 'egg';
 /**
  * Service
  */
-interface AddUserParams {
+
+interface RegisterParams {
   username: string,
   password: string,
   mobile: number,
@@ -13,10 +14,10 @@ interface AddUserParams {
 export default class Test extends Service {
 
     /**
-     * sayHi to you
-     * @param name - your name
+     * 
+     * @param RegisterParams - your name
      */
-    public async register(user: AddUserParams) {
+    public async register(user: RegisterParams) {
         const {ctx} = this
 
         // 是否可以查询到
