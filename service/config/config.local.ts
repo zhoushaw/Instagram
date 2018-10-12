@@ -23,6 +23,17 @@ export default () => {
     // 是否加载到 agent 上，默认关闭
     agent: false,
   };
+  
+  // Sequelize config
+  config.sequelize = {
+    dialect: 'mysql',
+    host: '127.0.0.1',
+    port: 3306,
+    database: 'learn',
+    username: 'root',
+    password: 'touwohaozhesi',
+    operatorsAliases: false
+  };
 
   return config;
 };

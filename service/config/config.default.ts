@@ -9,6 +9,28 @@ export default (appInfo: EggAppInfo) => {
 
   // add your egg config in here
   config.middleware = [];
+  
+  // add RESTful API base path
+  config.basePath = '/api/v2'
+
+  // 关闭安全威胁csrf的防范
+  config.security = {
+    csrf: {
+      ignore: ctx => {
+        let ipReg = /^(172\.17|127\.0)/;
+        return ipReg.test(ctx.ip)
+      }
+    }
+  }
+
+  // router puls add namespace feature
+  config.routerPlus = {
+    enable: true,
+    package: 'egg-router-plus',
+  };
+
+  // 使用koa的中间件
+  config.middleware = ['errorHandler']
 
   // add your special config in here
   const bizConfig = {

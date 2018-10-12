@@ -2,6 +2,10 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg'; // Make sure ts to import egg declaration at first
-import 'egg-view-nunjucks';
-import 'egg-mysql';
-import 'egg-sequelize';
+import User from '../../../app/model/user';
+
+declare module 'sequelize' {
+  interface Sequelize {
+    User: ReturnType<typeof User>;
+  }
+}
