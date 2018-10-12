@@ -12,14 +12,19 @@ class UserController extends Controller {
         const {mobile, password, code, username, email} = ctx.request.body
 
         // 参数校验
+        let message;
         if (!mobile || !password) {
-            ctx.throw(400, '手机号或者密码不能为空');
+            message = '手机号或者密码不能为空'
         } else if (!code) {
-            ctx.throw(400, '验证码不能为空');
+            message = '验证码不能为空'
         } else if (!username) {
-            ctx.throw(400, '用户名为空');
+            message = '用户名为空'
         } else if (!email) {
-            ctx.throw(400, '邮箱地址为空');
+            message = '邮箱地址为空'
+        }
+        // 抛出异常
+        if (message) {
+            ctx.throw(400, message);
         }
 
         // 注册成功返回体
