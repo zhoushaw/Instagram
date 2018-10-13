@@ -6,3 +6,5 @@ import 'egg-view-nunjucks';
 import 'egg-mysql';
 import 'egg-sequelize';
 import 'egg-router-plus';
+import 'egg-passport';
+import 'egg-passport-local';

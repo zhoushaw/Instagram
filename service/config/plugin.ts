@@ -17,6 +17,14 @@ const plugin: EggPlugin = {
   routerPlus: {
     enable: true,
     package: 'egg-router-plus',
+  },
+  passport: {
+    enable: true,
+    package: 'egg-passport',
+  },
+  passportLocal: {
+    enable: true,
+    package: 'egg-passport-local',
   }
 };
 

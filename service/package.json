@@ -23,6 +23,8 @@
   "dependencies": {
     "egg": "^2.6.1",
     "egg-mysql": "^3.0.0",
+    "egg-passport": "^2.0.1",
+    "egg-passport-local": "^1.2.1",
     "egg-router-plus": "^1.3.0",
     "egg-scripts": "^2.6.0",
     "egg-sequelize": "^4.1.0",

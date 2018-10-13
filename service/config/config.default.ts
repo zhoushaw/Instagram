@@ -23,6 +23,12 @@ export default (appInfo: EggAppInfo) => {
     }
   }
 
+  // config passport 
+  config.passportLocal = {
+    usernameField: 'username',
+    passwordField: 'password',
+  };
+
   // router puls add namespace feature
   config.routerPlus = {
     enable: true,

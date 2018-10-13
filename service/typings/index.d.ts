@@ -5,6 +5,9 @@ declare module 'egg' {
     mysql: EggMysql,
     router: {
       namespace: function
+    },
+    passport: {
+      authenticate: function
     }
   }
 }

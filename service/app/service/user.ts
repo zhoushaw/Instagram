@@ -17,13 +17,17 @@ export default class UserService extends Service {
 
     /**
      * 
-     * @param RegisterParams - your name
+     * @interface RegisterParams - your name
+     * @param  username // 用户名
+     * @param  password // 密码
+     * @param  mobile // 手机号
+     * @param  email // 邮箱
      */
     public async register(user: RegisterParams) {
         const {ctx} = this
         
         // 添加uuid
-        user.user_id = uuid.v4();
+        user.user_id = uuid.v4()
 
         // 是否可以查询到
         const queryResult = await this.hasRegister(user.username)
@@ -32,8 +36,19 @@ export default class UserService extends Service {
         }
         
         const userInfo = await this.ctx.model.User.create(user);
+
+        // 注册成功，返回userid给前端
+        ctx.status = 200;
+        ctx.body = {
+            data: {
+                user_id: userInfo.dataValues.user_id
+            },
+            message: '恭喜您注册成功',
+            success: true
+        }
         return userInfo.dataValues;
     }
+
 
     // 查看是否已有注册
     private async hasRegister(username) {

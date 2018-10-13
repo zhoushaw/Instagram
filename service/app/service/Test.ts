@@ -17,12 +17,7 @@ export default class Test extends Service {
     // INSERT
     let {username} = userMsg
     // 是否可以查询到
-    const queryResult = await this.app.mysql.get('users', { username });
-    if (queryResult) {
-      return false
-    } else {
-      
-    }
+    await this.app.mysql.get('users', { username });
     
     // const result = await this.app.mysql.insert('users', { username: 'Hell', passwords: '123456' })
     // console.log(result.affectedRows === 1 && '插入成功')
