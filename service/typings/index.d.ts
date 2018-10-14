@@ -8,6 +8,11 @@ declare module 'egg' {
     },
     passport: {
       authenticate: function
-    }
+    },
+  }
+
+  interface Context {
+    // 在app/extend/application.js中定义的返回客户端的方法
+    returnBody(status: number, message: string): function
   }
 }

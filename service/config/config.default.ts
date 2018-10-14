@@ -23,6 +23,9 @@ export default (appInfo: EggAppInfo) => {
     }
   }
 
+  // cookie name config
+  config.auth_cookie_name = 'node_club';
+
   // config passport 
   config.passportLocal = {
     usernameField: 'username',

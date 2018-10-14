@@ -15,6 +15,7 @@ interface RegisterParams {
 
 export default class UserService extends Service {
 
+    
     /**
      * 
      * @interface RegisterParams - your name
@@ -66,4 +67,23 @@ export default class UserService extends Service {
 
         return false;
     }
+    
+  /*
+   * 根据登录名查找用户
+   * @param {String} loginName 登录名
+   * @return {Promise[user]} 承载用户的 Promise 对象
+   */
+  public async getUserByLoginName(loginName) {
+    const query = { loginname: new RegExp('^' + loginName + '$', 'i') };
+    return this.ctx.model.User.findOne(query)
+  }
+
+  /*
+   * 根据邮箱，查找用户
+   * @param {String} email 邮箱地址
+   * @return {Promise[user]} 承载用户的 Promise 对象
+   */
+  public async getUserByMail(email) {
+    return this.ctx.model.User.findOne({ email })
+  }
 }
