@@ -1,4 +1,5 @@
 import { Service } from 'egg';
+const jwt = require('jsonwebtoken');
 const uuid = require('uuid');
 
 /**
@@ -11,6 +12,11 @@ interface RegisterParams {
   mobile: number,
   email: string,
   user_id?: string
+}
+
+interface LoginParams {
+    username: string,
+    password: string
 }
 
 export default class UserService extends Service {
@@ -40,16 +46,42 @@ export default class UserService extends Service {
 
         // 注册成功，返回userid给前端
         ctx.status = 200;
-        ctx.body = {
-            data: {
-                user_id: userInfo.dataValues.user_id
-            },
-            message: '恭喜您注册成功',
-            success: true
-        }
+        ctx.returnBody(200, "登录成功", {
+            user_id: userInfo.dataValues.user_id   
+        })
         return userInfo.dataValues;
     }
 
+    public async login(user:LoginParams) {
+        const {app} = this
+        
+        // comfirm user's account type
+        const getUser = username => {
+            if (username.indexOf('@') > 0) {
+                return this.getUserByMail(username);
+            }
+            return this.getUserByLoginName(username);
+        };
+
+        const existUser = await getUser(user.username);
+
+        // 用户不存在
+        if (!existUser) {
+            return null
+        }
+
+        const passhash = existUser.password;
+        // TODO: change to async compare
+        const equal = passhash == user.password
+        // 密码不匹配
+        if (!equal) {
+            return false
+        }
+
+        // 验证通过
+        const token = jwt.sign({user_id: existUser.user_id,}, app.config.jwtSecret, {expiresIn: '7d'});
+        return token;
+    }
 
     // 查看是否已有注册
     private async hasRegister(username) {
@@ -68,22 +100,22 @@ export default class UserService extends Service {
         return false;
     }
     
-  /*
-   * 根据登录名查找用户
-   * @param {String} loginName 登录名
-   * @return {Promise[user]} 承载用户的 Promise 对象
-   */
-  public async getUserByLoginName(loginName) {
-    const query = { loginname: new RegExp('^' + loginName + '$', 'i') };
-    return this.ctx.model.User.findOne(query)
-  }
+    /*
+    * 根据登录名查找用户
+    * @param {String} loginName 登录名
+    * @return {Promise[user]} 承载用户的 Promise 对象
+    */
+    public async getUserByLoginName(loginName) {
+        const query = { loginname: new RegExp('^' + loginName + '$', 'i') };
+        return this.ctx.model.User.findOne(query)
+    }
 
-  /*
-   * 根据邮箱，查找用户
-   * @param {String} email 邮箱地址
-   * @return {Promise[user]} 承载用户的 Promise 对象
-   */
-  public async getUserByMail(email) {
-    return this.ctx.model.User.findOne({ email })
-  }
+    /*
+    * 根据邮箱，查找用户
+    * @param {String} email 邮箱地址
+    * @return {Promise[user]} 承载用户的 Promise 对象
+    */
+    public async getUserByMail(email) {
+        return this.ctx.model.User.findOne({ email })
+    }
 }

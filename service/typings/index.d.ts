@@ -13,6 +13,6 @@ declare module 'egg' {
 
   interface Context {
     // 在app/extend/application.js中定义的返回客户端的方法
-    returnBody(status: number, message: string): function
+    returnBody(status: number, message: string, data?: any): function
   }
 }

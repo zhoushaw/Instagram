@@ -9,6 +9,7 @@ export default (app: Application) => {
   apiV2Router.post('/user/register', user.register); // 注册
   apiV2Router.post('/user/login', user.loginIn); // 登录
   apiV2Router.get('/user/signout', user.signOut); // 退出登录
+  apiV2Router.get('/user/test', user.test); // 退出登录
 
   // router.put('/user/findPwd', user.findPwd); // 找回密码
 }

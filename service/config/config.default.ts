@@ -23,8 +23,14 @@ export default (appInfo: EggAppInfo) => {
     }
   }
 
+  // token凭证
+  config.jwtSecret = 'shawzhou';
+
+  // authorization's white list
+  config.authWhiteList = ['/api/v2/user/login', '/api/v2/user/register', '/api/v2/user/signout'];
+
   // cookie name config
-  config.auth_cookie_name = 'node_club';
+  config.auth_cookie_name = 'token';
 
   // config passport 
   config.passportLocal = {
@@ -39,7 +45,7 @@ export default (appInfo: EggAppInfo) => {
   };
 
   // 使用koa的中间件
-  config.middleware = ['errorHandler']
+  config.middleware = ['errorHandler', 'authorization']
 
   // add your special config in here
   const bizConfig = {
