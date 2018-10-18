@@ -1,5 +1,4 @@
 
-const jwt = require('jsonwebtoken');
 
 module.exports = (option, app) => {
   return async function (ctx, next) {
@@ -13,8 +12,7 @@ module.exports = (option, app) => {
       let token = ctx.cookies.get('token')
       //解码token
       try {
-        let decoded = jwt.verify(token, app.config.jwtSecret);
-        console.log(decoded)
+        ctx.jwt.verify(token, app.config.jwtSecret);
       } catch (error) {
         if (error.name == 'TokenExpiredError') {
           //重新发放令牌

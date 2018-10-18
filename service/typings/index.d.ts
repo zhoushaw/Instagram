@@ -1,5 +1,9 @@
 import EggMysql from 'egg-mysql';
 
+interface userStructure {
+  user_id: string
+}
+
 declare module 'egg' {
   interface Application {
     mysql: EggMysql,
@@ -13,6 +17,7 @@ declare module 'egg' {
 
   interface Context {
     // 在app/extend/application.js中定义的返回客户端的方法
-    returnBody(status: number, message: string, data?: any): function
+    returnBody(status: number, message: string, data?: any): function,
+    user: userStructure
   }
 }

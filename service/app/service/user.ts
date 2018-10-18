@@ -105,8 +105,18 @@ export default class UserService extends Service {
     * @param {String} loginName 登录名
     * @return {Promise[user]} 承载用户的 Promise 对象
     */
-    public async getUserByLoginName(loginName) {
-        const query = { loginname: new RegExp('^' + loginName + '$', 'i') };
+   public async getUserByLoginName(loginName) {
+    const query = { loginname: new RegExp('^' + loginName + '$', 'i') };
+    return this.ctx.model.User.findOne(query)
+    }
+
+    /*
+    * 根据userId查找用户
+    * @param {String} loginName 登录名
+    * @return {Promise[user]} 承载用户的 Promise 对象
+    */
+    public async getUserByUserId(userId) {
+        const query = { user_id: userId };
         return this.ctx.model.User.findOne(query)
     }
 
@@ -118,4 +128,5 @@ export default class UserService extends Service {
     public async getUserByMail(email) {
         return this.ctx.model.User.findOne({ email })
     }
+    
 }
