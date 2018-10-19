@@ -1,23 +1,11 @@
 import { Service } from 'egg';
+import {insertTopicParams, insertDiscussParams, queryTopicParams} from './type/topic-interface'
+
+
+
 /**
  * Service
  */
-
-// 新增帖子参数
-interface insertTopicParams {
-    topic_img: string, // 图片地址
-    topic_title: string, // 帖子标题
-    username: string, // 用户名
-    user_id: string // 用户id
-}
-
-// 新增评论参数
-interface insertDiscussParams {
-    topic_id: string, // 帖子id
-    reply_content: string, // 帖子内容
-    reply_name: string, // 用户名
-    user_id: string // 用户id
-}
 
 export default class TopicService extends Service {
     /*
@@ -29,13 +17,37 @@ export default class TopicService extends Service {
 
         return await ctx.model.Topic.create(topicParams);
     }
+
     /*
-     * 新增帖子
+     * 新增评论
      * @interface insertTopicParams
      */
     public async insertDiscuss (discussParams: insertDiscussParams) {
         let {ctx} = this
 
         return await ctx.model.Discuss.create(discussParams);
+    }
+
+    /*
+     * 查询帖子详情
+     * @interface insertTopicParams
+     */
+    public async queryTopicDetail (query: queryTopicParams) {
+        let {ctx} = this
+        return await ctx.model.Topic.findOne({
+            where: query
+        })
+    }
+
+    /*
+     * 查询评论详情
+     * @interface insertTopicParams
+     */
+    public async queryDiscuss (query: queryTopicParams) {
+        let {ctx} = this
+
+        return await ctx.model.Discuss.findAll({
+            where: query
+        });
     }
 }
