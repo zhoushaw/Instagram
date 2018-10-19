@@ -34,7 +34,7 @@ export default class UserService extends Service {
         const {ctx} = this
         
         // 添加uuid
-        user.user_id = uuid.v4()
+        user.user_id = uuid.v4().replace(/-/g,'')
 
         // 是否可以查询到
         const queryResult = await this.hasRegister(user.username)
@@ -46,7 +46,7 @@ export default class UserService extends Service {
 
         // 注册成功，返回userid给前端
         ctx.status = 200;
-        ctx.returnBody(200, "登录成功", {
+        ctx.returnBody(200, "注册成功", {
             user_id: userInfo.dataValues.user_id   
         })
         return userInfo.dataValues;
@@ -87,11 +87,9 @@ export default class UserService extends Service {
     private async hasRegister(username) {
 
         // 查询用户名
-        const user = await this.ctx.model.User.findOne(
-            {
+        const user = await this.ctx.model.User.findOne({
             where: {username: username}
-            }
-        );
+        });
 
         if (user && user.dataValues.user_id) {
             return true;
@@ -106,8 +104,8 @@ export default class UserService extends Service {
     * @return {Promise[user]} 承载用户的 Promise 对象
     */
    public async getUserByLoginName(loginName) {
-    const query = { loginname: new RegExp('^' + loginName + '$', 'i') };
-    return this.ctx.model.User.findOne(query)
+        const query = { loginname: new RegExp('^' + loginName + '$', 'i') };
+        return this.ctx.model.User.findOne(query)
     }
 
     /*

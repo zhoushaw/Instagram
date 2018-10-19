@@ -14,6 +14,7 @@ export default (app: Application) => {
 
 
   apiV2Router.post('/topic/add', topic.addTopic); // 注册
+  apiV2Router.post('/topic/discuss/add', topic.addDiscuss); // 注册
 
   // router.put('/user/findPwd', user.findPwd); // 找回密码
 }
