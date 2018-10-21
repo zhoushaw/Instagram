@@ -39,6 +39,39 @@ export default class TopicService extends Service {
         })
     }
 
+
+    /*
+     * 查找是否点过赞
+     * @interface insertTopicParams
+     */
+    public async queryTopicLike (query: queryTopicParams) {
+        let {ctx} = this
+        return await ctx.model.TopicLike.findOne({
+            where: query
+        });
+    }
+
+    /*
+     * 创建一条点赞记录
+     */
+    public async createdTopicLike (topicStatus) {
+        let {ctx} = this
+
+        return await ctx.model.Discuss.create(topicStatus);
+    }
+
+    /*
+     * 更新点赞状态
+     * @interface insertTopicParams
+     */
+    public async putTopicLike (query: queryTopicParams, topicStatus) {
+        let {ctx} = this
+
+        return await ctx.model.TopicLike.update(topicStatus, {
+            where: query
+        });
+    }
+    
     /*
      * 查询评论详情
      * @interface insertTopicParams
@@ -46,8 +79,9 @@ export default class TopicService extends Service {
     public async queryDiscuss (query: queryTopicParams) {
         let {ctx} = this
 
-        return await ctx.model.Discuss.findAll({
+        return await ctx.model.TopicLike.findAll({
             where: query
         });
     }
+
 }

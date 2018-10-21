@@ -96,6 +96,40 @@ class TopicController extends Controller {
         !topic && ctx.returnBody(400, "网络异常请稍后重试")
     }
 
+
+    /**
+     * 给帖子点赞
+     */
+    public async putLikeTopic () {
+        const {ctx} = this;
+        const {topicId, status} = ctx.request.query
+
+        let user_id = ctx.user.user_id
+
+        // 新帖子
+        let topicStatus = {
+            topic_id: topicId,
+            user_id,
+            status
+        }
+        // 查询条件
+        let query = {
+            topic_id: topicId
+        }
+
+        // 未曾创建进行创建操作，否则进行更新
+        let hadTopicLike = await ctx.service.topic.queryTopicLike(query)
+        let putLike;
+        if (hadTopicLike) {
+            putLike =  await ctx.service.topic.putTopicLike(query, topicStatus)
+        } else {
+            putLike =  await ctx.service.topic.createdTopicLike(query)
+        }
+        
+        ctx.returnBody(200, putLike? "更新成功" : "网络异常请稍后重试")
+    }
+
+
 }
 
 module.exports = TopicController

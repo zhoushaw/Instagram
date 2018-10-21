@@ -21,6 +21,6 @@ export interface insertDiscussParams {
 
 // 查询帖子详情
 export interface queryTopicParams {
-    topic_id: number // 帖子id
+    topic_id: string | number // 帖子id
 }
 
