@@ -96,6 +96,33 @@ class TopicController extends Controller {
         !topic && ctx.returnBody(400, "网络异常请稍后重试")
     }
 
+    
+    /**
+     * 获取帖子列表
+     */
+    public async friendsTopicList () {
+        const {ctx} = this;
+
+        let user_id = ctx.user.user_id
+        // 获取并填充数据
+        // let user = await this.service.user.getUserByUserId(user_id)
+
+        // 查询帖子详情
+        let follower =  await ctx.service.follow.findFollow(user_id)
+        
+        // 处理需要查询用户帖子的user_id
+        let followList = follower.map((item) => {
+            return item.user_id
+        })
+        followList.push(user_id)
+
+
+        let topics = await ctx.service.topic.queryTopicList(followList)
+        console.log(topics)
+        follower && ctx.returnBody(200, "成功", follower)
+    }
+
+    
 
     /**
      * 给帖子点赞

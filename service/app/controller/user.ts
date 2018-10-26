@@ -52,9 +52,25 @@ class UserController extends Controller {
         ctx.returnBody(200, "退出登录成功")
     }
 
-    // test
-    public async test() {
-        this.ctx.returnBody(200, "成功")
+    // 关注好友
+    public async follow() {
+        const {ctx} = this
+        const {followedId, status} = ctx.request.body
+
+        let user_id = ctx.user.user_id
+
+        // 新帖子
+        let followMsg = {
+            user_id: followedId, // 被关注者id
+            followed_id: user_id, // 关注者id
+            status
+        }
+
+        let result = await ctx.service.follow.followUser(followMsg)
+        
+        result && ctx.returnBody(200, +status?"关注成功":"取消成功")
+        !result && ctx.returnBody(400, "网络异常请稍后重试")
+        
     }
 
     // 参数异常函数

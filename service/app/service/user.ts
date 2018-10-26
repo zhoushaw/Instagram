@@ -56,11 +56,11 @@ export default class UserService extends Service {
         const {app} = this
         
         // comfirm user's account type
-        const getUser = username => {
+        const getUser = async username => {
             if (username.indexOf('@') > 0) {
-                return this.getUserByMail(username);
+                return await this.getUserByMail(username);
             }
-            return this.getUserByLoginName(username);
+            return await this.getUserByLoginName(username);
         };
 
         const existUser = await getUser(user.username);
@@ -124,7 +124,11 @@ export default class UserService extends Service {
     * @return {Promise[user]} 承载用户的 Promise 对象
     */
     public async getUserByMail(email) {
-        return this.ctx.model.User.findOne({ email })
+        return this.ctx.model.User.findOne({ 
+            where: {
+                email
+            }
+        })
     }
     
 }

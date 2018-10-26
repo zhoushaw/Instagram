@@ -39,6 +39,22 @@ export default class TopicService extends Service {
         })
     }
 
+    /*
+     * 查询帖子列表
+     * @interface insertTopicParams
+     */
+    public async queryTopicList (query) {
+        let {ctx, app} = this
+        const Op = app.Sequelize.Op;
+        return await ctx.model.Topic.findAll({
+            where: {
+                user_id: {
+                    [Op.in]: query
+                }
+            }
+        })
+    }
+
 
     /*
      * 查找是否点过赞
