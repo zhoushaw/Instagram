@@ -58,15 +58,28 @@ class TopicController extends Controller {
         const {ctx} = this;
         const {topicId} = ctx.request.query
 
-        let user_id = ctx.user.user_id
-        // 获取并填充数据
-        let user = await this.service.user.getUserByUserId(user_id)
+        let topicDetail = await this.topicDetailHanderl(topicId)
+        
+        ctx.returnBody(200, "成功", topicDetail)
+    }
+
+    /**
+     * 帖子详情handler
+     * params {topicId} // string
+     */
+    private async topicDetailHanderl (topicId) {
+        const {ctx} = this;
+
 
         // 查询帖子详情
         let topic =  await ctx.service.topic.queryTopicDetail({
             topic_id: +topicId // 帖子id
         })
         
+        let user_id = topic.user_id
+        // 获取并填充数据
+        let user = await this.service.user.getUserByUserId(user_id)
+
         // 查询帖子评论
         let discuss = await ctx.service.topic.queryDiscuss({
             topic_id: +topicId // 帖子id
@@ -91,12 +104,9 @@ class TopicController extends Controller {
             },
             discuss: disscussList
         }
-        
-        topic && ctx.returnBody(200, "成功", topicDetail)
-        !topic && ctx.returnBody(400, "网络异常请稍后重试")
+        return topicDetail || {}
     }
 
-    
     /**
      * 获取帖子列表
      */
@@ -116,10 +126,13 @@ class TopicController extends Controller {
         })
         followList.push(user_id)
 
-
+        // 获取每个帖子详情、评论，发帖人信息
         let topics = await ctx.service.topic.queryTopicList(followList)
-        console.log(topics)
-        follower && ctx.returnBody(200, "成功", follower)
+        let topicList = topics.map(async (item) => {
+            return await this.topicDetailHanderl(item.topic_id)
+        })
+
+        topicList && ctx.returnBody(200, "成功", topicList)
     }
 
     
