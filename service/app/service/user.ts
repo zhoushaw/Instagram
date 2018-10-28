@@ -115,7 +115,9 @@ export default class UserService extends Service {
     */
     public async getUserByUserId(userId) {
         const query = { user_id: userId };
-        return this.ctx.model.User.findOne(query)
+        return this.ctx.model.User.findOne({
+            where: query
+        })
     }
 
     /*

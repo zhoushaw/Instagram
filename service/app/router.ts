@@ -2,7 +2,7 @@ import { Application, Router } from 'egg';
 
 export default (app: Application) => {
   const { controller } = app;
-  const { user, topic } = controller
+  const { user, topic, handle } = controller
   
   const apiV2Router: Router = app.router.namespace('/api/v2');
 
@@ -10,6 +10,9 @@ export default (app: Application) => {
   apiV2Router.post('/user/login', user.loginIn); // 登录
   apiV2Router.get('/user/signout', user.signOut); // 退出登录
   apiV2Router.post('/user/follow', user.follow); // 退出登录
+
+
+  apiV2Router.put('/handle/upload/image', handle.uploadImag); // 退出登录
 
 
   apiV2Router.post('/topic/add', topic.addTopic); // 新增帖子

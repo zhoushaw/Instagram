@@ -100,7 +100,8 @@ class TopicController extends Controller {
                 avatarUrl: user.avatar_url
             },
             topic: {
-                topicImgList: JSON.parse(topic.topic_img)
+                topicImgList: JSON.parse(topic.topic_img),
+                createdAt: topic.created_at
             },
             discuss: disscussList
         }
@@ -114,8 +115,6 @@ class TopicController extends Controller {
         const {ctx} = this;
 
         let user_id = ctx.user.user_id
-        // 获取并填充数据
-        // let user = await this.service.user.getUserByUserId(user_id)
 
         // 查询帖子详情
         let follower =  await ctx.service.follow.findFollow(user_id)
@@ -128,14 +127,16 @@ class TopicController extends Controller {
 
         // 获取每个帖子详情、评论，发帖人信息
         let topics = await ctx.service.topic.queryTopicList(followList)
-        let topicList = topics.map(async (item) => {
-            return await this.topicDetailHanderl(item.topic_id)
-        })
+        let topicList: any = [];
+
+        // 将所有帖子处理完毕
+        for (let topic of topics) {
+            let item =  await this.topicDetailHanderl(topic.topic_id)
+            topicList.push(item)
+        }
 
         topicList && ctx.returnBody(200, "成功", topicList)
     }
-
-    
 
     /**
      * 给帖子点赞

@@ -31,6 +31,7 @@
     "egg-view-nunjucks": "^2.2.0",
     "jsonwebtoken": "^8.3.0",
     "mysql2": "^1.6.1",
+    "qiniu": "^7.2.1",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
