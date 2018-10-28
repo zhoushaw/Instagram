@@ -12,7 +12,7 @@ export default (app: Application) => {
   apiV2Router.post('/user/follow', user.follow); // 退出登录
 
 
-  apiV2Router.put('/handle/upload/image', handle.uploadImag); // 退出登录
+  apiV2Router.get('/handle/upload/get-token', handle.getQiniuToken); // 退出登录
 
 
   apiV2Router.post('/topic/add', topic.addTopic); // 新增帖子

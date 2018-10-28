@@ -22,7 +22,7 @@ export default class qiniuService extends Service {
     /**
      * 获取七牛上传token
      */
-    private getQiniuToken () {
+    public async getQiniuToken () {
         let mac = new qiniu.auth.digest.Mac(this.accessKey, this.secretKey);
         let putPolicy = new qiniu.rs.PutPolicy(this.options);
         let uploadToken = putPolicy.uploadToken(mac);
@@ -33,10 +33,9 @@ export default class qiniuService extends Service {
     /**
      * 上传图片
      */
-     public async upload () {
+     public async upload (stream: any) {
 
         let {ctx} = this
-        let localFile = '/Users/shawzhou/Desktop/Instagram/detail.png'
 
         let config = new qiniu.conf.Config();
         // 空间对应的机房
@@ -48,7 +47,7 @@ export default class qiniuService extends Service {
         // 获取上传token
         let uploadToken = this.getQiniuToken()
         
-        formUploader.putFile(uploadToken, '', localFile, putExtra, (respErr,
+        formUploader.putFile(uploadToken, '', stream, putExtra, (respErr,
             respBody, respInfo) => {
             if (respErr) {
               throw respErr;
