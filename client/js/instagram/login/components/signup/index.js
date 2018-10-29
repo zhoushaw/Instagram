@@ -7,13 +7,15 @@ class NormalLoginForm extends React.Component {
   constructor (props) {
     super(props);
     this.state = {}
+    this.handleSubmit.bind(this)
   }
 
+  
   handleSubmit (e) {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        console.log("Received values of form: ", values);
       }
     });
   }
@@ -41,34 +43,24 @@ class NormalLoginForm extends React.Component {
           <span className="name">或</span>
           <span className="line"></span>
         </div>
-        <Form className="register-form" onSubmit={this.handleSubmit}>
+        <Form className="register-form" onSubmit={this.handleSubmit.bind(this)}>
           <FormItem>
-            {getFieldDecorator('phone', {
-              rules: [{ required: true, message: 'Please input your phone or email!' }],
+            {getFieldDecorator('email', {
+              rules: [{ required: true, message: 'Please input your email!' }],
             })(
-              <div className={`form-input ${this.state.phoneEmpty && 'active'}`}  onChange={this.onChangeHandler.bind(this, 'phone')}>
-                <label htmlFor="label-phone">手机号或邮箱</label>
-                <Input id="label-phone" prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />} />
+              <div className={`form-input ${this.state.emailEmpty && 'active'}`}  onChange={this.onChangeHandler.bind(this, 'email')}>
+                <label htmlFor="label-phone">邮箱</label>
+                <Input id="label-phone" prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} />
               </div>
             )}
           </FormItem>
           <FormItem>
-            {getFieldDecorator('userName', {
+            {getFieldDecorator('username', {
               rules: [{ required: true, message: 'Please input your userName!' }],
             })(
               <div className={`form-input ${this.state.usernameEmpty && 'active'}`}  onChange={this.onChangeHandler.bind(this, 'username')}>
                 <label htmlFor="label-username">全名</label>
                 <Input id="label-username" prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} />
-              </div>
-            )}
-          </FormItem>
-          <FormItem>
-            {getFieldDecorator('account', {
-              rules: [{ required: true, message: 'Please input your account!' }],
-            })(
-              <div className={`form-input ${this.state.accountEmpty && 'active'}`}  onChange={this.onChangeHandler.bind(this, 'account')}>
-                <label htmlFor="label-account">账户</label>              
-                <Input id="label-account" prefix={<Icon type="user-add" style={{ color: 'rgba(0,0,0,.25)' }} />}/>
               </div>
             )}
           </FormItem>
