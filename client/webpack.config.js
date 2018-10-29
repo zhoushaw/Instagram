@@ -1,7 +1,7 @@
 const path = require('path')
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const webpack = require('webpack')
-const clientPath = path.resolve(__dirname, 'client')
+const clientPath = path.resolve(__dirname)
 module.exports = {
   entry:{
     main: path.resolve(clientPath, "index.js"),
@@ -67,9 +67,9 @@ module.exports = {
   },
   plugins: [
       new HtmlWebPackPlugin({
-          template: path.resolve(process.cwd(), "client/index.html"),
+          template: path.resolve(process.cwd(), "index.html"),
           filename: "index.html",
-          favicon: path.resolve(process.cwd(), "client/assets/image/favicon.ico")
+          favicon: path.resolve(process.cwd(), "assets/image/favicon.ico")
       }),
       new webpack.HotModuleReplacementPlugin()
   ]
