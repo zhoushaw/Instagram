@@ -23,6 +23,18 @@ export default (appInfo: EggAppInfo) => {
     }
   }
 
+  config.security= {
+    csrf: {
+      enable: false,
+      ignoreJSON: true
+    },
+    domainWhiteList: ['http://localhost:7000']
+  }
+
+  config.cors = {
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
+  };
+
   // token凭证
   config.jwtSecret = 'shawzhou';
 

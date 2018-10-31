@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "egg": "^2.6.1",
+    "egg-cors": "^2.1.1",
     "egg-mysql": "^3.0.0",
     "egg-passport": "^2.0.1",
     "egg-passport-local": "^1.2.1",

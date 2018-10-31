@@ -25,6 +25,10 @@ const plugin: EggPlugin = {
   passportLocal: {
     enable: true,
     package: 'egg-passport-local',
+  },
+  cors: {
+    enable: true,
+    package: "egg-cors"
   }
 };
 

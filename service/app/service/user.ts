@@ -9,7 +9,7 @@ const uuid = require('uuid');
 interface RegisterParams {
   username: string,
   password: string,
-  mobile: number,
+  mobile?: number,
   email: string,
   user_id?: string
 }
@@ -27,7 +27,6 @@ export default class UserService extends Service {
      * @interface RegisterParams - your name
      * @param  username // 用户名
      * @param  password // 密码
-     * @param  mobile // 手机号
      * @param  email // 邮箱
      */
     public async register(user: RegisterParams) {
@@ -37,9 +36,9 @@ export default class UserService extends Service {
         user.user_id = uuid.v4().replace(/-/g,'')
 
         // 是否可以查询到
-        const queryResult = await this.hasRegister(user.username)
+        const queryResult = await this.hasRegister(user.email)
         if (queryResult) {
-            ctx.throw(400, '用户已注册');
+            ctx.returnBody(200, "用户已注册")
         }
         
         const userInfo = await this.ctx.model.User.create(user);
@@ -84,11 +83,11 @@ export default class UserService extends Service {
     }
 
     // 查看是否已有注册
-    private async hasRegister(username) {
+    private async hasRegister(email) {
 
         // 查询用户名
         const user = await this.ctx.model.User.findOne({
-            where: {username: username}
+            where: {email: email}
         });
 
         if (user && user.dataValues.user_id) {

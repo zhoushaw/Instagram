@@ -9,13 +9,13 @@ class UserController extends Controller {
     // 注册
     public async register () {
         const {ctx} = this;
-        const {mobile, password, username, email} = ctx.request.body
+        const {password, username, email} = ctx.request.body
 
         // 错误处理
         if (!this.__errNotice) return
 
         // 注册成功返回体
-        await ctx.service.user.register({ mobile, password, username, email});
+        await ctx.service.user.register({ password, username, email});
 
     }
 

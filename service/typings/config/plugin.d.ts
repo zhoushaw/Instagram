@@ -8,3 +8,4 @@ import 'egg-sequelize';
 import 'egg-router-plus';
 import 'egg-passport';
 import 'egg-passport-local';
+import 'egg-cors';
