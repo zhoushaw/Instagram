@@ -2,6 +2,7 @@
   "presets": ["env", "react"],
   "plugins": [
     "transform-decorators-legacy",
+    "transform-runtime",
     [
         "import",
         {
@@ -10,5 +11,5 @@
             "style": "css"
         }
     ]
-]
+ ]
 }

@@ -5,7 +5,7 @@ const clientPath = path.resolve(__dirname)
 module.exports = {
   entry:{
     main: path.resolve(clientPath, "index.js"),
-    login: path.resolve(clientPath, "js/instagram/login/index.js"),
+    login: path.resolve(clientPath, "js/pages/login/index.js"),
   }, 
   output: {
       publicPath: '/',
@@ -43,7 +43,8 @@ module.exports = {
       '@': clientPath,
       '@scss': path.resolve(clientPath, 'assets/style'),
       '@assets': path.resolve(clientPath, 'assets'),
-      '@components': path.resolve(clientPath, 'js/components')
+      '@components': path.resolve(clientPath, 'js/components'),
+      '@common': path.resolve(clientPath, 'js/common')
     }
   },
   devServer: {
