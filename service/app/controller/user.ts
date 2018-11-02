@@ -22,10 +22,10 @@ class UserController extends Controller {
     // 登录
     public async loginIn () {
         const {ctx} = this;
-        const {password, username} = ctx.request.body
+        const {password, email} = ctx.request.body
 
         // 登录
-        const token = await ctx.service.user.login({password, username})
+        const token = await ctx.service.user.login({password, email})
 
         // set cookie
         if (token) {
@@ -35,7 +35,8 @@ class UserController extends Controller {
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 // maxAge: 1000 * 40,
                 // signed: true,
-                httpOnly: true,
+                httpOnly: false,
+                // domain: '127'
             };
             ctx.cookies.set(this.config.auth_cookie_name, token, opts); // cookie 有效期30天
             ctx.returnBody(200, "登录成功")

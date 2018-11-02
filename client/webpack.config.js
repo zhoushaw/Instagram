@@ -50,7 +50,7 @@ module.exports = {
   devServer: {
     contentBase: path.resolve(process.cwd(), "dist"),//本地服务器所加载的页面所在的目录
     historyApiFallback: true,//不跳转
-    host:'localhost',
+    host:'0.0.0.0',
     port: 7000,
     hot: true,
     inline: true,//实时刷新
@@ -59,10 +59,11 @@ module.exports = {
     overlay: true, //Shows a full-screen overlay in the browser
     stats: "errors-only" ,//To show only errors in your bundle
     open:true, //When open is enabled, the dev server will open the browser.
+    disableHostCheck: true,
     proxy: {
         "/api": {
-            target: "http://localhost:3000",
-            pathRewrite: {"^/api" : ""}
+            target: "http://127.0.0.1:7001",
+            changeOrigin: true
         }
     }//重定向
   },

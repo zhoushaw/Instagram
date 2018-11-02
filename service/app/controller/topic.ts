@@ -13,7 +13,7 @@ class TopicController extends Controller {
 
         // 新帖子
         let newTopic = {
-            topic_img: JSON.stringify(topicImg),
+            topic_img: topicImg.join(','),
             topic_title: topicTitle,
             user_id,
         }
@@ -100,7 +100,7 @@ class TopicController extends Controller {
                 avatarUrl: user.avatar_url
             },
             topic: {
-                topicImgList: JSON.parse(topic.topic_img),
+                topicImgList: new Array(topic.topic_img),
                 createdAt: topic.created_at
             },
             discuss: disscussList

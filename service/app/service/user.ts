@@ -15,7 +15,7 @@ interface RegisterParams {
 }
 
 interface LoginParams {
-    username: string,
+    email: string,
     password: string
 }
 
@@ -38,7 +38,10 @@ export default class UserService extends Service {
         // 是否可以查询到
         const queryResult = await this.hasRegister(user.email)
         if (queryResult) {
-            ctx.returnBody(200, "用户已注册")
+            ctx.returnBody(200, "邮箱已被使用", {
+                flag: false  
+            })
+            return
         }
         
         const userInfo = await this.ctx.model.User.create(user);
@@ -46,23 +49,16 @@ export default class UserService extends Service {
         // 注册成功，返回userid给前端
         ctx.status = 200;
         ctx.returnBody(200, "注册成功", {
-            user_id: userInfo.dataValues.user_id   
+            user_id: userInfo.dataValues.user_id,
+            flag: true  
         })
         return userInfo.dataValues;
     }
 
     public async login(user:LoginParams) {
         const {app} = this
-        
-        // comfirm user's account type
-        const getUser = async username => {
-            if (username.indexOf('@') > 0) {
-                return await this.getUserByMail(username);
-            }
-            return await this.getUserByLoginName(username);
-        };
 
-        const existUser = await getUser(user.username);
+        const existUser = await this.getUserByMail(user.email)
 
         // 用户不存在
         if (!existUser) {
@@ -97,16 +93,6 @@ export default class UserService extends Service {
         return false;
     }
     
-    /*
-    * 根据登录名查找用户
-    * @param {String} loginName 登录名
-    * @return {Promise[user]} 承载用户的 Promise 对象
-    */
-   public async getUserByLoginName(loginName) {
-        const query = { loginname: new RegExp('^' + loginName + '$', 'i') };
-        return this.ctx.model.User.findOne(query)
-    }
-
     /*
     * 根据userId查找用户
     * @param {String} loginName 登录名

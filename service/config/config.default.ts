@@ -28,7 +28,7 @@ export default (appInfo: EggAppInfo) => {
       enable: false,
       ignoreJSON: true
     },
-    domainWhiteList: ['http://localhost:7000']
+    domainWhiteList: ['http://localhost:7000','http://127.0.0.1:7000','http://sushi.mogujie.com:7000']
   }
 
   config.cors = {

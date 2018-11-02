@@ -28,9 +28,9 @@ module.exports = (option, app) => {
         // 从 error 对象上读出各个属性，设置到响应中
         ctx.body = { 
             data: {},
-            message: error_msg 
+            message: error_msg,
+            success: false
         };
-        ctx.body.success = false;
         ctx.status = status;
     }
   };
