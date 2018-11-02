@@ -11,9 +11,8 @@ class TopicController extends Controller {
 
         let user_id = ctx.user.user_id
 
-        // 新帖子
         let newTopic = {
-            topic_img: topicImg.join(','),
+            topic_img: JSON.parse(topicImg),
             topic_title: topicTitle,
             user_id,
         }
