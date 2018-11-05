@@ -12,8 +12,8 @@ class DynamicList extends React.Component {
         {
           userInfo: {
             avatar: 'https://s10.mogucdn.com/mlcdn/c45406/180930_634a7ck1ikea6k139lbgbi343ha2c_150x150.jpg',
-            username: 'codingzx',
-            abstract: 'life is great'
+            username: 'loading',
+            abstract: 'loading'
           },
           topic: {
             topicImgList: [],
@@ -27,10 +27,11 @@ class DynamicList extends React.Component {
 
   async initBaseData () {
     let response = await API.frientTopicList()
-    console.log(response)
-    this.setState({
-      dynamicList: response.data
-    })
+    if (response.data.length > 0) {
+        this.setState({
+          dynamicList: response.data
+        })
+    }
   }
 
   

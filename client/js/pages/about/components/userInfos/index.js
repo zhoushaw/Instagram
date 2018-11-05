@@ -1,6 +1,7 @@
 import React from 'react'
 import { Icon } from 'antd';
 import Style from './index.scss'
+import {defaultAvatarUrl} from '@common/staticVariate.js'
 
 class UserInfos extends React.Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class UserInfos extends React.Component {
       postAmount: 20,
       fans: 20,
       attentionAmount: 100,
-      userName: '周晓'
+      userName: '周晓',
+      avator: ''
     }
   }
 
@@ -18,7 +20,7 @@ class UserInfos extends React.Component {
     return (
       <main>
         <div className={Style['user-infos']}>
-          <div className="avator"></div>
+          <div className="avator" style={{'backgroundImage': `url(${defaultAvatarUrl})`}}></div>
           <div className="user-infos">
             <p className="operate">
               <span className="user-account">{this.state.accountName}</span>

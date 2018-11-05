@@ -102,4 +102,18 @@ export default class TopicService extends Service {
         });
     }
 
+
+    /*
+     * 查询评论详情
+     * @interface insertTopicParams
+     */
+    public async countsTopic (query: queryTopicParams) {
+        let {ctx} = this
+
+        return await ctx.model.Discuss.findAll({
+            where: query
+        });
+    }
+
+
 }

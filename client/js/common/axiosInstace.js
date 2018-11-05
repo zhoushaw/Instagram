@@ -66,6 +66,12 @@ instance.interceptors.response.use(function (response) {
         notification['error']({
             message: error.response.data.message
         })
+        // 登录授权
+        if (error.response.status === 401) {
+            setTimeout(() => {
+                window.location.href = '/login'
+            }, 2000)
+        }
     } catch (err) {
         notification['error']({
             message: '系统异常，请稍后重试！'
