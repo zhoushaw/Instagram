@@ -1,6 +1,8 @@
 import React from 'react'
 import Style from './index.scss'
 import API from '@common/api.js'
+import Carousel from '@components/carousel'
+
 
 class DynamicList extends React.Component {
   constructor(props){
@@ -13,19 +15,10 @@ class DynamicList extends React.Component {
             username: 'codingzx',
             abstract: 'life is great'
           },
-          imagList: [
-            'https://s10.mogucdn.com/mlcdn/c45406/180930_34f03e7j4jkdbc9671jjc37ghf08c_1080x1080.jpg'
-          ]
-        },
-        {
-          userInfo: {
-            avatar: 'https://s10.mogucdn.com/mlcdn/c45406/180930_634a7ck1ikea6k139lbgbi343ha2c_150x150.jpg',
-            username: 'kagoyuta',
-            abstract: 'life is great'
-          },
-          imagList: [
-            'https://s10.mogucdn.com/mlcdn/c45406/180930_34f03e7j4jkdbc9671jjc37ghf08c_1080x1080.jpg'
-          ]
+          topic: {
+            topicImgList: [],
+            createdAt: ''
+          }
         }
       ],
 	}
@@ -35,9 +28,22 @@ class DynamicList extends React.Component {
   async initBaseData () {
     let response = await API.frientTopicList()
     console.log(response)
+    this.setState({
+      dynamicList: response.data
+    })
+  }
+
+  
+  next() {
+    this.slider.slickNext();
+  }
+
+  previous() {
+    this.slider.slickPrev();
   }
 
   render() {
+
     return (
       <div className={Style['dynamic-list']}>
         {
@@ -45,13 +51,15 @@ class DynamicList extends React.Component {
             return (
               <article className="article" key={index}>
                 <header className="header">
-                  <div className="avatar"  style={{'backgroundImage': `url(${item.userInfo.avatar}`}}></div>
+                  <div className="avatar"  style={{'backgroundImage': `url(${item.userInfo.avatarUrl}`}}></div>
                   <div className="user_abstract">
                     <div className={`username ${item.userInfo.username&&'clear-bg'}`}>{item.userInfo.username}</div>
                     {/* <div className={`abstract ${item.userInfo.abstract&&'clear-bg'}`}>{item.userInfo.abstract}</div> */}
                   </div>
                 </header>
-                <div className="container" style={{'backgroundImage': `url(${item.imagList[0]}`}}>
+                
+                <div className="container">
+                    <Carousel imageList={item.topic.topicImgList}></Carousel>
                 </div>
               </article>
             )

@@ -1,0 +1,69 @@
+
+@import '~@scss/mixin.scss';
+
+:local(.carousel){
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  .carousel-list {
+    position: relative;
+    // 左右切换按钮
+    .pre-btn, .next-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+      font-size: 30px;
+      color: rgba(255,255,255,0.7);
+    }
+    .pre-btn {
+      left: 20px;
+    }
+    .next-btn {
+      right: 20px;
+    }
+    .pre-btn:hover, .next-btn:hover {
+      cursor: pointer;
+      color: rgb(255,255,255);
+    }
+    
+    // 切换按钮
+    .slick-dot {
+      width: 100%;
+      height: 50px;
+      position: absolute;
+      bottom: 10px;
+      text-align: center;
+      li {
+        display: inline-block;
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        margin-right: 5px;
+        background: rgba(255,255,255,0.4);
+      }
+      li:hover {
+        cursor: pointer;
+        background: rgba(255,255,255,0.7);
+      }
+      li.acitve {
+        background: rgba(255,255,255,0.7);
+      }
+    }
+  }
+  .carousel-list, .carousel-item {
+    height: 100%;
+    width: 100%;
+  }
+  .carousel-item {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    transition: all 1s;
+  }
+  .carousel-item.actived {
+    opacity: 1;
+  }
+}

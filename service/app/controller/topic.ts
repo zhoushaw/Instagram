@@ -12,7 +12,7 @@ class TopicController extends Controller {
         let user_id = ctx.user.user_id
 
         let newTopic = {
-            topic_img: JSON.parse(topicImg),
+            topic_img: topicImg,
             topic_title: topicTitle,
             user_id,
         }
@@ -99,7 +99,7 @@ class TopicController extends Controller {
                 avatarUrl: user.avatar_url
             },
             topic: {
-                topicImgList: new Array(topic.topic_img),
+                topicImgList: JSON.parse(topic.topic_img),
                 createdAt: topic.created_at
             },
             discuss: disscussList

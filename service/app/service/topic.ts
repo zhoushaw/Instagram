@@ -97,7 +97,7 @@ export default class TopicService extends Service {
     public async queryDiscuss (query: queryTopicParams) {
         let {ctx} = this
 
-        return await ctx.model.TopicLike.findAll({
+        return await ctx.model.Discuss.findAll({
             where: query
         });
     }
