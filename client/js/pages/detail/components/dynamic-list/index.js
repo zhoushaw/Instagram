@@ -2,7 +2,7 @@ import React from 'react'
 import Style from './index.scss'
 import API from '@common/api.js'
 import Carousel from '@components/carousel'
-
+import {defaultAvatarUrl} from '@common/staticVariate.js'
 
 class DynamicList extends React.Component {
   constructor(props){
@@ -43,7 +43,6 @@ class DynamicList extends React.Component {
   }
 
   render() {
-
     return (
       <div className={Style['dynamic-list']}>
         {
@@ -51,7 +50,7 @@ class DynamicList extends React.Component {
             return (
               <article className="article" key={index}>
                 <header className="header">
-                  <div className="avatar"  style={{'backgroundImage': `url(${item.userInfo.avatarUrl}`}}></div>
+                  <div className="avatar"  style={{'backgroundImage': `url(${item.userInfo.avatarUrl || defaultAvatarUrl}`}}></div>
                   <div className="user_abstract">
                     <div className={`username ${item.userInfo.username&&'clear-bg'}`}>{item.userInfo.username}</div>
                     {/* <div className={`abstract ${item.userInfo.abstract&&'clear-bg'}`}>{item.userInfo.abstract}</div> */}

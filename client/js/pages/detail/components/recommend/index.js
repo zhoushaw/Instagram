@@ -1,5 +1,6 @@
 import React from 'react'
 import Style from './index.scss'
+import {defaultAvatarUrl} from '@common/staticVariate.js'
 
 class Recommend extends React.Component {
   constructor(props){
@@ -7,7 +8,7 @@ class Recommend extends React.Component {
     this.state = {
       friend_list: ['', '', '', '', ''],
       userInfo: {
-        avatar: 'https://scontent-nrt1-1.cdninstagram.com/vp/411304988011e5a322e837c6d44b5b35/5C2DA515/t51.2885-19/s320x320/33885471_1992324384411933_7383797600782123008_n.jpg',
+        avatar: '',
         username: 'codingzx',
         abstract: 'life is great'
       }
@@ -29,7 +30,7 @@ class Recommend extends React.Component {
     return (
       <div className={Style.recommend}>
         <header className="header">
-          <div className = "avatar" style = {{ 'backgroundImage': `url(${this.state.userInfo.avatar})`}}></div>
+          <div className = "avatar" style = {{ 'backgroundImage': `url(${this.state.userInfo.avatar || defaultAvatarUrl})`}}></div>
           <div className="user_abstract">
             <div className={`username ${this.state.userInfo.username&&'clear-bg'}`}>{this.state.userInfo.username}</div>
             <div className={`abstract ${this.state.userInfo.abstract&&'clear-bg'}`}>{this.state.userInfo.abstract}</div>
