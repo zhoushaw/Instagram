@@ -7,7 +7,7 @@
     height: 60px;
     width: 300px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #efefef;
+    // border-bottom: 1px solid #efefef;
     .avatar {
       display: inline-block;
       height: 50px;
@@ -48,7 +48,11 @@
     width: 300px;
     max-height: 350px;
     overflow: scroll;
-    border-bottom: 1px solid #efefef;
+    border: 1px solid #efefef;
+    border-radius: 5px;
+    padding: 0 20px;
+    margin:  10px 0 20px;
+    background: #fff;
     .title {
       height: 46px;
       color: #999;

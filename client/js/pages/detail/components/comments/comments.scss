@@ -1,0 +1,44 @@
+
+@import '~@scss/mixin.scss';
+
+:local(.comments-section){
+    // height: 210px;
+    background: #fff;
+    .opetions {
+        width: 580px;
+        height: 40px;
+        margin: 0 auto;
+        line-height: 40px;
+        .fl-left {
+            height: 100%;
+        }
+        .comments, .favorite, .collect {
+            display: inline-block;
+            margin: 8px;
+            height: 24px;
+            width: 24px;
+            cursor: pointer;
+        }
+        .favorite {
+            margin-left: 0;
+            @include sprite-1x( 236px 211px,-125px -112px);
+            &.active {
+                @include sprite-1x( 236px 211px,-100px -112px);
+            }
+        }
+        .comments {
+            @include sprite-1x( 236px 211px,0 -187px);
+        }
+        .collect {
+            @include sprite-1x( 236px 211px,-187px -25px);
+            &.active {
+                @include sprite-1x( 236px 211px,-125px -162px);
+            }
+        }
+    }
+    .dot-counts {
+        width: 580px;
+        height: 40px;
+        margin: 0 auto;
+    }
+}

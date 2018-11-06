@@ -100,9 +100,9 @@ class UserController extends Controller {
 
     // 关注好友
     public async userInfo() {
-        const {ctx} = this
+        // const {ctx} = this
 
-        let user_id = ctx.user.user_id
+        // let user_id = ctx.user.user_id
 
         // // 新帖子
         // let followMsg = {

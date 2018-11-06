@@ -2,6 +2,7 @@ import React from 'react'
 import Style from './index.scss'
 import API from '@common/api.js'
 import Carousel from '@components/carousel'
+import Comments from '../comments/comments.js'
 import {defaultAvatarUrl} from '@common/staticVariate.js'
 
 class DynamicList extends React.Component {
@@ -18,7 +19,8 @@ class DynamicList extends React.Component {
           topic: {
             topicImgList: [],
             createdAt: ''
-          }
+          },
+          discuss: []
         }
       ],
 	}
@@ -61,6 +63,9 @@ class DynamicList extends React.Component {
                 <div className="container">
                     <Carousel imageList={item.topic.topicImgList}></Carousel>
                 </div>
+                
+                {/* 评论区 */}
+                <Comments discuss={item.discuss}></Comments>
               </article>
             )
           })

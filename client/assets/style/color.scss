@@ -1,0 +1,35 @@
+// 数字越大，颜色越重~ - -！
+$red-1:     #ef7089;
+$red-2:     #e03959;
+$red-3:     #ff718a;
+$pink-2:    #fdb4d5;
+$pink-1:    #fcf1f7;
+$black-1:	  #999999;
+$black-2:	  #666666;
+$black-3:	  #262626;;
+$gray-1:    #f6f6f6;
+$gray-2:    #bcbcbc;
+$orange:    #fd961d;
+
+//字体颜色
+.u-f-white          {color: #fff;}
+.u-f-lightred       {color: $red-1;}
+.u-f-red            {color: $red-2;}
+.u-f-lightblack2    {color: $black-1;}
+.u-f-lightblack     {color: $black-2;}
+.u-f-black          {color: $black-3;font-weight: 600;}
+.u-f-lightpink      {color: $pink-1;}
+.u-f-pink           {color: $pink-2;}
+.u-f-gray           {color: $gray-2;}
+.u-f-orange         {color: $orange;}
+.u-f-fql-lightred   {color: #ff4e71;}
+.u-f-zy-lightred   {color: #ff4e71;}
+//背景色
+.u-bgc-white        {background-color: #fff;}
+.u-bgc-red          {background-color: $red-2;}
+.u-bgc-lightred     {background-color: $red-1;}
+.u-bgc-pink         {background-color: $pink-2;}
+.u-bgc-lightpink    {background-color: $pink-1;}
+.u-bgc-gray         {background-color: $gray-2;}
+.u-bgc-lightgray    {background-color: $gray-1;}
+.u-bgc-black        {background-color: $black-2;}

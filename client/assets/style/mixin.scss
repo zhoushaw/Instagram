@@ -1,9 +1,15 @@
 // 定义2x雪碧图
 @mixin sprite-2x($size,$poz) {
-  background-repeat: no-repeat;
-  background-image: url('~@assets/image/2x/sprite.png');
-  background-size: $size;
-  background-position: $poz;
+    background-repeat: no-repeat;
+    background-image: url('~@assets/image/sprite.png');
+    background-size: $size;
+    background-position: $poz;
+}
+@mixin sprite-1x($size,$poz) {
+    background-repeat: no-repeat;
+    background-image: url('~@assets/image/sprite2.png');
+    background-size: $size;
+    background-position: $poz;
 }
 
 @keyframes spinner-spin8
