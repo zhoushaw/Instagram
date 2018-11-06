@@ -25,19 +25,18 @@ class Comments extends React.Component {
             </div>
             <div className="dot-counts u-f-black">{this.state.dotCounts}次赞</div>
             <ul className="comments-list">
-                {/* {JSON.stringify(this.props.discuss)} */}
                 { 
                     this.props.discuss.map((item,index) => {
                         return (
-                            <li key={index}>
-                                <span className="username">{item.replyName}</span>
+                            <li className="content" key={index}>
+                                <span className="username  u-f-black">{item.replyName}</span>
                                 <span>{item.replyContent}</span>
                             </li>
                         )
                     })
                 }
             </ul>
-            <div className="release-time"></div>
+            <div className="release-time">3天前</div>
             <div className="add-comments"></div>
         </div>
     )

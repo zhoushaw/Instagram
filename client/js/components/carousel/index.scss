@@ -5,7 +5,7 @@
   position: relative;
   height: 100%;
   width: 100%;
-  overflow: hidden;
+//   overflow: hidden;
   .carousel-list {
     position: relative;
     // 左右切换按钮
@@ -30,25 +30,27 @@
     
     // 切换按钮
     .slick-dot {
-      width: 100%;
-      height: 50px;
       position: absolute;
-      bottom: 10px;
+      bottom: -30px;
+      width: 100%;
+      height: 30px;
+      line-height: 30px;
       text-align: center;
       li {
         display: inline-block;
-        height: 15px;
-        width: 15px;
+        transition: all .2s ease-in-out;
+        width: 6px;
+        height: 6px;
         border-radius: 50%;
         margin-right: 5px;
-        background: rgba(255,255,255,0.4);
+        background: #dbdbdb;
       }
       li:hover {
         cursor: pointer;
-        background: rgba(255,255,255,0.7);
+        background: #3897f0;
       }
       li.acitve {
-        background: rgba(255,255,255,0.7);
+        background: #3897f0;
       }
     }
   }
