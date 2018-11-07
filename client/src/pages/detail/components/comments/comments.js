@@ -27,8 +27,7 @@ class Comments extends React.Component {
             
             // 向父组件通信，添加评论
             this.prorps.addComments(
-                this.state.replyContent,
-                this.props.discussIndex
+                this.state.replyContent
             )
 
             // 清空评论

@@ -38,7 +38,7 @@ class DynamicList extends React.Component {
   }
 
   // 新增评论
-  addComments (comment, index) {
+  addComments (index, comment) {
 
   }
 
@@ -62,7 +62,11 @@ class DynamicList extends React.Component {
                 </div>
                 
                 {/* 评论区 */}
-                <Comments discuss={item.discuss} topicId={item.topic.topicId} discussIndex={index} addComments={this.addComments.bind(this)}></Comments>
+                <Comments 
+                    discuss={item.discuss} 
+                    topicId={item.topic.topicId} 
+                    addComments={(replyContent) => this.addComments(index, replyContent)}>
+                </Comments>
               </article>
             )
           })

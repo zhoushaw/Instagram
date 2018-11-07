@@ -100,7 +100,8 @@ class TopicController extends Controller {
             },
             topic: {
                 topicImgList: JSON.parse(topic.topic_img),
-                createdAt: topic.created_at
+                createdAt: topic.created_at,
+                topicId
             },
             discuss: disscussList
         }
