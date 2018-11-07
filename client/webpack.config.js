@@ -5,12 +5,12 @@ const clientPath = path.resolve(__dirname)
 module.exports = {
   entry:{
     main: path.resolve(clientPath, "index.js"),
-    login: path.resolve(clientPath, "js/pages/login/index.js"),
+    login: path.resolve(clientPath, "src/pages/login/index.js"),
   }, 
   output: {
       publicPath: '/',
       path: path.resolve(process.cwd(), "dist"),
-      filename: 'js/[name].js'
+      filename: 'src/[name].js'
   },
   module: {
     rules: [
@@ -43,8 +43,8 @@ module.exports = {
       '@': clientPath,
       '@scss': path.resolve(clientPath, 'assets/style'),
       '@assets': path.resolve(clientPath, 'assets'),
-      '@components': path.resolve(clientPath, 'js/components'),
-      '@common': path.resolve(clientPath, 'js/common')
+      '@components': path.resolve(clientPath, 'src/components'),
+      '@common': path.resolve(clientPath, 'src/common')
     }
   },
   devServer: {

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Instagram from './js/pages/index.js'
+import Instagram from './src/pages/index.js'
 
 ReactDOM.render(
   <Instagram />, 
