@@ -6,7 +6,8 @@ $pink-2:    #fdb4d5;
 $pink-1:    #fcf1f7;
 $black-1:	  #999999;
 $black-2:	  #666666;
-$black-3:	  #262626;;
+$black-3:	  #262626;
+$black-4:	  #000;
 $gray-1:    #f6f6f6;
 $gray-2:    #bcbcbc;
 $orange:    #fd961d;
@@ -17,7 +18,8 @@ $orange:    #fd961d;
 .u-f-red            {color: $red-2;}
 .u-f-lightblack2    {color: $black-1;}
 .u-f-lightblack     {color: $black-2;}
-.u-f-black          {color: $black-3;font-weight: 600;}
+.u-f-black          {color: $black-3;}
+.u-f-black-blod     {color: $black-4;}
 .u-f-lightpink      {color: $pink-1;}
 .u-f-pink           {color: $pink-2;}
 .u-f-gray           {color: $gray-2;}

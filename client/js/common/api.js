@@ -14,3 +14,8 @@ exports.login = (data) => {
 exports.frientTopicList = (params) => {
     return instance.get('/topic/friend/list', params);
 }
+
+// 获取好友帖子列表
+exports.addDiscuss = (data) => {
+    return instance.post('/topic/discuss/add', data);
+}

@@ -47,16 +47,48 @@
     // 评论列表
     .comments-list {
         width: 580px;
+        margin: 0;
         .content {
             margin: 5px 0;
             .username {
                 margin-right: 10px;
+                font-weight: 600;
+            }
+            .replay-content {
+                font-weight: 400;
+                font-size: 13px;
             }
         }
     }
 
     // 发表时间
     .release-time {
-        
+        font-size: 12px;
+        padding-bottom: 14px;
+        font-weight: bold;
+    }
+
+    // 评论框
+    .add-comments {
+        height: 56px;
+        border-top: 1px solid #efefef;
+        display: flex;
+        align-items: center;
+        input {
+            height: 100%;
+            flex: 1;
+            border: none;
+            outline: none;
+            &::-webkit-input-placeholder{ 
+                color: #999;
+            } 
+        }
+        .more {
+            display: inline-block;
+            height: 24px;
+            width: 24px;
+            cursor: pointer;
+            @include sprite-1x( 236px 211px,-162px -50px);
+        }
     }
 }

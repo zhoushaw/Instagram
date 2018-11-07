@@ -27,6 +27,7 @@ class DynamicList extends React.Component {
 	this.initBaseData()
   }
 
+  // 初始化朋友圈
   async initBaseData () {
     let response = await API.frientTopicList()
     if (response.data.length > 0) {
@@ -36,13 +37,9 @@ class DynamicList extends React.Component {
     }
   }
 
-  
-  next() {
-    this.slider.slickNext();
-  }
+  // 新增评论
+  addComments (comment, index) {
 
-  previous() {
-    this.slider.slickPrev();
   }
 
   render() {
@@ -65,7 +62,7 @@ class DynamicList extends React.Component {
                 </div>
                 
                 {/* 评论区 */}
-                <Comments discuss={item.discuss}></Comments>
+                <Comments discuss={item.discuss} topicId={item.topic.topicId} discussIndex={index} addComments={this.addComments.bind(this)}></Comments>
               </article>
             )
           })

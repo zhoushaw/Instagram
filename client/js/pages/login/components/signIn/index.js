@@ -1,5 +1,4 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom' 
 import { Form, Icon, Input, Button, Checkbox, notification } from 'antd';
 import Style from './index.scss'
 import API from '@common/api.js'
@@ -19,9 +18,9 @@ class NormalLoginForm extends React.Component {
 		if (!err) {
 			console.log('Received values of form: ', values);
 
-			let resposne = await API.login(values)
+			let response = await API.login(values)
 			notification['success']({
-				message: resposne.message
+				message: response.message
 			})
 
 			// 跳转登录
