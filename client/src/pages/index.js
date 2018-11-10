@@ -1,6 +1,7 @@
 import { BrowserRouter as Router,Switch,Route,Redirect} from "react-router-dom";
-import { connect } from 'react-redux'
+import API from '@common/api.js'
 import React from 'react'
+import store from '@/src/store'
 import Login from './login/index.js'
 import Detail from './detail/index'
 import About from './about/index'
@@ -11,11 +12,13 @@ import './index.scss'
 class Intagram extends React.Component {
 
     componentDidMount() {
-        console.log(this.props)
-        this.props.addUserInfo({
-            username: 'shawzhou',
-
-        })
+        // API.getUserInfo().then(response => {
+        //     store.dispatch({
+        //         type: 'ADD_USERINFO', 
+        //         info: response.data
+        //     })
+        //     console.log(store.getState())
+        // })
     }
 
     render() {
@@ -32,14 +35,4 @@ class Intagram extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
-    userInfo: state.userInfo
-})
-const mapDispatchToProps = dispatch => ({
-  addUserInfo: info => dispatch(addUserInfo(info))
-})
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Intagram)
+export default Intagram

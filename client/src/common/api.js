@@ -15,7 +15,12 @@ exports.frientTopicList = (params) => {
     return instance.get('/topic/friend/list', params);
 }
 
-// 获取好友帖子列表
+// 添加评论
 exports.addDiscuss = (data) => {
     return instance.post('/topic/discuss/add', data);
+}
+
+// 获取用户信息
+exports.getUserInfo = (data) => {
+    return instance.get('/user/info', data);
 }
