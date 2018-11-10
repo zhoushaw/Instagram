@@ -4,6 +4,9 @@ import API from '@common/api.js'
 import Carousel from '@components/carousel'
 import Comments from '../comments/comments.js'
 import {defaultAvatarUrl} from '@common/staticVariate.js'
+import store from '@/src/store'
+import { connect } from 'react-redux'
+
 
 class DynamicList extends React.Component {
   constructor(props){
@@ -23,24 +26,30 @@ class DynamicList extends React.Component {
           discuss: []
         }
       ],
-	}
+    }
 	this.initBaseData()
   }
 
-  // 初始化朋友圈
-  async initBaseData () {
-    let response = await API.frientTopicList()
-    if (response.data.length > 0) {
-        this.setState({
-          dynamicList: response.data
-        })
+    // 初始化朋友圈
+    async initBaseData () {
+        let response = await API.frientTopicList()
+        if (response.data.length > 0) {
+            this.setState({
+                dynamicList: response.data
+            })
+        }
     }
-  }
 
-  // 新增评论
-  addComments (index, comment) {
-
-  }
+    // 新增评论
+    addComments(index, replyContent) {
+        let targetTopic = this.state.dynamicList[index]
+        let replyName = this.props.userInfo.username
+        let sourceComment = {
+            replyName,
+            replyContent
+        }
+        targetTopic.discuss.push(sourceComment)
+    }
 
   render() {
     return (
@@ -65,6 +74,7 @@ class DynamicList extends React.Component {
                 <Comments 
                     discuss={item.discuss} 
                     topicId={item.topic.topicId} 
+                    topicLike={item.topic.topicLike}
                     addComments={(replyContent) => this.addComments(index, replyContent)}>
                 </Comments>
               </article>
@@ -75,4 +85,11 @@ class DynamicList extends React.Component {
     )
   }
 }
-export default DynamicList
+
+const mapStateToProps = state => ({
+    userInfo: state.userInfo
+})
+
+export default connect(
+    mapStateToProps
+)(DynamicList)

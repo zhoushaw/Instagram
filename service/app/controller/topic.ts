@@ -81,8 +81,17 @@ class TopicController extends Controller {
 
         // 查询帖子评论
         let discuss = await ctx.service.topic.queryDiscuss({
-            topic_id: +topicId // 帖子id
+            topic_id: +topicId, // 帖子id
+            user_id: ctx.user.user_id
         })
+
+        // 查询用户是否已点赞
+        let topicLike = await ctx.service.topic.queryTopicLike({
+            topic_id: +topicId, // 帖子id
+            user_id: ctx.user.user_id
+        })
+
+
         // 处理帖子数据
         let disscussList = discuss.map((item) => {
             return {
@@ -101,7 +110,8 @@ class TopicController extends Controller {
             topic: {
                 topicImgList: JSON.parse(topic.topic_img),
                 createdAt: topic.created_at,
-                topicId
+                topicId,
+                topicLike: !!topicLike
             },
             discuss: disscussList
         }
@@ -143,7 +153,7 @@ class TopicController extends Controller {
      */
     public async putLikeTopic () {
         const {ctx} = this;
-        const {topicId, status} = ctx.request.query
+        const {topicId, status} = ctx.request.body
 
         let user_id = ctx.user.user_id
 
@@ -159,18 +169,12 @@ class TopicController extends Controller {
         }
 
         // 未曾创建进行创建操作，否则进行更新
-        let hadTopicLike = await ctx.service.topic.queryTopicLike(query)
-        let putLike;
-        if (hadTopicLike) {
-            putLike =  await ctx.service.topic.putTopicLike(query, topicStatus)
-        } else {
-            putLike =  await ctx.service.topic.createdTopicLike(query)
-        }
+        await ctx.service.topic.putTopicLike(query, topicStatus)
         
-        ctx.returnBody(200, putLike? "更新成功" : "网络异常请稍后重试")
+        ctx.returnBody(200, "更新成功", {
+            status: +status
+        })
     }
-
-
 }
 
 module.exports = TopicController

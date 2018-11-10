@@ -36,7 +36,7 @@ class UserController extends Controller {
                 // maxAge: 1000 * 40,
                 // signed: true,
                 httpOnly: false,
-                // domain: '127'
+                domain: '127.0.0.1'
             };
             ctx.cookies.set(this.config.auth_cookie_name, token, opts); // cookie 有效期30天
             ctx.returnBody(200, "登录成功")

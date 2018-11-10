@@ -69,23 +69,15 @@ export default class TopicService extends Service {
         });
     }
 
+    
     /*
-     * 创建一条点赞记录
-     */
-    public async createdTopicLike (topicStatus) {
-        let {ctx} = this
-
-        return await ctx.model.Discuss.create(topicStatus);
-    }
-
-    /*
-     * 更新点赞状态
+     * 创建或更新点赞状态
      * @interface insertTopicParams
      */
     public async putTopicLike (query: queryTopicParams, topicStatus) {
         let {ctx} = this
 
-        return await ctx.model.TopicLike.update(topicStatus, {
+        return await ctx.model.TopicLike.upsert(topicStatus, {
             where: query
         });
     }

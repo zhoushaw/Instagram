@@ -29,8 +29,8 @@ class Login extends React.Component {
                     <section className="login_dialog">
                         {
                             this.state.isSignUp
-                            ?<SignUp />
-                            :<SignIn />
+                            ? <SignIn />
+                            : <SignUp />
                         }
                         <div className="toggle_ways">
                             {

@@ -60,12 +60,12 @@ module.exports = {
     stats: "errors-only" ,//To show only errors in your bundle
     open:true, //When open is enabled, the dev server will open the browser.
     disableHostCheck: true,
-    // proxy: {
-    //     "/api": {
-    //         target: "http://127.0.0.1:7001",
-    //         changeOrigin: true
-    //     }
-    // }//重定向
+    proxy: {
+        "/api": {
+            target: "http://127.0.0.1:7001",
+            changeOrigin: true
+        }
+    }//重定向
   },
   plugins: [
       new HtmlWebPackPlugin({

@@ -9,12 +9,32 @@ class Comments extends React.Component {
         super(props);
         this.state = {
             dotCounts: 2,
-            replyContent: ''
+            replyContent: '',
+            selfLove: false,
+            topicLike: props.topicLike
         }
+        this._handleKeyPress = this._handleKeyPress.bind(this)
     }
 
     handelChange (event){
         this.setState({replyContent:event.target.value})
+    }
+
+    // 点赞
+    async topicLike() {
+        let response = await API.topicLike({ topicId: this.props.topicId, status: this.state.topicLike? 0 : 1 })
+
+        // 确定点赞数，status: 1点赞，0取消
+        let dotCounts;
+        if (response.data.status){
+            dotCounts = ++this.state.dotCounts
+        } else {
+            dotCounts = this.state.dotCounts - 1 >= 0 ? this.state.dotCounts - 1 : 0
+        }
+        this.setState({
+            dotCounts,
+            topicLike: !!response.data.status
+        })
     }
 
     // 添加评论
@@ -26,13 +46,13 @@ class Comments extends React.Component {
             })
             
             // 向父组件通信，添加评论
-            this.prorps.addComments(
+            this.props.addComments(
                 this.state.replyContent
             )
 
             // 清空评论
             this.setState({
-                replyContent: false
+                replyContent: ''
             })
         }
     }
@@ -43,7 +63,7 @@ class Comments extends React.Component {
             <div className={Style['comments-section']}>
                 <div className="opetions">
                     <div className="fl-left">
-                        <span className="favorite"></span>
+                        <span className={`favorite  ${this.state.topicLike && 'active'}`} onClick={this.topicLike.bind(this)}></span>
                         <span className="comments"></span>
                     </div>
                     <span className="fl-right collect"></span>
@@ -68,7 +88,7 @@ class Comments extends React.Component {
                         placeholder="添加评论..." 
                         onChange={this.handelChange.bind(this)} 
                         value={this.state.replyContent} 
-                        onKeyPress={this._handleKeyPress.bind(this)}/>
+                        onKeyPress={this._handleKeyPress}/>
                     <span className="more"></span>
                 </div>
             </div>

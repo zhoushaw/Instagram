@@ -14,11 +14,13 @@
             height: 100%;
         }
         .comments, .favorite, .collect {
+            position: relative;
             display: inline-block;
             margin: 8px;
             height: 24px;
             width: 24px;
             cursor: pointer;
+            z-index: 1;
         }
         .favorite {
             margin-left: 0;
