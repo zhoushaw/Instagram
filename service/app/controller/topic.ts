@@ -88,6 +88,13 @@ class TopicController extends Controller {
         // 查询用户是否已点赞
         let topicLike = await ctx.service.topic.queryTopicLike({
             topic_id: +topicId, // 帖子id
+            user_id: ctx.user.user_id,
+            status: 1
+        })
+
+        // 查询点赞数量
+        let topicLikeCounts = await ctx.service.topic.queryTopicLikeCounts({
+            topic_id: +topicId, // 帖子id
             user_id: ctx.user.user_id
         })
 
@@ -111,7 +118,8 @@ class TopicController extends Controller {
                 topicImgList: JSON.parse(topic.topic_img),
                 createdAt: topic.created_at,
                 topicId,
-                topicLike: !!topicLike
+                topicLike: !!topicLike,
+                topicLikeCounts: topicLikeCounts.count
             },
             discuss: disscussList
         }
@@ -165,7 +173,8 @@ class TopicController extends Controller {
         }
         // 查询条件
         let query = {
-            topic_id: topicId
+            topic_id: topicId,
+            user_id,
         }
 
         // 未曾创建进行创建操作，否则进行更新

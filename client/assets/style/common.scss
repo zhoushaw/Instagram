@@ -25,6 +25,12 @@
 .hidden-vs {
     visibility: hidden;
 }
+.hidden {
+    display: none;
+}
+.no-hidden {
+    display: block;
+}
 
 .fl-left {
     float: left;

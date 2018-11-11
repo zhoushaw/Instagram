@@ -1,6 +1,11 @@
 
 :local(.recommend){
   width: 300px;
+  // 贴附样式
+  &.is-attach {
+    position: fixed;
+  }
+
   .header {
     display: flex;
     align-items: center;

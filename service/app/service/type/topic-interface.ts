@@ -25,3 +25,10 @@ export interface queryTopicParams {
     user_id?: string // 用户id 
 }
 
+// 查询帖子详情
+export interface queryTopicLikeParams {
+    topic_id: string | number, // 帖子id
+    user_id: string, // 用户id 
+    status: number
+}
+

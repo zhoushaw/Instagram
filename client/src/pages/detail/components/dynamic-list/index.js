@@ -4,7 +4,6 @@ import API from '@common/api.js'
 import Carousel from '@components/carousel'
 import Comments from '../comments/comments.js'
 import {defaultAvatarUrl} from '@common/staticVariate.js'
-import store from '@/src/store'
 import { connect } from 'react-redux'
 
 
