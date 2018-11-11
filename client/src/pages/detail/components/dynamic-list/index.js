@@ -20,7 +20,8 @@ class DynamicList extends React.Component {
           },
           topic: {
             topicImgList: [],
-            createdAt: ''
+            createdAt: '',
+            topicLikeCounts: 0 // 点赞数
           },
           discuss: []
         }
@@ -50,6 +51,17 @@ class DynamicList extends React.Component {
         targetTopic.discuss.push(sourceComment)
     }
 
+    // 点赞
+    topicLike(index, dotCounts) {
+        let targetTopic = this.state.dynamicList[index].topic
+        this.setState(Object.assign(
+            targetTopic,
+            {
+                topicLikeCounts: dotCounts
+            }
+        ))
+    }
+
   render() {
     return (
       <div className={Style['dynamic-list']}>
@@ -74,6 +86,8 @@ class DynamicList extends React.Component {
                     discuss={item.discuss} 
                     topicId={item.topic.topicId} 
                     topicLike={item.topic.topicLike}
+                    dotCounts={item.topic.topicLikeCounts}
+                    topicLikeFn={(dotCounts) => this.topicLike(index, dotCounts)}
                     addComments={(replyContent) => this.addComments(index, replyContent)}>
                 </Comments>
               </article>

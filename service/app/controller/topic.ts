@@ -95,7 +95,8 @@ class TopicController extends Controller {
         // 查询点赞数量
         let topicLikeCounts = await ctx.service.topic.queryTopicLikeCounts({
             topic_id: +topicId, // 帖子id
-            user_id: ctx.user.user_id
+            user_id: ctx.user.user_id,
+            status: 1
         })
 
 

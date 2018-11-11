@@ -22,13 +22,6 @@ export interface insertDiscussParams {
 // 查询帖子详情
 export interface queryTopicParams {
     topic_id: string | number, // 帖子id
-    user_id?: string // 用户id 
+    user_id?: string, // 用户id 
+    status?: number
 }
-
-// 查询帖子详情
-export interface queryTopicLikeParams {
-    topic_id: string | number, // 帖子id
-    user_id: string, // 用户id 
-    status: number
-}
-

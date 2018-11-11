@@ -1,5 +1,5 @@
 import { Service } from 'egg';
-import { insertTopicParams, insertDiscussParams, queryTopicParams, queryTopicLikeParams} from './type/topic-interface'
+import { insertTopicParams, insertDiscussParams, queryTopicParams} from './type/topic-interface'
 
 
 
@@ -62,7 +62,7 @@ export default class TopicService extends Service {
      * 查找是否点过赞
      * @interface insertTopicParams
      */
-    public async queryTopicLike (query: queryTopicLikeParams) {
+    public async queryTopicLike(query: queryTopicParams) {
         let {ctx} = this
         return await ctx.model.TopicLike.findOne({
             where: query
@@ -76,10 +76,15 @@ export default class TopicService extends Service {
      */
     public async putTopicLike(query: queryTopicParams, topicStatus) {
         let { ctx } = this
+        let result = await this.queryTopicLike(query)
 
-        return await ctx.model.TopicLike.upsert(topicStatus, {
-            where: query
-        });
+        if (!result) {
+            return await ctx.model.TopicLike.create(topicStatus)
+        } else {
+            return await ctx.model.TopicLike.update(topicStatus, {
+                where: query
+            })
+        }
     }
 
     /*

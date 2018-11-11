@@ -8,7 +8,6 @@ class Comments extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            dotCounts: 2,
             replyContent: '',
             selfLove: false,
             topicLike: props.topicLike,
@@ -34,12 +33,12 @@ class Comments extends React.Component {
         // 确定点赞数，status: 1点赞，0取消
         let dotCounts;
         if (response.data.status){
-            dotCounts = ++this.state.dotCounts
+            dotCounts = this.props.dotCounts + 1;
         } else {
-            dotCounts = this.state.dotCounts - 1 >= 0 ? this.state.dotCounts - 1 : 0
+            dotCounts = this.props.dotCounts - 1 >= 0 ? this.props.dotCounts - 1 : 0;
         }
+        this.props.topicLikeFn(dotCounts)
         this.setState({
-            dotCounts,
             topicLike: !!response.data.status
         })
     }
@@ -82,7 +81,7 @@ class Comments extends React.Component {
                     </div>
                     <span className="fl-right collect"></span>
                 </div>
-                <div className="dot-counts u-f-black">{this.state.dotCounts}次赞</div>
+                <div className="dot-counts u-f-black">{this.props.dotCounts}次赞</div>
                 <ul className="comments-list">
                     { 
                         this.props.discuss.map((item,index) => {

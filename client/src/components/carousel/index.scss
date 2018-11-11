@@ -13,7 +13,6 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      z-index: 1;
       font-size: 25px;
       color: rgba(255,255,255,0.7);
     }
@@ -36,6 +35,7 @@
       height: 40px;
       line-height: 40px;
       text-align: center;
+      z-index: 0;
       li {
         display: inline-block;
         transition: all .2s ease-in-out;
