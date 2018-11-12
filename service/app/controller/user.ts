@@ -109,7 +109,8 @@ class UserController extends Controller {
         let userInfo = {
             username: user.username,
             email: user.email,
-            avatarUrl: user.avatar_url
+            avatarUrl: user.avatar_url,
+            abstract: user.abstract
         }
         ctx.returnBody(200, "获取成功", userInfo)
     }

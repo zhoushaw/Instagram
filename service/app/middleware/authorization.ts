@@ -14,27 +14,12 @@ module.exports = (option, app) => {
       try {
         ctx.jwt.verify(token, app.config.jwtSecret);
       } catch (error) {
-        if (error.name == 'TokenExpiredError') {
-          //重新发放令牌
-          token = jwt.sign({
-            user_id: 1
-          }, app.config.jwtSecret, {
-            expiresIn: '10s' //过期时间设置为60妙。那么decode这个token的时候得到的过期时间为 : 创建token的时间 +　设置的值
-          });
-          ctx.cookies.set('token', token, {
-            maxAge: 60 * 1000,
-            httpOnly: false,
-            overwrite: true,
-            signed: false
-          });
-        } else {
-          ctx.returnBody(401, "you don't access to get data")
-          return;
-        }
+        ctx.returnBody(401, "您未登录，请登录后再试")
+        return;
       }
       await next(option);
     } else {
-      ctx.returnBody(401, "you don't access to get data")
+      ctx.returnBody(401, "您未登录，请登录后再试")
       return;
     }
   }

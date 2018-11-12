@@ -1,16 +1,16 @@
 import React from 'react'
 import Style from './index.scss'
-import {defaultAvatarUrl} from '@common/staticVariate.js'
-import myUtil from '@common/utils'
+import store from '@/src/store'
+
 class Recommend extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             friend_list: ['', '', '', '', ''],
             userInfo: {
-            avatar: '',
-            username: 'codingzx',
-            abstract: 'life is great'
+                avatar: '',
+                username: 'loading',
+                abstract: 'loading'
             },
             attach: {
                 isAttach: false,
@@ -18,6 +18,13 @@ class Recommend extends React.Component {
                 left: 0
             }
         }
+
+        // 获取store数据，获取userInfo
+        store.subscribe(() =>
+            this.setState({
+                userInfo: store.getState().userInfo
+            })
+        );
     }
 
     initData () {
@@ -63,10 +70,14 @@ class Recommend extends React.Component {
             className={`${Style.recommend} ${this.state.attach.isAttach && 'is-attach'}`} 
             ref="recommend">
             <header className="header">
-                <div className = "avatar" style = {{ 'backgroundImage': `url(${this.state.userInfo.avatar || defaultAvatarUrl})`}}></div>
+                <div className = "avatar" style = {{ 'backgroundImage': `url(${this.state.userInfo.avatarUrl})`}}></div>
                 <div className="user_abstract">
-                <div className={`username ${this.state.userInfo.username&&'clear-bg'}`}>{this.state.userInfo.username}</div>
-                <div className={`abstract ${this.state.userInfo.abstract&&'clear-bg'}`}>{this.state.userInfo.abstract}</div>
+                    <div className={`username ${this.state.userInfo.username&&'clear-bg'}`}>{this.state.userInfo.username}</div>
+                    {
+                        this.state.userInfo.abstract?
+                        <div className={`abstract ${this.state.userInfo.abstract&&'clear-bg'}`}>{this.state.userInfo.abstract}</div>
+                        : ''
+                    }
                 </div>
             </header>
             <section className="container">

@@ -3,7 +3,6 @@ import Style from './index.scss'
 import API from '@common/api.js'
 import Carousel from '@components/carousel'
 import Comments from '../comments/comments.js'
-import {defaultAvatarUrl} from '@common/staticVariate.js'
 import { connect } from 'react-redux'
 
 
@@ -52,12 +51,13 @@ class DynamicList extends React.Component {
     }
 
     // 点赞
-    topicLike(index, dotCounts) {
+    topicLike(index, dotCounts, topicLike) {
         let targetTopic = this.state.dynamicList[index].topic
         this.setState(Object.assign(
             targetTopic,
             {
-                topicLikeCounts: dotCounts
+                topicLikeCounts: dotCounts,
+                topicLike
             }
         ))
     }
@@ -70,7 +70,7 @@ class DynamicList extends React.Component {
             return (
               <article className="article" key={index}>
                 <header className="header">
-                  <div className="avatar"  style={{'backgroundImage': `url(${item.userInfo.avatarUrl || defaultAvatarUrl}`}}></div>
+                  <div className="avatar"  style={{'backgroundImage': `url(${item.userInfo.avatarUrl}`}}></div>
                   <div className="user_abstract">
                     <div className={`username ${item.userInfo.username&&'clear-bg'}`}>{item.userInfo.username}</div>
                     {/* <div className={`abstract ${item.userInfo.abstract&&'clear-bg'}`}>{item.userInfo.abstract}</div> */}
@@ -87,7 +87,7 @@ class DynamicList extends React.Component {
                     topicId={item.topic.topicId} 
                     topicLike={item.topic.topicLike}
                     dotCounts={item.topic.topicLikeCounts}
-                    topicLikeFn={(dotCounts) => this.topicLike(index, dotCounts)}
+                    topicLikeFn={(dotCounts, topicLike) => this.topicLike(index, dotCounts, topicLike)}
                     addComments={(replyContent) => this.addComments(index, replyContent)}>
                 </Comments>
               </article>
