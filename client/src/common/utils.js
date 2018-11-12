@@ -25,6 +25,28 @@ const fn = {
               },delay);
           }
       }
+  },
+  /**
+    * debunce 
+    * @param fn{Function}     传入的函数
+    * @param delay{Number}    时间间隔
+    * @returns {Function}     返回调用函数
+   */
+  debunce(fn, delay = 1000) {
+    var timer;
+    var context = this;
+    return function () {
+        if (timer) {
+            clearTimeout(timer)
+            timer = setTimeout(() => {
+                fn.apply(context, arguments)
+            }, delay);
+        } else {
+            timer = setTimeout(() => {
+                fn.apply(context, arguments)
+            }, delay);
+        }
+    }
   }
 }
 export default fn

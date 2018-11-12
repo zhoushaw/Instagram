@@ -1,5 +1,5 @@
 import { Service } from 'egg';
-import { insertTopicParams, insertDiscussParams, queryTopicParams} from './type/topic-interface'
+import { insertTopicParams, insertDiscussParams, queryTopicParams, queryTopicCountsParams} from './type/topic-interface'
 
 
 
@@ -95,6 +95,18 @@ export default class TopicService extends Service {
         let { ctx } = this
 
         return await ctx.model.TopicLike.findAndCountAll({
+            where: query
+        });
+    }
+
+    /*
+     * 查询帖子数量
+     * @interface insertTopicParams
+     */
+    public async queryTopicCounts(query: queryTopicCountsParams) {
+        let { ctx } = this
+
+        return await ctx.model.Topic.findAndCountAll({
             where: query
         });
     }

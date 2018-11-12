@@ -16,6 +16,11 @@ exports.getUserInfo = (data) => {
     return instance.get('/user/info', data);
 }
 
+// 获取用户关注、发帖信息
+exports.getPersonalInfo = (data) => {
+    return instance.get('/user/personal', data);
+}
+
 
 // 点赞
 exports.topicLike = (data) => {

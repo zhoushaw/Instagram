@@ -3,18 +3,10 @@ import DynamicList from './components/dynamic-list/index'
 import Recommend from './components/recommend/index'
 import Nav from '@components/nav/index.js'
 import Style from './index.scss'
-import store from '@/src/store'
-import API from '@common/api.js'
 
 class Detail extends React.Component {
     constructor(props) {
         super(props);
-        API.getUserInfo().then(response => {
-            store.dispatch({
-                type: 'ADD_USERINFO',
-                info: response.data
-            })
-        })
     }
 
     render() {

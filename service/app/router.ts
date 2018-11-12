@@ -10,7 +10,9 @@ export default (app: Application) => {
   apiV2Router.post('/user/login', user.loginIn); // 登录
   apiV2Router.get('/user/signout', user.signOut); // 退出登录
   apiV2Router.post('/user/follow', user.follow); // 关注
-  apiV2Router.get('/user/info', user.userInfo); // 关注
+  apiV2Router.get('/user/info', user.userInfo); // 用户信息
+  apiV2Router.get('/user/personal', user.userPersonalInfo); // 用户信息
+
 
 
   apiV2Router.get('/handle/upload/get-token', handle.getQiniuToken); // 退出登录

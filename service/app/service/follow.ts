@@ -31,13 +31,23 @@ export default class followService extends Service {
      * 查询关注用户的列表
      * @interface {followUserParams}
      */
-    public async findFollow (user_id) {
+    public async findFollow (query) {
         let {ctx} = this
 
         return await ctx.model.Follow.findAll({ 
-            where: {
-                followed_id: user_id
-            } 
+            where: query 
+        })
+    }
+
+    /**
+     * 查询用户关注的数量
+     */
+
+    public async findFollowCounts (query) {
+        let {ctx} = this
+
+        return await ctx.model.Follow.findAndCountAll({ 
+            where: query 
         })
     }
 }

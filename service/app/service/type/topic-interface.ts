@@ -25,3 +25,8 @@ export interface queryTopicParams {
     user_id?: string, // 用户id 
     status?: number
 }
+
+// 查询用户帖子数量
+export interface queryTopicCountsParams {
+    user_id: string // 用户id 
+}

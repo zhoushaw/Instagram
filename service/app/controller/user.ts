@@ -115,6 +115,33 @@ class UserController extends Controller {
         ctx.returnBody(200, "获取成功", userInfo)
     }
 
+    // 获取用户关注、粉丝、帖子数量
+    public async userPersonalInfo () {
+        const {ctx} = this
+
+        let user_id = ctx.user.user_id
+
+        // 用户帖子
+        let topicCounts = await ctx.service.topic.queryTopicCounts({
+            user_id
+        })
+
+        // 用户粉丝
+        let fansCounts = await ctx.service.follow.findFollowCounts({
+            user_id
+        })
+
+        // 用户关注数
+        let followCounts = await ctx.service.follow.findFollowCounts({
+            followed_id: user_id
+        })
+
+        ctx.returnBody(200, "获取成功", {
+            topicCounts: topicCounts.count,
+            followCounts: followCounts.count,
+            fansCounts: fansCounts.count
+        })
+    }
 }
 
 module.exports = UserController

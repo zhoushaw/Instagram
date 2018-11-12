@@ -136,7 +136,9 @@ class TopicController extends Controller {
         let user_id = ctx.user.user_id
 
         // 查询帖子详情
-        let follower =  await ctx.service.follow.findFollow(user_id)
+        let follower =  await ctx.service.follow.findFollow({
+            followed_id: user_id
+        })
         
         // 处理需要查询用户帖子的user_id
         let followList = follower.map((item) => {
@@ -184,6 +186,17 @@ class TopicController extends Controller {
         ctx.returnBody(200, "更新成功", {
             status: +status
         })
+    }
+
+    // 获取用户发布帖子数量
+    public async queryTopic () {
+        let {ctx} = this
+        // 查询点赞数量
+        let topicCounts = await ctx.service.topic.queryTopicCounts({
+            user_id: ctx.user.user_id
+        })
+
+        return topicCounts
     }
 }
 

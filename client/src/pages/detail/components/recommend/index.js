@@ -1,6 +1,7 @@
 import React from 'react'
 import Style from './index.scss'
 import store from '@/src/store'
+import myUtil from '@common/utils.js'
 
 class Recommend extends React.Component {
     constructor(props){
@@ -18,32 +19,41 @@ class Recommend extends React.Component {
                 left: 0
             }
         }
-
-        // 获取store数据，获取userInfo
-        store.subscribe(() =>
-            this.setState({
-                userInfo: store.getState().userInfo
-            })
-        );
     }
 
     initData () {
         this.setState({
             friend_list: []
         })
+
+        // 获取store数据，获取userInfo
+        store.subscribe(() =>{
+            let userInfo = store.getState().userInfo
+            // 处理邮箱号
+            let email = userInfo.email
+            userInfo.email = email.replace(/@.*/, '')
+
+            this.setState({
+                userInfo
+            })
+        });
     }
 
     componentDidMount () {
         this.initData()
 
         // 设置距离左边距离
-        let offsetleft = this.refs.recommend.offsetLeft
-        let attach = Object.assign({}, this.state.attach, {
-            left: offsetleft
-        })
-        this.setState({
-            attach
-        })
+        let setLeftFn = () => {
+            let offsetleft = this.refs.recommend.offsetLeft
+            let attach = Object.assign({}, this.state.attach, {
+                left: offsetleft
+            })
+            this.setState({
+                attach
+            })
+        }
+        setLeftFn()
+        window.addEventListener('resize', myUtil.debunce(setLeftFn, 500))
 
 
         // 检测是否需要贴附
@@ -72,12 +82,8 @@ class Recommend extends React.Component {
             <header className="header">
                 <div className = "avatar" style = {{ 'backgroundImage': `url(${this.state.userInfo.avatarUrl})`}}></div>
                 <div className="user_abstract">
-                    <div className={`username ${this.state.userInfo.username&&'clear-bg'}`}>{this.state.userInfo.username}</div>
-                    {
-                        this.state.userInfo.abstract?
-                        <div className={`abstract ${this.state.userInfo.abstract&&'clear-bg'}`}>{this.state.userInfo.abstract}</div>
-                        : ''
-                    }
+                    <div className={`username ${this.state.userInfo.email&&'clear-bg'}`}>{this.state.userInfo.email}</div>
+                    <div className={`abstract ${this.state.userInfo.username&&'clear-bg'}`}>{this.state.userInfo.username}</div>
                 </div>
             </header>
             <section className="container">
