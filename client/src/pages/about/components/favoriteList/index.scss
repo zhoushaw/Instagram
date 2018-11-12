@@ -1,3 +1,4 @@
+@import '~@scss/mixin.scss';
 :local(.favorite-list) {
   margin-top: 44px;
   .favorite-nav {
@@ -11,6 +12,7 @@
       margin-right: 60px;
       font-size: 12px;
       font-weight: bold;
+      cursor: pointer;
       .icon {
         font-weight: bold;
         font-size: 16px;
@@ -25,12 +27,28 @@
   }
   .favorite-container {
     height: 380px;
-    background: #fff;
+    // background: #fff;
     .descript {
-      width: 385px;
+      width: 100%;
       height: 385px;
-      background-image: url('https://s10.mogucdn.com/mlcdn/c45406/180930_43j6dga2j511jh59e0hdaf6af2f2l_760x760.jpg');
       background-size: 100% 100%;
+      .no-more {
+          margin: 60px auto;
+          width: 117px;
+          height: 137px;
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+          .no-more-icon {
+              font-size: 60px;
+              margin: 0 auto;
+          }
+          .notice {
+              height: 40px;
+              line-height: 40px;
+              font-size: 23px;
+          }
+      }
     }
   }
 }

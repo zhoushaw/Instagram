@@ -6,7 +6,7 @@ class FavoriteList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+      hasData: false
     }
   }
 
@@ -20,9 +20,17 @@ class FavoriteList extends React.Component {
             <li><Icon className="icon" type="tags" theme="outlined" />收藏夹</li>
           </ul>
           <section className="favorite-container">
-            <div className="descript">
-
-            </div>
+            {
+                this.state.hasData?
+                <div className="descript"></div>
+                :
+                <div  className="descript">
+                    <div className="no-more">
+                        <Icon  className="no-more-icon" type="linkedin" />
+                        <span className="notice">没有照片</span>
+                    </div>
+                </div>
+            }
           </section>
         </div>
       </main>
