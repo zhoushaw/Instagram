@@ -28,6 +28,20 @@ class FavoriteList extends React.Component {
                                 return (
                                     <li className="topic" key={item.topic.topicId}>
                                         <img src={item.topic.topicImgList[0]} height="293px"  width="293px"/>
+                                        <div className="abstract">
+                                            {
+                                                item.discuss.length > 0 ?
+                                                    <span className="comments"><i className="icon"></i>{item.discuss.length}</span>
+                                                    :
+                                                    ""
+                                            }
+                                            {
+                                                item.topic.topicLikeCounts> 0?
+                                                <span className="favorite"><i className="icon"></i>{item.topic.topicLikeCounts}</span>
+                                                : 
+                                                ""
+                                            }
+                                        </div>
                                     </li>
                                 )
                             })

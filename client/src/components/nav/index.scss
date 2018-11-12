@@ -36,7 +36,7 @@
         color: #003569;
         text-decoration: none;
         transition: all .3s ease-in-out;
-        @include sprite-2x( 495px 483px,0 -230px);
+        @include sprite-2x( 0 -230px);
       }
       .icon {
         position: absolute;
@@ -45,7 +45,7 @@
         display: inline-block;
         height: 32px;
         width: 32px;
-        @include sprite-2x( 495px 483px,0 -230px);
+        @include sprite-2x( 0 -230px);
       }
     
     }
@@ -83,7 +83,7 @@
           display: inline-block;
           height: 10px;
           width: 10px;
-          @include sprite-2x( 495px 483px,-135px -339px);
+          @include sprite-2x( -135px -339px);
         }
         .close {
           z-index: 3;
@@ -94,7 +94,7 @@
           height: 20px;
           width: 20px;
           transform: translate3d(0,0,0);
-          @include sprite-2x( 495px 483px,-472px -405px);
+          @include sprite-2x( -472px -405px);
           &.active {
             @extend .rotate_icon;
           }
@@ -127,7 +127,7 @@
           text-align: center;
           vertical-align: baseline;
           margin-right: 6px;
-          @include sprite-2x( 495px 483px,-135px -339px);
+          @include sprite-2x( -135px -339px);
         }
     
         .block-text {
@@ -148,13 +148,13 @@
         margin-left: 30px;
       }
       .explore {
-        @include sprite-2x( 495px 483px,-176px -399px);
+        @include sprite-2x( -176px -399px);
       }
       .love {
-        @include sprite-2x( 495px 483px,-150px -425px);
+        @include sprite-2x( -150px -425px);
       }
       .user {
-        @include sprite-2x( 495px 483px,-376px -399px);
+        @include sprite-2x( -376px -399px);
       }
     }
   }

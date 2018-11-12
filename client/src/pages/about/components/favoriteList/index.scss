@@ -25,44 +25,85 @@
       }
     }
   }
-  .favorite-container {
+    .favorite-container {
     // background: #fff;
-    margin-top: 0;
-    .descript {
-      width: 100%;
-      height: 285px;
-      background-size: 100% 100%;
+        margin-top: 0;
+        .descript {
+            width: 100%;
+            height: 285px;
+            background-size: 100% 100%;
 
-      .topic-list {
-          padding: 0 10px;
-          .topic {
-              display: inline-block;
-              margin-right: 25px;
-              height: 293px;
-              width: 293px;
-              &:nth-child(3n) {
-                margin-right: 0;
-              }
-          }
-      }
-      .no-more {
-          padding-top: 60px;
-          margin:0 auto 60px;
-          width: 117px;
-          height: 137px;
-          display: flex;
-          flex-direction: column;
-          text-align: center;
-          .no-more-icon {
-              font-size: 60px;
-              margin: 0 auto;
-          }
-          .notice {
-              height: 40px;
-              line-height: 40px;
-              font-size: 23px;
-          }
-      }
+        .topic-list {
+            padding: 0 10px;
+            .topic {
+                position: relative;
+                display: inline-block;
+                margin-right: 25px;
+                height: 293px;
+                width: 293px;
+                cursor: pointer;
+                &:nth-child(3n) {
+                    margin-right: 0;
+                }
+                &:hover .abstract {
+                    visibility: visible;
+                }
+                .abstract {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    visibility: hidden;
+                    display: flex;
+                    justify-content: center;;
+                    align-items: center;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 0;
+                    background: rgba(0,0,0,0.3);
+
+                    .comments, .favorite {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        margin: 8px;
+                        font-size: 20px;
+                        font-weight: 600;
+                        color: #fff;
+                        cursor: pointer;
+                        .icon {
+                            display: inline-block;
+                            height: 20px;
+                            width: 20px;
+                            margin-right: 5px;
+                        }
+                    }
+                    .comments .icon {
+                        @include sprite-2x( -450px -400px);
+                    }
+                    .favorite .icon {
+                        @include sprite-2x( -450px -427px);
+                    }
+                }
+            }
+        }
+        .no-more {
+            padding-top: 60px;
+            margin:0 auto 60px;
+            width: 117px;
+            height: 137px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            .no-more-icon {
+                font-size: 60px;
+                margin: 0 auto;
+            }
+            .notice {
+                height: 40px;
+                line-height: 40px;
+                font-size: 23px;
+            }
+        }
     }
   }
 }
