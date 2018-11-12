@@ -122,9 +122,17 @@ class UserController extends Controller {
         let user_id = ctx.user.user_id
 
         // 用户帖子
-        let topicCounts = await ctx.service.topic.queryTopicCounts({
+        let topics = await ctx.service.topic.queryTopicCounts({
             user_id
         })
+
+        let topicList: any = [];
+        // 将所有帖子处理完毕
+        for (let topic of topics.rows) {
+            let item = await ctx.service.topic.topicDetailHanderl(topic.topic_id)
+            topicList.push(item)
+        }
+
 
         // 用户粉丝
         let fansCounts = await ctx.service.follow.findFollowCounts({
@@ -137,7 +145,10 @@ class UserController extends Controller {
         })
 
         ctx.returnBody(200, "获取成功", {
-            topicCounts: topicCounts.count,
+            topic: {
+                counts: topics.count,
+                topicList
+            },
             followCounts: followCounts.count,
             fansCounts: fansCounts.count
         })

@@ -26,14 +26,28 @@
     }
   }
   .favorite-container {
-    height: 380px;
     // background: #fff;
+    margin-top: 0;
     .descript {
       width: 100%;
-      height: 385px;
+      height: 285px;
       background-size: 100% 100%;
+
+      .topic-list {
+          padding: 0 10px;
+          .topic {
+              display: inline-block;
+              margin-right: 25px;
+              height: 293px;
+              width: 293px;
+              &:nth-child(3n) {
+                margin-right: 0;
+              }
+          }
+      }
       .no-more {
-          margin: 60px auto;
+          padding-top: 60px;
+          margin:0 auto 60px;
           width: 117px;
           height: 137px;
           display: flex;

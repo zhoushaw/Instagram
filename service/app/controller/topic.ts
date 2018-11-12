@@ -57,74 +57,9 @@ class TopicController extends Controller {
         const {ctx} = this;
         const {topicId} = ctx.request.query
 
-        let topicDetail = await this.topicDetailHanderl(topicId)
+        let topicDetail = await ctx.service.topic.topicDetailHanderl(topicId)
         
         ctx.returnBody(200, "成功", topicDetail)
-    }
-
-    /**
-     * 帖子详情handler
-     * params {topicId} // string
-     */
-    private async topicDetailHanderl (topicId) {
-        const {ctx} = this;
-
-
-        // 查询帖子详情
-        let topic =  await ctx.service.topic.queryTopicDetail({
-            topic_id: +topicId // 帖子id
-        })
-        
-        let user_id = topic.user_id
-        // 获取并填充数据
-        let user = await this.service.user.getUserByUserId(user_id)
-
-        // 查询帖子评论
-        let discuss = await ctx.service.topic.queryDiscuss({
-            topic_id: +topicId, // 帖子id
-            user_id: ctx.user.user_id
-        })
-
-        // 查询用户是否已点赞
-        let topicLike = await ctx.service.topic.queryTopicLike({
-            topic_id: +topicId, // 帖子id
-            user_id: ctx.user.user_id,
-            status: 1
-        })
-
-        // 查询点赞数量
-        let topicLikeCounts = await ctx.service.topic.queryTopicLikeCounts({
-            topic_id: +topicId, // 帖子id
-            user_id: ctx.user.user_id,
-            status: 1
-        })
-
-
-        // 处理帖子数据
-        let disscussList = discuss.map((item) => {
-            return {
-                replyName: item.reply_name,
-                replyContent: item.reply_content,
-                userId: item.user_id
-            }
-        })
-
-        // 返回帖子详情
-        const topicDetail = {
-            userInfo: {
-                username: user.username,
-                avatarUrl: user.avatar_url
-            },
-            topic: {
-                topicImgList: JSON.parse(topic.topic_img),
-                createdAt: topic.created_at,
-                topicId,
-                topicLike: !!topicLike,
-                topicLikeCounts: topicLikeCounts.count
-            },
-            discuss: disscussList
-        }
-        return topicDetail || {}
     }
 
     /**
@@ -152,7 +87,7 @@ class TopicController extends Controller {
 
         // 将所有帖子处理完毕
         for (let topic of topics) {
-            let item =  await this.topicDetailHanderl(topic.topic_id)
+            let item = await ctx.service.topic.topicDetailHanderl(topic.topic_id)
             topicList.push(item)
         }
 

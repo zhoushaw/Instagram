@@ -57,6 +57,70 @@ export default class TopicService extends Service {
         })
     }
 
+    /**
+     * 帖子详情handler
+     * params {topicId} // string
+     */
+    public async topicDetailHanderl(topicId) {
+        const { ctx } = this;
+
+
+        // 查询帖子详情
+        let topic = await ctx.service.topic.queryTopicDetail({
+            topic_id: +topicId // 帖子id
+        })
+
+        let user_id = topic.user_id
+        // 获取并填充数据
+        let user = await this.service.user.getUserByUserId(user_id)
+
+        // 查询帖子评论
+        let discuss = await ctx.service.topic.queryDiscuss({
+            topic_id: +topicId, // 帖子id
+            user_id: ctx.user.user_id
+        })
+
+        // 查询用户是否已点赞
+        let topicLike = await ctx.service.topic.queryTopicLike({
+            topic_id: +topicId, // 帖子id
+            user_id: ctx.user.user_id,
+            status: 1
+        })
+
+        // 查询点赞数量
+        let topicLikeCounts = await ctx.service.topic.queryTopicLikeCounts({
+            topic_id: +topicId, // 帖子id
+            user_id: ctx.user.user_id,
+            status: 1
+        })
+
+
+        // 处理帖子数据
+        let disscussList = discuss.map((item) => {
+            return {
+                replyName: item.reply_name,
+                replyContent: item.reply_content,
+                userId: item.user_id
+            }
+        })
+
+        // 返回帖子详情
+        const topicDetail = {
+            userInfo: {
+                username: user.username,
+                avatarUrl: user.avatar_url
+            },
+            topic: {
+                topicImgList: JSON.parse(topic.topic_img),
+                createdAt: topic.created_at,
+                topicId,
+                topicLike: !!topicLike,
+                topicLikeCounts: topicLikeCounts.count
+            },
+            discuss: disscussList
+        }
+        return topicDetail || {}
+    }
 
     /*
      * 查找是否点过赞

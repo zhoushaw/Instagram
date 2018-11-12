@@ -12,14 +12,14 @@ class Detail extends React.Component {
     render() {
         return (
             <main>
-            <Nav />
-            <div className="page-container">
-                <div className={Style['home-detail']}>
-                <span className="loading"></span>
-                <DynamicList />
-                <Recommend />
+                <Nav />
+                <div className="page-container">
+                    <div className={Style['home-detail']}>
+                        <span className="loading"></span>
+                        <DynamicList />
+                        <Recommend />
+                    </div>
                 </div>
-            </div>
             </main>
         )
     }

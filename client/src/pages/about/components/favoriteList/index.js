@@ -16,18 +16,29 @@ class FavoriteList extends React.Component {
         <div className={Style['favorite-list']}>
           <ul className="favorite-nav">
             <li className="active"><Icon className="icon" type="appstore" theme="outlined" />帖子</li>
-            <li>IGTV</li>
             <li><Icon className="icon" type="tags" theme="outlined" />收藏夹</li>
           </ul>
           <section className="favorite-container">
             {
-                this.state.hasData?
-                <div className="descript"></div>
+                this.props.topicList.length >0 ?
+                <div className="descript">
+                    <ul className="topic-list">
+                        {
+                            this.props.topicList.map((item) => {
+                                return (
+                                    <li className="topic" key={item.topic.topicId}>
+                                        <img src={item.topic.topicImgList[0]} height="293px"  width="293px"/>
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
+                </div>
                 :
                 <div  className="descript">
                     <div className="no-more">
                         <Icon  className="no-more-icon" type="linkedin" />
-                        <span className="notice">没有照片</span>
+                        <span className="notice">没有帖子</span>
                     </div>
                 </div>
             }
