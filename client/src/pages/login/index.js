@@ -1,8 +1,8 @@
 import React from 'react'
-import ReactDOM from "react-dom";
 import SignUp from './components/signup/index.js'
 import SignIn from './components/signIn/index.js'
 import Style from './index.scss'
+import Footer from '@components/footer'
 
 class Login extends React.Component {
     constructor(props) {
@@ -41,6 +41,7 @@ class Login extends React.Component {
                         </div>
                     </section>
                 </article>
+                <Footer />
             </main>
         )
     }

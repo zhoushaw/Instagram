@@ -3,6 +3,7 @@ import Style from './index.scss'
 import Nav from '../../components/nav/index.js'
 import UserInfos from './components/userInfos/index.js'
 import FavoriteList from './components/favoriteList/index.js'
+import Footer from '@components/footer'
 import API from '@common/api'
 
 class Detail extends React.Component {
@@ -43,7 +44,8 @@ class Detail extends React.Component {
                         followCounts: this.state.followCounts
                     }
                 } />
-                <FavoriteList topicList={this.state.topic.topicList}/>
+            <FavoriteList topicList={this.state.topic.topicList}/>
+            <Footer />
           </div>
         </div>
       </main>
