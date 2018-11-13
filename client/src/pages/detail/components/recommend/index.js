@@ -55,49 +55,49 @@ class Recommend extends React.Component {
         window.addEventListener('scroll', fn)
     }
 
-  render () {
-    const {userInfo} = this.props
-    return (
-        <div 
-            style={{ left: this.state.attach.left + 'px', top: this.state.attach.top + 'px'}}
-            className={`${Style.recommend} ${this.state.attach.isAttach && 'is-attach'}`} 
-            ref="recommend">
-            <header className="header">
-                <div className = "avatar" style = {{ 'backgroundImage': `url(${userInfo.avatarUrl})`}}></div>
-                <div className="user_abstract">
-                    <div className={`username ${userInfo.account&&'clear-bg'}`}>{userInfo.account}</div>
-                    <div className={`abstract ${userInfo.username&&'clear-bg'}`}>{userInfo.username}</div>
-                </div>
-            </header>
-            <section className="container">
-                <nav className="title">快拍</nav>
-                {
-                this.state.friend_list.length === 0
-                ?<p className="notice">你的关注对象动态会显示在这里哦</p>
-                :<ul className="friend_photo">
+    render () {
+        const {userInfo} = this.props
+        return (
+            <div 
+                style={{ left: this.state.attach.left + 'px', top: this.state.attach.top + 'px'}}
+                className={`${Style.recommend} ${this.state.attach.isAttach && 'is-attach'}`} 
+                ref="recommend">
+                <header className="header">
+                    <div className = "avatar" style = {{ 'backgroundImage': `url(${userInfo.avatarUrl})`}}></div>
+                    <div className="user_abstract">
+                        <div className={`username ${userInfo.account&&'clear-bg'}`}>{userInfo.account}</div>
+                        <div className={`abstract ${userInfo.username&&'clear-bg'}`}>{userInfo.username}</div>
+                    </div>
+                </header>
+                <section className="container">
+                    <nav className="title">快拍</nav>
                     {
-                    this.state.friend_list.map((item, index)=>{
-                        return (
-                        <li className="list" key={index}>
-                            <div className="avatar"></div>
-                            <div className="user_abstract">
-                            <div className="username"></div>
-                            <div className="abstract"></div>
-                            </div>
-                        </li>
-                        )
-                    })
+                    this.state.friend_list.length === 0
+                    ?<p className="notice">你的关注对象动态会显示在这里哦</p>
+                    :<ul className="friend_photo">
+                        {
+                        this.state.friend_list.map((item, index)=>{
+                            return (
+                            <li className="list" key={index}>
+                                <div className="avatar"></div>
+                                <div className="user_abstract">
+                                <div className="username"></div>
+                                <div className="abstract"></div>
+                                </div>
+                            </li>
+                            )
+                        })
+                        }
+                    </ul>
                     }
-                </ul>
-                }
-            </section>
-            <section className="introduce">
-                <p>关于我们·支持·新闻中心·API·工作·隐私·条款·目录·个人主页·话题标签·语言</p>
-                <p className="brand">@ 2018 shawzhou</p>
-            </section>
-        </div>
-    )
-  }
+                </section>
+                <section className="introduce">
+                    <p>关于我们·支持·新闻中心·API·工作·隐私·条款·目录·个人主页·话题标签·语言</p>
+                    <p className="brand">@ 2018 shawzhou</p>
+                </section>
+            </div>
+        )
+    }
 }
 
 export default Recommend

@@ -10,9 +10,24 @@ class Nav extends React.Component{
             toggle: true,
             focusStatus: false
         }
-        this.onScroll.bind(this)
     }
  
+    componentDidMount(){
+        const fn = () => {
+            let scrollTop = document.documentElement.scrollTop
+            let toggle = false
+            
+            if (scrollTop >= 58) {
+                toggle = false;
+            }else {
+                toggle = true;
+            }
+            this.setState({toggle})
+            debugger
+        }
+        window.addEventListener("scroll", myUtils.throttle(fn,100))
+    }
+    
     render () {
         return (
             <nav className={Style['page-header']}>
@@ -54,27 +69,6 @@ class Nav extends React.Component{
         this.setState({'focusStatus': !this.state.focusStatus})
     }
 
-    onScroll () {
-        // 切换头部状态
-        const toggle = () => {
-            let scrollTop = document.documentElement.scrollTop
-            let toggle = false
-            
-            if (scrollTop >= 58) {
-                toggle = false;
-            }else {
-                toggle = true;
-            }
-            this.setState({toggle})
-        }
-        
-        return myUtils.throttle(toggle,100);
-    }
-
-    componentDidMount(){
-        let onScroll = this.onScroll()
-        window.addEventListener("scroll", onScroll)
-    }
 
     componentWillUnmount () {
         this.setState = (state,callback)=>{
