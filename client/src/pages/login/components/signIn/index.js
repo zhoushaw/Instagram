@@ -2,6 +2,7 @@ import React from 'react'
 import { Form, Icon, Input, Button, Checkbox, notification } from 'antd';
 import Style from './index.scss'
 import API from '@common/api.js'
+import { withRouter } from 'react-router'
 
 const FormItem = Form.Item;
 
@@ -23,9 +24,10 @@ class NormalLoginForm extends React.Component {
 				message: response.message
 			})
 
+            const { history } = this.props;
 			// 跳转登录
 			setTimeout(() => {
-				window.location.href = '/'
+                history.push('/')
 			}, 500)
 		}
     });
@@ -86,4 +88,4 @@ class NormalLoginForm extends React.Component {
 
 const WrappedNormalLoginForm = Form.create()(NormalLoginForm);
 
-export default WrappedNormalLoginForm
+export default withRouter(WrappedNormalLoginForm)

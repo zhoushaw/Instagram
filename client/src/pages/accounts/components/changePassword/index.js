@@ -45,14 +45,6 @@ class RegistrationForm extends React.Component {
         }
     }
 
-    validateToNextPassword = (rule, value, callback) => {
-        const form = this.props.form;
-        if (value && this.state.confirmDirty) {
-            form.validateFields(['confirm'], { force: true });
-        }
-        callback();
-    }
-
     handleWebsiteChange = (value) => {
         let autoCompleteResult;
         if (!value) {
@@ -89,14 +81,6 @@ class RegistrationForm extends React.Component {
                 },
             },
         };
-        const prefixSelector = getFieldDecorator('prefix', {
-            initialValue: '86',
-        })(
-            <Select style={{ width: 70 }}>
-                <Option value="86">+86</Option>
-                <Option value="87">+87</Option>
-            </Select>
-        );
 
         const websiteOptions = autoCompleteResult.map(website => (
             <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
@@ -158,43 +142,6 @@ class RegistrationForm extends React.Component {
                         >
                         <Input />
                         </AutoComplete>
-                    )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="Abstract"
-                        >
-                        {getFieldDecorator('abstract', {
-                            rules: [{
-                            type: 'abstract', message: 'The input is not valid abstract',
-                            }, {
-                            required: true, message: 'Please input your abstract!',
-                            }],
-                        })(
-                            <TextArea placeholder="Please input your abstract " autosize={{ minRows: 2, maxRows: 6 }} />
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        label="Phone Number"
-                        >
-                        {getFieldDecorator('phone', {
-                            rules: [{ required: true, message: 'Please input your phone number!' }],
-                        })(
-                            <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
-                        )}
-                    </FormItem>
-                    <FormItem
-                    {...formItemLayout}
-                    label="Sex"
-                    >
-                    {getFieldDecorator('sex', {
-                        rules: [{ required: true, message: 'Please input your sex!' }],
-                    })(
-                        <Select>
-                            <Option value="1">man</Option>
-                            <Option value="2">women</Option>
-                        </Select>
                     )}
                     </FormItem>
                     <FormItem {...tailFormItemLayout}>

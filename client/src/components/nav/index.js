@@ -1,6 +1,8 @@
 import React from 'react'
 import Style from './index.scss'
 import myUtils from '../../common/utils'
+import {Link} from 'react-router-dom'
+
 class Nav extends React.Component{
     constructor(props){
         super(props)
@@ -18,9 +20,9 @@ class Nav extends React.Component{
                     <div className="logo-space">
                     {
                         this.state.toggle?
-                        <a className="instagram" href="/"></a>
+                        <Link  className="instagram" to={'/'} />
                         :
-                        <a className="icon"></a>
+                        <Link  className="icon" to={'/'} />
                     }
                     </div>
                     <div className="search">
@@ -39,9 +41,9 @@ class Nav extends React.Component{
                     }
                     </div>
                     <div className="navigate">
-                    <a className="explore" href=""></a>
-                    <a className="love" href=""></a>
-                    <a className="user" href="/about"></a>
+                        <Link  className="explore" to={'/'} />
+                        <Link  className="love" to={'/'} />
+                        <Link  className="user" to={'/about'} />
                     </div>
                 </div>
             </nav>

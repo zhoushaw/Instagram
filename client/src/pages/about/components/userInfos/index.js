@@ -1,49 +1,44 @@
 import React from 'react'
 import { Icon } from 'antd';
 import Style from './index.scss'
-import store from '@/src/store'
+import { withRouter } from 'react-router'
+import { connect } from "react-redux";
 
+@connect(
+    store => {
+        return {
+            userInfo: store.userInfo
+        }
+    }
+)
 class UserInfos extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userInfo: {
-                avatarUrl: '',
-                username: 'loading',
-                abstract: 'loading'
-            },
             topicCounts: 0,
             fansCounts: 20,
             followCounts: 100,
             avator: ''
         }
-        this.initData()
     }
 
-    initData () {
-        // 获取store数据，获取userInfo
-        store.subscribe(() =>{
-            let userInfo = store.getState().userInfo
-            // 处理邮箱号
-            let email = userInfo.email
-            userInfo.email = email.replace(/@.*/, '')
 
-            this.setState({
-                userInfo
-            })
-        });
-    }   
+    goEditAccounts = () => {
+        const { history } = this.props;
+        history.push('/accounts')
+    }
 
     render() {
+        let {userInfo} = this.props
         return (
             <main>
                 <div className={Style['user-infos']}>
-                    <div className="avator" style={{'backgroundImage': `url(${this.state.userInfo.avatarUrl})`}}></div>
+                    <div className="avator" style={{'backgroundImage': `url(${userInfo.avatarUrl})`}}></div>
                     <div className="user-infos">
                     <p className="operate">
-                        <span className="user-account">{this.state.userInfo.email}</span>
-                        <span className="modify">编辑个人主页</span>
-                        <Icon className="icon" type="setting" theme="filled" />
+                        <span className="user-account">{userInfo.account}</span>
+                        <span className="modify" onClick={this.goEditAccounts}>编辑个人主页</span>
+                        <Icon className="icon" type="setting" theme="filled"  onClick={this.goEditAccounts}/>
                     </p>
                     <p className="attention-status">
                         <span><b>{this.props.personalInfo.topicCounts}</b>帖子</span>
@@ -51,7 +46,7 @@ class UserInfos extends React.Component {
                         <span><b>正在关注</b>{this.props.personalInfo.followCounts}</span>
                     </p>
                     <p className="user-name">
-                        <b>{this.state.userInfo.username}</b>
+                        <b>{userInfo.username}</b>
                     </p>
                     </div>     
                 </div>
@@ -60,4 +55,4 @@ class UserInfos extends React.Component {
     }
 }
 
-export default UserInfos
+export default withRouter(UserInfos)

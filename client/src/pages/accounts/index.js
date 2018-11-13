@@ -1,18 +1,16 @@
 import React from 'react'
 import Style from './index.scss'
 import EditAccounts from './components/edit'
+import ChangePassword from './components/changePassword'
 import Nav from '../../components/nav/index.js'
 import Footer from '@components/footer'
 
 class Accounts extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            navList: ['编辑主页', '更改密码'],
-            currIndex: 0
-        }
+    state = {
+        navList: ['编辑主页', '更改密码'],
+        currIndex: 0
     }
-    
+
     changeCurrIndex (index) {
         this.setState({
             currIndex: index
@@ -39,7 +37,12 @@ class Accounts extends React.Component{
                             </ul>
                         </nav>
                         <section className="operation-content">
-                            <EditAccounts />
+                            {
+                                this.state.currIndex === 0?
+                                <EditAccounts onClick={this.changeCurrIndex.bind(this,0)}/>
+                                : 
+                                <ChangePassword  onClick={this.changeCurrIndex.bind(this, 1)}/>
+                            }
                         </section>
                     </section>
                     <Footer />

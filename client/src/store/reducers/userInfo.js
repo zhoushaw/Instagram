@@ -1,11 +1,15 @@
-const userInfo = (state = {
+const defaultValue = {
     avatarUrl: '',
     username: '',
-    abstract: ''
-}, action) => {
+    account: '',
+    abstract: '',
+    email: ''
+}
+
+const userInfo = (state = defaultValue, action) => {
     switch (action.type) {
       case 'ADD_USERINFO':
-        return Object.assign(state, action.info)
+        return Object.assign({}, state, action.info)
       default:
         return state
     }

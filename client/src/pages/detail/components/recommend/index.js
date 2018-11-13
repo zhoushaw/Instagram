@@ -1,47 +1,31 @@
 import React from 'react'
 import Style from './index.scss'
-import store from '@/src/store'
 import myUtil from '@common/utils.js'
+import { connect } from "react-redux";
 
+@connect(
+    store => {
+        return {
+            userInfo: store.userInfo
+        }
+    }
+)
 class Recommend extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-            friend_list: ['', '', '', '', ''],
-            userInfo: {
-                avatar: '',
-                username: 'loading',
-                abstract: 'loading'
-            },
-            attach: {
-                isAttach: false,
-                top: 78,
-                left: 0
-            }
+    }
+    state = {
+        friend_list: [],
+        attach: {
+            isAttach: false,
+            top: 78,
+            left: 0
         }
     }
-
-    initData () {
-        this.setState({
-            friend_list: []
-        })
-
-        // 获取store数据，获取userInfo
-        store.subscribe(() =>{
-            let userInfo = store.getState().userInfo
-            // 处理邮箱号
-            let email = userInfo.email
-            userInfo.email = email.replace(/@.*/, '')
-
-            this.setState({
-                userInfo
-            })
-        });
-    }
+    
 
     componentDidMount () {
-        this.initData()
-
+        // this.initData()
         // 设置距离左边距离
         let setLeftFn = () => {
             let offsetleft = this.refs.recommend.offsetLeft
@@ -54,7 +38,6 @@ class Recommend extends React.Component {
         }
         setLeftFn()
         window.addEventListener('resize', myUtil.debunce(setLeftFn, 500))
-
 
         // 检测是否需要贴附
         let fn = () => {
@@ -73,17 +56,17 @@ class Recommend extends React.Component {
     }
 
   render () {
-
+    const {userInfo} = this.props
     return (
         <div 
             style={{ left: this.state.attach.left + 'px', top: this.state.attach.top + 'px'}}
             className={`${Style.recommend} ${this.state.attach.isAttach && 'is-attach'}`} 
             ref="recommend">
             <header className="header">
-                <div className = "avatar" style = {{ 'backgroundImage': `url(${this.state.userInfo.avatarUrl})`}}></div>
+                <div className = "avatar" style = {{ 'backgroundImage': `url(${userInfo.avatarUrl})`}}></div>
                 <div className="user_abstract">
-                    <div className={`username ${this.state.userInfo.email&&'clear-bg'}`}>{this.state.userInfo.email}</div>
-                    <div className={`abstract ${this.state.userInfo.username&&'clear-bg'}`}>{this.state.userInfo.username}</div>
+                    <div className={`username ${userInfo.account&&'clear-bg'}`}>{userInfo.account}</div>
+                    <div className={`abstract ${userInfo.username&&'clear-bg'}`}>{userInfo.username}</div>
                 </div>
             </header>
             <section className="container">
