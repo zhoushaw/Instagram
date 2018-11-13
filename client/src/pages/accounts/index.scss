@@ -1,0 +1,45 @@
+
+
+:local(.accounts){
+    display: flex;
+    flex-direction: row;
+    width: 935px;
+    margin: 0 auto 50px;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    background: #fff;
+    overflow: hidden;
+    nav {
+        width: 237px;
+        border-right: 1px solid #dbdbdb;
+        .operation-list {
+            li {
+                position: relative;
+                height: 52px;
+                padding-left: 30px;
+                line-height: 52px;
+                color: #003569;
+                font-size: 16px;
+                cursor: pointer;
+                &.active {
+                    color: #262626;
+                    font-weight: 600;
+                }
+                &.active::after {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    height: 100%;
+                    width: 2px;
+                    background: #262626;
+                }
+            }
+        }
+    }
+    .operation-content {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        padding: 40px 0;
+    }
+}

@@ -1,0 +1,31 @@
+
+
+:local(.edit-accounts){
+    margin: 0 auto;
+    width: 500px;
+    .header {
+        margin-bottom: 20px;
+        .avatar {
+          display: inline-block;
+          height: 50px;
+          width: 50px;
+          overflow: hidden;
+          border-radius: 50%;
+          background-size: 100% 100%;
+          background-color: #efefef;
+          margin-right: 10px;
+          cursor: pointer;
+        }
+        .username {
+            font-size: 20px;
+            color: #000;
+            font-weight: 400;
+        }
+        .notice {
+            font-size: 14px;
+            color: #3897f0;
+            font-weight: 800;
+            cursor: pointer;
+        }
+    }
+}

@@ -1,0 +1,25 @@
+
+
+:local(.page-footer){
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 104px;
+    width: 1010px;
+    margin: 0 auto;
+    .nav {
+        li {
+            display: inline-block;
+            color: #003569;
+            margin-right: 16px;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+    }
+    .sign {
+        font-size: 12px;
+        font-weight: 800;
+        cursor: pointer;
+    }
+}
