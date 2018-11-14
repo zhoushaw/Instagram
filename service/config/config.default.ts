@@ -39,7 +39,7 @@ export default (appInfo: EggAppInfo) => {
   config.jwtSecret = 'shawzhou';
 
   // authorization's white list
-  config.authWhiteList = ['/api/v2/user/login', '/api/v2/user/register', '/api/v2/user/signout'];
+  config.authWhiteList = ['/api/v2/user/login', '/api/v2/user/register'];
 
   // cookie name config
   config.auth_cookie_name = 'token';

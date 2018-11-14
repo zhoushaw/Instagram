@@ -11,7 +11,7 @@ module.exports = app => {
       mobile: STRING(32),// 手机号,
       prefix: STRING(32),// 手机号,
       abstract:  {type: STRING(255), allowNull: true},// 自我介绍
-      sex: {type: INTEGER, defaultValue: 0}, // 值为1时是男性，值为2时是女性，默认值为0时是未知
+      sex: {type: STRING(1), defaultValue: 0}, // 值为1时是男性，值为2时是女性，默认值为0时是未知
       created_at: {type: DATE, defaultValue: NOW},// 创建时间
       updated_at: {type: DATE, defaultValue: NOW}// 更新时间
   }, {

@@ -25,7 +25,8 @@ class Recommend extends React.Component {
             isAttach: false,
             top: 78,
             left: 0
-        }
+        },
+        hadSetScrollFn: false
     }
     
     // 设置边缘
@@ -37,6 +38,14 @@ class Recommend extends React.Component {
         this.setState({
             attach
         })
+
+        // 距离边缘设置完成后，添加滚动事件
+        if (!this.state.hadSetScrollFn) {
+            window.addEventListener('scroll', this.attachFn)
+            this.setState({
+                hadSetScrollFn: true
+            })
+        }
     }
 
     // 检测是否需要贴附
@@ -56,10 +65,13 @@ class Recommend extends React.Component {
     componentDidMount () {
         this.setLeftFn()
         window.addEventListener('resize', this.setLeftFn)
-        window.addEventListener('scroll', this.attachFn)
     }
 
     componentWillUnmount(){
+        this.setState = (state, callback) => {
+            return;
+        };
+
         window.removeEventListener("resize", this.setLeftFn);
         window.removeEventListener("scroll", this.attachFn);
     }

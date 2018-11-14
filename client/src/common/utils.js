@@ -10,7 +10,7 @@ const fn = {
   throttle(fn ,delay ,options) {
       var wait=false;
       if (!options) options = {};
-      return ()=>{
+      return function (){
           const args=arguments;
           if(!wait){
               if (!(options.leading === false)){

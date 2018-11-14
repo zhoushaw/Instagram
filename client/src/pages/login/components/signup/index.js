@@ -20,6 +20,8 @@ class NormalLoginForm extends React.Component {
         notification[response.data.flag? 'success' : 'error']({
           message: response.message
         })
+        // 切换登录状态
+        this.props.toggleSign()
       }
     });
   }

@@ -8,7 +8,11 @@ exports.register = (data) => {
 // 登录
 exports.login = (data) => {
     return instance.post('/user/login', data);
- };
+};
+// 退出登录
+exports.signout = (data) => {
+    return instance.get('/user/signout', data);
+};
   
 
 // 获取用户信息

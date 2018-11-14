@@ -30,7 +30,7 @@ class Login extends React.Component {
                         {
                             this.state.isSignUp
                             ? <SignIn />
-                            : <SignUp />
+                            : <SignUp toggleSign={this.toggleSign.bind(this)}/>
                         }
                         <div className="toggle_ways">
                             {

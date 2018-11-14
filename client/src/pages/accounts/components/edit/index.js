@@ -31,10 +31,6 @@ class RegistrationForm extends React.Component {
                 Object.keys(values).forEach((index) =>{
                     if (!!values[index]) params[index] = values[index]
                 })
-                // 无法成功init到form中，单独处理
-                if (params.sex === '男') params.sex = 1
-                if (params.sex === '女') params.sex = 2
-
 
                 let response = await API.updatePersonalInfo(params);
                 notification['success']({
@@ -212,8 +208,8 @@ class RegistrationForm extends React.Component {
                         initialValue: userInfo.sex
                     })(
                         <Select>
-                            <Option value="1">男</Option>
-                            <Option value="2">女</Option>
+                            <Option value="男">男</Option>
+                            <Option value="女">女</Option>
                         </Select>
                     )}
                     </FormItem>

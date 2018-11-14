@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Icon, Input, Button, Checkbox, notification } from 'antd';
+import { Form, Icon, Input, Button, notification } from 'antd';
 import Style from './index.scss'
 import API from '@common/api.js'
 import store from '@/src/store'

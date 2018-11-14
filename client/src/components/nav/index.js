@@ -1,7 +1,11 @@
 import React from 'react'
 import Style from './index.scss'
-import myUtils from '../../common/utils'
 import {Link} from 'react-router-dom'
+import { Menu, Dropdown, notification } from 'antd';
+import API from '@common/api'
+import { withRouter } from 'react-router'
+
+
 
 class Nav extends React.Component{
     constructor(props){
@@ -14,6 +18,12 @@ class Nav extends React.Component{
  
     
     render () {
+        const menu = (
+            <Menu>
+                <Menu.Item>关于我</Menu.Item>
+                <Menu.Item onClick={this.signOut.bind(this)}>退出登录</Menu.Item>
+            </Menu>
+        );
         return (
             <nav className={Style['page-header']}>
                 <div ref="header" className={`header ${this.state.toggle?'' : 'toggle'}`} >
@@ -43,7 +53,9 @@ class Nav extends React.Component{
                     <div className="navigate">
                         <Link  className="explore" to={'/'} />
                         <Link  className="love" to={'/'} />
-                        <Link  className="user" to={'/about'} />
+                        <Dropdown overlay={menu} >
+                            <Link  className="user" to={'/about'} />
+                        </Dropdown>
                     </div>
                 </div>
             </nav>
@@ -62,6 +74,14 @@ class Nav extends React.Component{
         })
     }
 
+    async signOut () {
+        let response = await API.signout()
+        notification['success']({
+            message: response.message
+        })
+        window.location.href = '/login';
+    }
+
     componentDidMount(){
         window.addEventListener("scroll",this.onScroll)
     }
@@ -70,4 +90,4 @@ class Nav extends React.Component{
         window.removeEventListener("scroll",this.onScroll);
     }
 }
-export default Nav
+export default withRouter(Nav)
