@@ -24,32 +24,7 @@
       cursor: pointer;
     }
   }
-  .user_abstract {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 50px;
-    margin-left: 12px;
-    .username {
-      width: 140px;
-      min-height: 10px;
-      background: #efefef;
-      line-height: 10px;
-      color: #262626;
-      font-weight: 600;
-      font-size: 14px;
-    }
-    .abstract {
-      width: 100px;
-      min-height: 10px;
-      margin-top: 10px;
-      background: #efefef;
-      font-size: 12px;
-      line-height: 10px;
-      white-space: nowrap;
-      color: #999;
-    }
-  }
+  
   .container {
     width: 300px;
     max-height: 350px;

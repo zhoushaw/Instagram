@@ -15,8 +15,8 @@ class FavoriteList extends React.Component {
       <main>
         <div className={Style['favorite-list']}>
           <ul className="favorite-nav">
-            <li className="active"><Icon className="icon" type="appstore" theme="outlined" />帖子</li>
-            <li><Icon className="icon" type="tags" theme="outlined" />收藏夹</li>
+            <li className="active"><i className="topic"></i>帖子</li>
+            <li><i className="collect"></i>收藏夹</li>
           </ul>
           <section className="favorite-container">
             {

@@ -84,7 +84,12 @@ class Comments extends React.Component {
                     </div>
                     <span className="fl-right collect"></span>
                 </div>
-                <div className="dot-counts u-f-black">{this.props.dotCounts}次赞</div>
+                {
+                    this.props.dotCounts?
+                    <div className="dot-counts u-f-black">{this.props.dotCounts}次赞</div>
+                    :
+                    <div className="dot-counts u-f-black">抢先 点赞</div>
+                }
                 <ul className="comments-list">
                     { 
                         this.props.discuss.map((item,index) => {

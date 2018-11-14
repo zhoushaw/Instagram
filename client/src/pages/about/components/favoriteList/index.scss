@@ -13,11 +13,17 @@
       font-size: 12px;
       font-weight: bold;
       cursor: pointer;
-      .icon {
-        font-weight: bold;
-        font-size: 16px;
-        color: rgba(0,0,0,0.8);
+      i {
+        display: inline-block;
+        height: 12px;
+        width: 12px;
         margin-right: 6px;
+      }
+      .topic {
+        @include sprite-2x( -351px -111px);
+      }
+      .collect {
+        @include sprite-2x( -413px -376px);
       }
 
       &.active {
