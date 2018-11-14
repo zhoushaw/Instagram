@@ -10,9 +10,12 @@ import { connect } from "react-redux";
         }
     }
 )
+
+
 class Recommend extends React.Component {
     constructor(props){
         super(props);
+        this.setLeftFn = myUtil.debunce(this.setLeftFn, 200)
     }
     state = {
         friend_list: [],
@@ -23,37 +26,42 @@ class Recommend extends React.Component {
         }
     }
     
+    // 设置边缘
+    setLeftFn = () => {
+        let offsetleft = this.refs.recommend.offsetLeft
+        let attach = Object.assign({}, this.state.attach, {
+            left: offsetleft
+        })
+        this.setState({
+            attach
+        })
+    }
 
-    componentDidMount () {
-        // this.initData()
-        // 设置距离左边距离
-        let setLeftFn = () => {
-            let offsetleft = this.refs.recommend.offsetLeft
+    // 检测是否需要贴附
+    attachFn = () => {
+        let isAttach = window.scrollY >= 78
+    
+        if (isAttach !== this.state.attach.isAttach) {
             let attach = Object.assign({}, this.state.attach, {
-                left: offsetleft
+                isAttach
             })
             this.setState({
                 attach
             })
         }
-        setLeftFn()
-        window.addEventListener('resize', myUtil.debunce(setLeftFn, 500))
-
-        // 检测是否需要贴附
-        let fn = () => {
-            let isAttach = window.scrollY >= 78
-
-            if (isAttach !== this.state.attach.isAttach) {
-                let attach = Object.assign({}, this.state.attach, {
-                    isAttach
-                })
-                this.setState({
-                    attach
-                })
-            }
-        }
-        window.addEventListener('scroll', fn)
     }
+
+    componentDidMount () {
+        this.setLeftFn()
+        window.addEventListener('resize', this.setLeftFn)
+        window.addEventListener('scroll', this.attachFn)
+    }
+
+    componentWillUnmount(){
+        window.removeEventListener("resize", this.setLeftFn);
+        window.removeEventListener("scroll", this.attachFn);
+    }
+
 
     render () {
         const {userInfo} = this.props
@@ -66,7 +74,7 @@ class Recommend extends React.Component {
                     <div className = "avatar" style = {{ 'backgroundImage': `url(${userInfo.avatarUrl})`}}></div>
                     <div className="user_abstract">
                         <div className={`username ${userInfo.account&&'clear-bg'}`}>{userInfo.account}</div>
-                        <div className={`abstract ${userInfo.username&&'clear-bg'}`}>{userInfo.username}</div>
+                        <div className={`abstract ${userInfo.abstract&&'clear-bg'}`}>{userInfo.abstract}</div>
                     </div>
                 </header>
                 <section className="container">

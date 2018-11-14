@@ -21,6 +21,15 @@ exports.getPersonalInfo = (data) => {
     return instance.get('/user/personal', data);
 }
 
+// 更新用户信息
+exports.updatePersonalInfo = (data) => {
+    return instance.post('/user/update', data);
+}
+
+
+
+
+
 
 // 点赞
 exports.topicLike = (data) => {

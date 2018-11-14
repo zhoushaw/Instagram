@@ -5,7 +5,7 @@ const clientPath = path.resolve(__dirname)
 module.exports = {
   entry:{
     main: path.resolve(clientPath, "index.js"),
-    login: path.resolve(clientPath, "src/pages/login/index.js"),
+    login: path.resolve(clientPath, "src/pages/login/index.js")
   }, 
   output: {
       publicPath: '/',

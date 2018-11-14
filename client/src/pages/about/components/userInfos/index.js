@@ -46,7 +46,7 @@ class UserInfos extends React.Component {
                         <span><b>正在关注</b>{this.props.personalInfo.followCounts}</span>
                     </p>
                     <p className="user-name">
-                        <b>{userInfo.username}</b>
+                        <b>{userInfo.abstract}</b>
                     </p>
                     </div>     
                 </div>

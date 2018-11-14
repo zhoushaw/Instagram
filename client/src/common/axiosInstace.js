@@ -64,7 +64,7 @@ instance.interceptors.response.use(function (response) {
     // 4.系统错误，比如500、404等
     try {
         notification['error']({
-            message: error.response.data.message
+            message: error.response.data.message || '系统异常'
         })
         // 登录授权
         if (error.response.status === 401) {

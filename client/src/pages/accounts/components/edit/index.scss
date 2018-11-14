@@ -13,7 +13,7 @@
           border-radius: 50%;
           background-size: 100% 100%;
           background-color: #efefef;
-          margin-right: 10px;
+          margin-right: 25px;
           cursor: pointer;
         }
         .username {
@@ -23,9 +23,15 @@
         }
         .notice {
             font-size: 14px;
+            font-weight: bold;
             color: #3897f0;
-            font-weight: 800;
             cursor: pointer;
         }
+    }
+    .form-item-label {
+        color: #262626;
+        font-size: 16px;
+        margin-right: 15px;
+        font-weight: bold;
     }
 }

@@ -117,5 +117,16 @@ export default class UserService extends Service {
             }
         })
     }
-    
+
+    /*
+    * 更新用户数据
+    * @param {String} email 邮箱地址
+    * @return {Promise[user]} 承载用户的 Promise 对象
+    */
+    public async updateUserInfo(query, updateValue) {
+
+        return this.ctx.model.User.update(updateValue, { 
+            where: query
+        })
+    }
 }

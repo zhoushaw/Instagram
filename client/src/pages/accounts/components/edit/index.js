@@ -1,6 +1,7 @@
 import React from 'react'
-import { Form, Input, Tooltip, Icon, Select, Button, AutoComplete } from 'antd';
+import { Form, Input, Select, Button, AutoComplete, notification } from 'antd';
 import Style from './index.scss'
+import API from '@common/api.js'
 import { Row, Col } from 'antd';
 import { connect } from "react-redux";
 
@@ -24,8 +25,21 @@ class RegistrationForm extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.form.validateFieldsAndScroll((err, values) => {
+        this.props.form.validateFieldsAndScroll(async (err, values) => {
             if (!err) {
+                let params = {}
+                Object.keys(values).forEach((index) =>{
+                    if (!!values[index]) params[index] = values[index]
+                })
+                // 无法成功init到form中，单独处理
+                if (params.sex === '男') params.sex = 1
+                if (params.sex === '女') params.sex = 2
+
+
+                let response = await API.updatePersonalInfo(params);
+                notification['success']({
+                    message: response.message
+                })
                 console.log('Received values of form: ', values);
             }
         });
@@ -110,47 +124,31 @@ class RegistrationForm extends React.Component {
                     </Col>
                     <Col span={16}  className="user_abstract">
                         <div className={'username'}>{userInfo.account}</div>
-                        <div className={'notice'}>更换手机号</div>
+                        <div className={'notice'}>更换头像</div>
                     </Col>
                 </Row>
                 <Form onSubmit={this.handleSubmit}>
                     <FormItem
                         {...formItemLayout}
                         label={(
-                        <span>
-                            Nickname&nbsp;
-                            <Tooltip title="What do you want others to call you?">
-                            <Icon type="question-circle-o" />
-                            </Tooltip>
-                        </span>
+                            <span className="form-item-label">姓名</span>
                         )}
                         >
-                        {getFieldDecorator('nickname', {
-                            rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
+                        {getFieldDecorator('username', {
+                            rules: [{ required: true, message: 'Please input your username!', whitespace: true }],
+                            initialValue: userInfo.username
                         })(
                         <Input />
                         )}
                     </FormItem>
                     <FormItem
                     {...formItemLayout}
-                    label="E-mail"
-                    >
-                    {getFieldDecorator('email', {
-                        rules: [{
-                            type: 'email', message: 'The input is not valid E-mail!',
-                        }, {
-                            required: true, message: 'Please input your E-mail!',
-                        }],
-                    })(
-                        <Input />
-                    )}
-                    </FormItem>
-                    <FormItem
-                    {...formItemLayout}
-                    label="Website"
+                        label={(
+                            <span className="form-item-label">网站</span>
+                        )}
                     >
                     {getFieldDecorator('website', {
-                        rules: [{ required: true, message: 'Please input website!' }],
+                        rules: [{ required: false, message: 'Please input website!' }],
                     })(
                         <AutoComplete
                         dataSource={websiteOptions}
@@ -162,43 +160,65 @@ class RegistrationForm extends React.Component {
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label="Abstract"
+                            label={(
+                                <span className="form-item-label">个人简介</span>
+                            )}
                         >
                         {getFieldDecorator('abstract', {
                             rules: [{
-                            type: 'abstract', message: 'The input is not valid abstract',
-                            }, {
-                            required: true, message: 'Please input your abstract!',
+                                required: false, message: 'Please input your abstract!'
                             }],
+                            initialValue: userInfo.abstract
                         })(
                             <TextArea placeholder="Please input your abstract " autosize={{ minRows: 2, maxRows: 6 }} />
                         )}
                     </FormItem>
                     <FormItem
+                    {...formItemLayout}
+                        label={(
+                            <span className="form-item-label">邮箱</span>
+                        )}
+                    >
+                    {getFieldDecorator('email', {
+                        rules: [{
+                            type: 'email', message: 'The input is not valid E-mail!',
+                        }],
+                        initialValue: userInfo.email
+                    })(
+                        <Input />
+                    )}
+                    </FormItem>
+                    <FormItem
                         {...formItemLayout}
-                        label="Phone Number"
+                            label={(
+                                <span className="form-item-label">手机号</span>
+                            )}
                         >
-                        {getFieldDecorator('phone', {
-                            rules: [{ required: true, message: 'Please input your phone number!' }],
+                        {getFieldDecorator('mobile', {
+                            rules: [{ required: false, message: 'Please input your phone number!' }],
+                            initialValue: userInfo.mobile
                         })(
                             <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
                         )}
                     </FormItem>
                     <FormItem
                     {...formItemLayout}
-                    label="Sex"
+                        label={(
+                            <span className="form-item-label">性别</span>
+                        )}
                     >
                     {getFieldDecorator('sex', {
-                        rules: [{ required: true, message: 'Please input your sex!' }],
+                        rules: [{ required: false, message: 'Please input your sex!' }],
+                        initialValue: userInfo.sex
                     })(
                         <Select>
-                            <Option value="1">man</Option>
-                            <Option value="2">women</Option>
+                            <Option value="1">男</Option>
+                            <Option value="2">女</Option>
                         </Select>
                     )}
                     </FormItem>
                     <FormItem {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit">Update</Button>
+                        <Button type="primary" htmlType="submit">更新</Button>
                     </FormItem>
                 </Form>
             </section>

@@ -111,9 +111,47 @@ class UserController extends Controller {
             email: user.email,
             avatarUrl: user.avatar_url,
             abstract: user.abstract,
-            account: user.email.replace(/@.*/, '')
+            account: user.email.replace(/@.*/, ''),
+            mobile: user.mobile,
+            sex: user.sex
         }
         ctx.returnBody(200, "获取成功", userInfo)
+    }
+
+    // 更新用户信息
+    public async updateUserInfo () {
+        const {ctx} = this
+        let user_id = ctx.user.user_id
+
+        let contentBody = ctx.request.body
+        
+        // 更新已使用的他人邮箱地址
+        if (contentBody.email) {
+            let result = await this.service.user.getUserByMail(contentBody.email)
+            if (result && result.user_id !== user_id) {
+                ctx.returnBody(400, "该邮箱已被其他账户使用")
+                return
+            }
+        }
+
+        // 密码校验不通过
+        let result = await this.service.user.getUserByUserId(user_id)
+        if (result && result.password !== contentBody.password) {
+            ctx.returnBody(400, "旧密码不正确")
+            return
+        }
+
+        // 获取并填充数据
+        await this.service.user.updateUserInfo({user_id}, contentBody)
+
+        // 已更改密码，让用户重新登录
+        if (contentBody.password) {
+            ctx.logout();
+            ctx.cookies.set(this.config.auth_cookie_name, "");
+            ctx.returnBody(401, "密码更新成功，请重新登录")
+        } else {
+            ctx.returnBody(200, "更新成功")
+        }
     }
 
     // 获取用户关注、粉丝、帖子数量

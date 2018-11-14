@@ -12,6 +12,7 @@ export default (app: Application) => {
   apiV2Router.post('/user/follow', user.follow); // 关注
   apiV2Router.get('/user/info', user.userInfo); // 用户信息
   apiV2Router.get('/user/personal', user.userPersonalInfo); // 用户信息
+  apiV2Router.post('/user/update', user.updateUserInfo); // 用户信息
 
 
 

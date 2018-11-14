@@ -12,21 +12,6 @@ class Nav extends React.Component{
         }
     }
  
-    componentDidMount(){
-        const fn = () => {
-            let scrollTop = document.documentElement.scrollTop
-            let toggle = false
-            
-            if (scrollTop >= 58) {
-                toggle = false;
-            }else {
-                toggle = true;
-            }
-            this.setState({toggle})
-            debugger
-        }
-        window.addEventListener("scroll", myUtils.throttle(fn,100))
-    }
     
     render () {
         return (
@@ -69,11 +54,20 @@ class Nav extends React.Component{
         this.setState({'focusStatus': !this.state.focusStatus})
     }
 
+    onScroll = (event) => {
+        if(!event.srcElement.scrollingElement){return;}
+        let scroll_Y = event.srcElement.scrollingElement.scrollTop;
+        this.setState({
+            toggle: !(scroll_Y>58)
+        })
+    }
 
-    componentWillUnmount () {
-        this.setState = (state,callback)=>{
-            return;
-        };
+    componentDidMount(){
+        window.addEventListener("scroll",this.onScroll)
+    }
+
+    componentWillUnmount(){
+        window.removeEventListener("scroll",this.onScroll);
     }
 }
 export default Nav

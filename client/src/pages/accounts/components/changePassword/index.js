@@ -1,13 +1,11 @@
 import React from 'react'
-import { Form, Input, Tooltip, Icon, Select, Button, AutoComplete } from 'antd';
+import { Form, Input, Button , notification} from 'antd';
 import Style from './index.scss'
+import API from '@common/api.js'
 import { Row, Col } from 'antd';
 import { connect } from "react-redux";
 
-const { TextArea } = Input;
 const FormItem = Form.Item;
-const Option = Select.Option;
-const AutoCompleteOption = AutoComplete.Option;
 
 @connect(
     store => {
@@ -24,8 +22,24 @@ class RegistrationForm extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.form.validateFieldsAndScroll((err, values) => {
+        this.props.form.validateFieldsAndScroll(async (err, values) => {
             if (!err) {
+                let {newPassword, confirmPassword, password} = values
+                if (newPassword !== confirmPassword ) {
+                    notification['error']({
+                        message: '新密码与确认密码不一致'
+                    })
+                    return
+                }
+
+                let params = {
+                    password,
+                    newPassword
+                }
+                let response = await API.updatePersonalInfo(params);
+                notification['success']({
+                    message: response.message
+                })
                 console.log('Received values of form: ', values);
             }
         });
@@ -57,7 +71,6 @@ class RegistrationForm extends React.Component {
 
     render() {
         const { getFieldDecorator } = this.props.form;
-        const { autoCompleteResult } = this.state;
 
         const formItemLayout = {
             labelCol: {
@@ -81,10 +94,6 @@ class RegistrationForm extends React.Component {
                 },
             },
         };
-
-        const websiteOptions = autoCompleteResult.map(website => (
-            <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
-        ));
         let {userInfo} = this.props        
         return (
             <section className={Style['edit-accounts']}>
@@ -94,58 +103,49 @@ class RegistrationForm extends React.Component {
                     </Col>
                     <Col span={16}  className="user_abstract">
                         <div className={'username'}>{userInfo.account}</div>
-                        <div className={'notice'}>更换手机号</div>
                     </Col>
                 </Row>
                 <Form onSubmit={this.handleSubmit}>
                     <FormItem
                         {...formItemLayout}
                         label={(
-                        <span>
-                            Nickname&nbsp;
-                            <Tooltip title="What do you want others to call you?">
-                            <Icon type="question-circle-o" />
-                            </Tooltip>
-                        </span>
+                            <span className="form-item-label">旧密码</span>
                         )}
                         >
-                        {getFieldDecorator('nickname', {
-                            rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
+                        {getFieldDecorator('password', {
+                            rules: [{ required: true, message: 'Please input your old password!', whitespace: true }],
                         })(
                         <Input />
                         )}
                     </FormItem>
                     <FormItem
                     {...formItemLayout}
-                    label="E-mail"
+                        label={(
+                            <span className="form-item-label">新密码</span>
+                        )}
                     >
-                    {getFieldDecorator('email', {
+                    {getFieldDecorator('newPassword', {
                         rules: [{
-                            type: 'email', message: 'The input is not valid E-mail!',
-                        }, {
-                            required: true, message: 'Please input your E-mail!',
+                            required: true, message: 'Please input your new password!',
                         }],
                     })(
                         <Input />
                     )}
                     </FormItem>
                     <FormItem
-                    {...formItemLayout}
-                    label="Website"
+                    {...formItemLayout}    
+                        label={(
+                            <span className="form-item-label">确定新密码</span>
+                        )}
                     >
-                    {getFieldDecorator('website', {
-                        rules: [{ required: true, message: 'Please input website!' }],
+                    {getFieldDecorator('confirmPassword', {
+                        rules: [{ required: true, message: 'Please confirm you new password!' }],
                     })(
-                        <AutoComplete
-                        dataSource={websiteOptions}
-                        onChange={this.handleWebsiteChange}
-                        >
                         <Input />
-                        </AutoComplete>
                     )}
                     </FormItem>
                     <FormItem {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit">Update</Button>
+                        <Button type="primary" htmlType="submit">确定</Button>
                     </FormItem>
                 </Form>
             </section>
