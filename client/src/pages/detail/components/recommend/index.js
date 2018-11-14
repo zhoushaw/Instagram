@@ -2,6 +2,7 @@ import React from 'react'
 import Style from './index.scss'
 import myUtil from '@common/utils.js'
 import { connect } from "react-redux";
+import { withRouter } from 'react-router'
 
 @connect(
     store => {
@@ -62,6 +63,9 @@ class Recommend extends React.Component {
         window.removeEventListener("scroll", this.attachFn);
     }
 
+    goAbout () {
+        this.props.history.push('/about')
+    }
 
     render () {
         const {userInfo} = this.props
@@ -71,7 +75,7 @@ class Recommend extends React.Component {
                 className={`${Style.recommend} ${this.state.attach.isAttach && 'is-attach'}`} 
                 ref="recommend">
                 <header className="header">
-                    <div className = "avatar" style = {{ 'backgroundImage': `url(${userInfo.avatarUrl})`}}></div>
+                    <div className = "avatar" style = {{ 'backgroundImage': `url(${userInfo.avatarUrl})`}} onClick={this.goAbout.bind(this)}></div>
                     <div className="user_abstract">
                         <div className={`username ${userInfo.account&&'clear-bg'}`}>{userInfo.account}</div>
                         <div className={`abstract ${userInfo.abstract&&'clear-bg'}`}>{userInfo.abstract}</div>
@@ -108,4 +112,4 @@ class Recommend extends React.Component {
     }
 }
 
-export default Recommend
+export default withRouter(Recommend)

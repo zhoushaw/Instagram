@@ -16,6 +16,9 @@ import Accounts from './accounts'
 class Intagram extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount () {
         let pathname = location.pathname
         let allowPath = ['/accounts','/about', '/']
         

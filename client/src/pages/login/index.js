@@ -35,8 +35,8 @@ class Login extends React.Component {
                         <div className="toggle_ways">
                             {
                                 this.state.isSignUp
-                                ?<span>有账号了？<a className="notice" onClick={this.toggleSign.bind(this)}>请登录</a></span>
-                                :<span>没有账号？<a className="notice" onClick={this.toggleSign.bind(this)}>注册</a></span>
+                                ?<span>没有账号？<a className="notice" onClick={this.toggleSign.bind(this)}>注册</a></span>
+                                :<span>有账号了？<a className="notice" onClick={this.toggleSign.bind(this)}>请登录</a></span>
                             }
                         </div>
                     </section>

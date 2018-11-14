@@ -16,7 +16,7 @@ class NotFoundPage extends React.Component {
         </div>
         <nav className="navigation">
           <ul>
-              <li><a href="#">返回上一页</a></li>
+              <li><a href="/">返回首页</a></li>
           </ul>
         </nav>
         <section className="error">

@@ -136,11 +136,14 @@ class UserController extends Controller {
 
         // 密码校验不通过
         let result = await this.service.user.getUserByUserId(user_id)
-        if (result && result.password !== contentBody.password) {
+        if (contentBody.password && result && result.password !== contentBody.password) {
             ctx.returnBody(400, "旧密码不正确")
             return
+        } else if(contentBody.password) {
+            contentBody.password = contentBody.newPassword
         }
 
+        
         // 获取并填充数据
         await this.service.user.updateUserInfo({user_id}, contentBody)
 

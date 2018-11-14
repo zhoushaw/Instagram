@@ -2,6 +2,7 @@ import React from 'react'
 import { Form, Icon, Input, Button, Checkbox, notification } from 'antd';
 import Style from './index.scss'
 import API from '@common/api.js'
+import store from '@/src/store'
 import { withRouter } from 'react-router'
 
 const FormItem = Form.Item;
@@ -22,7 +23,10 @@ class NormalLoginForm extends React.Component {
 			let response = await API.login(values)
 			notification['success']({
 				message: response.message
-			})
+            })
+            
+            // 登录成功后，获取用户基础数据
+            this.getUserinfo()
 
             const { history } = this.props;
 			// 跳转登录
@@ -31,6 +35,15 @@ class NormalLoginForm extends React.Component {
 			}, 500)
 		}
     });
+  }
+
+  getUserinfo () {
+    API.getUserInfo().then(response => {
+        store.dispatch({
+            type: 'ADD_USERINFO',
+            info: response.data
+        })
+    })
   }
 
   onChangeHandler (type, event) {
@@ -69,13 +82,6 @@ class NormalLoginForm extends React.Component {
             )}
           </FormItem>
           <FormItem>
-            {getFieldDecorator('remember', {
-              valuePropName: 'checked',
-              initialValue: true,
-            })(
-              <Checkbox>Remember me</Checkbox>
-            )}
-            <a className="register-form-forgot" href="">Forgot password</a>
             <Button type="primary" htmlType="submit" className="register-form-button">
               登陆
             </Button>
