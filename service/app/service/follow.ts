@@ -16,7 +16,7 @@ export default class followService extends Service {
 
         const obj = await ctx.model.Follow.findOne({ 
             where: {
-                user_id: followUser.user_id
+                userId: followUser.userId
             } 
         })
         

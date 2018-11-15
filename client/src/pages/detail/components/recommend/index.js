@@ -31,6 +31,7 @@ class Recommend extends React.Component {
     
     // 设置边缘
     setLeftFn = () => {
+        if (!this.refs.recommend) return
         let offsetleft = this.refs.recommend.offsetLeft
         let attach = Object.assign({}, this.state.attach, {
             left: offsetleft

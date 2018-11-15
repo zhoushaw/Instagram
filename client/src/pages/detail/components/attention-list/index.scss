@@ -1,0 +1,25 @@
+
+:local(.attention-list){
+    margin: 0 auto;
+    width: 600px;
+    .title {
+        padding-left: 10px;
+        font-size: 16px;
+        color: #262626;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    .list {
+        width: 100%;
+        background: #fff;
+        li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-sizing: content-box;
+            height: 55px;
+            padding: 8px 16px;
+        }
+    }
+}
+

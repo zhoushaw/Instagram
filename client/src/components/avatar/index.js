@@ -11,7 +11,7 @@ class Avatar extends React.Component{
         const {userInfo} = this.props
         return (
             <div className={Style['avatar-content']}>
-                <div className="avatar"  style={{'backgroundImage': `url(${userInfo.avatarUrl}`}}></div>
+                <div className="avatar"  style={{...this.props.avatarStyle,'backgroundImage': `url(${userInfo.avatarUrl}`}}></div>
                   <div className="user_abstract">
                     <div className={`username ${userInfo.username&&'clear-bg'}`}>{userInfo.username}</div>
                     {
@@ -22,6 +22,13 @@ class Avatar extends React.Component{
                   </div>
             </div>
         )
+    }
+}
+
+Avatar.defaultProps = {
+    avatarStyle: {
+        'width': '32px',
+        'height': '32px'
     }
 }
 export default Avatar

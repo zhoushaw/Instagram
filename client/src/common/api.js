@@ -2,18 +2,21 @@ import instance from './axiosInstace.js';
 
 // 注册
 exports.register = (data) => {
-    return instance.post('/user/register', data);
+    return instance.post('/login/register', data);
  };
 
 // 登录
 exports.login = (data) => {
-    return instance.post('/user/login', data);
+    return instance.post('/login', data);
 };
 // 退出登录
 exports.signout = (data) => {
-    return instance.get('/user/signout', data);
+    return instance.get('/login/signout', data);
 };
   
+
+
+
 
 // 获取用户信息
 exports.getUserInfo = (data) => {
@@ -49,3 +52,12 @@ exports.frientTopicList = (data) => {
 exports.addDiscuss = (data) => {
     return instance.post('/topic/discuss/add', data);
 }
+
+
+
+
+// 点赞
+exports.friendList = (data) => {
+    return instance.get('/friend/list', data);
+}
+

@@ -6,7 +6,7 @@ module.exports = {
 		const { INTEGER, DATE, STRING, NOW } = Sequelize;
 		await queryInterface.createTable('follow', {
 			id: {type: INTEGER(10), primaryKey: true, autoIncrement: true},// 评论id
-			user_id: {type: STRING(255)},// 用户id
+			userId: {type: STRING(255)},// 用户id
 			followed_id: {type: STRING(255)},// 关注者id
 			status: {type: INTEGER(1), allowNull: false},// 关注状态 0:取消关注，1:已关注
 			created_at: {type: DATE, defaultValue: NOW},// 创建时间

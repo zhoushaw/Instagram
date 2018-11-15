@@ -35,7 +35,7 @@
 //     const existUser = await handler(ctx, user);
 //     if (existUser) {
 //       // id存入Cookie, 用于验证过期.
-//       const auth_token = existUser.user_id + '$$$$'; // 以后可能会存储更多信息，用 $$$$ 来分隔
+//       const auth_token = existUser.userId + '$$$$'; // 以后可能会存储更多信息，用 $$$$ 来分隔
 //       const opts = {
 //         path: '/',
 //         maxAge: 1000 * 60 * 60 * 24 * 30,

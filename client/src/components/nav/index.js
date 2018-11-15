@@ -54,7 +54,7 @@ class Nav extends React.Component{
                         <Link  className="explore" to={'/'} />
                         <Link  className="love" to={'/'} />
                         <Dropdown overlay={menu} >
-                            <Link  className="user" to={'/about'} />
+                            <Link  className="user" to={'/about'}/>
                         </Dropdown>
                     </div>
                 </div>
@@ -79,7 +79,7 @@ class Nav extends React.Component{
         notification['success']({
             message: response.message
         })
-        window.location.href = '/login';
+        this.props.history.push('/login');
     }
 
     componentDidMount(){

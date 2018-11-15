@@ -5,7 +5,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     const { INTEGER, DATE, STRING } = Sequelize;
     await queryInterface.createTable('users', {
-      user_id: {type: INTEGER, primaryKey: true, autoIncrement: true},//用户id
+      userId: {type: INTEGER, primaryKey: true, autoIncrement: true},//用户id
       username: {type: STRING(255), allowNull: false}, // 用户名
       email: {type: STRING(255), allowNull: false},// email 地址
       password: {type: STRING(255), allowNull: false},// 密码  

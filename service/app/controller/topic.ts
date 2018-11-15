@@ -9,12 +9,12 @@ class TopicController extends Controller {
         const {ctx} = this;
         const {topicImg, topicTitle} = ctx.request.body
 
-        let user_id = ctx.user.user_id
+        let userId = ctx.user.userId
 
         let newTopic = {
             topic_img: topicImg,
             topic_title: topicTitle,
-            user_id,
+            userId,
         }
 
         let topic: any =  await ctx.service.topic.insertTopic(newTopic)
@@ -31,16 +31,16 @@ class TopicController extends Controller {
         const {ctx} = this;
         const {topicId, replyContent} = ctx.request.body
 
-        let user_id = ctx.user.user_id
+        let userId = ctx.user.userId
         // 获取并填充数据
-        let user = await this.service.user.getUserByUserId(user_id)
+        let user = await this.service.user.getUserByUserId(userId)
 
         // 新帖子
         let newDiscuss = {
             topic_id: topicId,
             reply_content: replyContent,
             reply_name: user.username,
-            user_id,
+            userId,
         }
 
         let discuss: any =  await ctx.service.topic.insertDiscuss(newDiscuss)
@@ -68,18 +68,18 @@ class TopicController extends Controller {
     public async friendsTopicList () {
         const {ctx} = this;
 
-        let user_id = ctx.user.user_id
+        let userId = ctx.user.userId
 
         // 查询帖子详情
         let follower =  await ctx.service.follow.findFollow({
-            followed_id: user_id
+            followed_id: userId
         })
         
-        // 处理需要查询用户帖子的user_id
+        // 处理需要查询用户帖子的userId
         let followList = follower.map((item) => {
-            return item.user_id
+            return item.userId
         })
-        followList.push(user_id)
+        followList.push(userId)
 
         // 获取每个帖子详情、评论，发帖人信息
         let topics = await ctx.service.topic.queryTopicList(followList)
@@ -101,18 +101,18 @@ class TopicController extends Controller {
         const {ctx} = this;
         const {topicId, status} = ctx.request.body
 
-        let user_id = ctx.user.user_id
+        let userId = ctx.user.userId
 
         // 新帖子
         let topicStatus = {
             topic_id: topicId,
-            user_id,
+            userId,
             status
         }
         // 查询条件
         let query = {
             topic_id: topicId,
-            user_id,
+            userId,
         }
 
         // 未曾创建进行创建操作，否则进行更新
@@ -128,7 +128,7 @@ class TopicController extends Controller {
         let {ctx} = this
         // 查询点赞数量
         let topicCounts = await ctx.service.topic.queryTopicCounts({
-            user_id: ctx.user.user_id
+            userId: ctx.user.userId
         })
 
         return topicCounts

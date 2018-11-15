@@ -3,7 +3,7 @@ module.exports = app => {
 
   const User = app.model.define('users', {
       id: {type: INTEGER, primaryKey: true, autoIncrement: true},//记录id
-      user_id: {type: INTEGER},//用户id
+      userId: {type: INTEGER},//用户id
       username: {type: STRING(255), allowNull: false}, // 用户名
       email: {type: STRING(255), allowNull: false},// email 地址
       password: {type: STRING(255), allowNull: false},// 密码  

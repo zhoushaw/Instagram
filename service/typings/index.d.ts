@@ -1,7 +1,7 @@
 import EggMysql from 'egg-mysql';
 
 interface userStructure {
-  user_id: string
+  userId: string
 }
 
 declare module 'egg' {

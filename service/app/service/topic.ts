@@ -49,7 +49,7 @@ export default class TopicService extends Service {
         const Op = sequelize.Op;
         return await ctx.model.Topic.findAll({
             where: {
-                user_id: {
+                userId: {
                     [Op.in]: query
                 }
             },
@@ -70,27 +70,27 @@ export default class TopicService extends Service {
             topic_id: +topicId // 帖子id
         })
 
-        let user_id = topic.user_id
+        let userId = topic.userId
         // 获取并填充数据
-        let user = await this.service.user.getUserByUserId(user_id)
+        let user = await this.service.user.getUserByUserId(userId)
 
         // 查询帖子评论
         let discuss = await ctx.service.topic.queryDiscuss({
             topic_id: +topicId, // 帖子id
-            user_id: ctx.user.user_id
+            userId: ctx.user.userId
         })
 
         // 查询用户是否已点赞
         let topicLike = await ctx.service.topic.queryTopicLike({
             topic_id: +topicId, // 帖子id
-            user_id: ctx.user.user_id,
+            userId: ctx.user.userId,
             status: 1
         })
 
         // 查询点赞数量
         let topicLikeCounts = await ctx.service.topic.queryTopicLikeCounts({
             topic_id: +topicId, // 帖子id
-            user_id: ctx.user.user_id,
+            userId: ctx.user.userId,
             status: 1
         })
 
@@ -100,7 +100,7 @@ export default class TopicService extends Service {
             return {
                 replyName: item.reply_name,
                 replyContent: item.reply_content,
-                userId: item.user_id
+                userId: item.userId
             }
         })
 
