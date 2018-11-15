@@ -147,7 +147,7 @@ export default class UserService extends Service {
         const Op = app.Sequelize.Op
 
         return this.ctx.model.User.findAll({
-            attributes: ['userId', 'username', 'email', 'avatar_url', 'abstract'],
+            attributes: ['userId', 'username', 'email', 'avatarUrl', 'abstract'],
             where: { 
                 userId: {
                     [Op.ne]: userId, 

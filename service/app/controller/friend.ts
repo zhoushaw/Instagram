@@ -12,7 +12,7 @@ class FriendController extends Controller {
         // 新帖子
         let followMsg = {
             userId: followedId, // 被关注者id
-            followed_id: userId, // 关注者id
+            followedId: userId, // 关注者id
             status
         }
 

@@ -12,8 +12,6 @@ import { withRouter } from 'react-router'
         }
     }
 )
-
-
 class Recommend extends React.Component {
     constructor(props){
         super(props);
@@ -65,6 +63,7 @@ class Recommend extends React.Component {
 
     componentDidMount () {
         this.setLeftFn()
+        
         window.addEventListener('resize', this.setLeftFn)
     }
 
@@ -83,13 +82,18 @@ class Recommend extends React.Component {
 
     render () {
         const {userInfo} = this.props
+        let avatarStyle = {
+            'width': '50px',
+            'height': '50px'
+        }
+        
         return (
             <div 
                 style={{ left: this.state.attach.left + 'px', top: this.state.attach.top + 'px'}}
                 className={`${Style.recommend} ${this.state.attach.isAttach && 'is-attach'}`} 
                 ref="recommend">
                 <header className="header">
-                    <Avatar onClick={this.goAbout.bind(this)} userInfo={userInfo}/>
+                    <Avatar onClick={this.goAbout.bind(this)} userInfo={userInfo} avatarStyle={avatarStyle}/>
                 </header>
                 <section className="container">
                     <nav className="title">快拍</nav>

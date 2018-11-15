@@ -24,18 +24,16 @@ class Detail extends React.Component {
             <main>
                 <Nav />
                 <div className="page-container">
-                    <div className={Style['home-detail']}>
-                        <span className="loading"></span>
+                    <span className="loading"></span>
                         {
                             this.state.hasTopic?
-                            <section>
+                            <div className={Style['home-detail']}>
                                 <DynamicList noTopic={this.noTopic}/>
                                 <Recommend />
-                            </section>
+                            </div>
                             :
                             <AttentionList />
                         }
-                    </div>
                 </div>
             </main>
         )

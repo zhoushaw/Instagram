@@ -12,8 +12,8 @@ class TopicController extends Controller {
         let userId = ctx.user.userId
 
         let newTopic = {
-            topic_img: topicImg,
-            topic_title: topicTitle,
+            topicImg: topicImg,
+            topicTitle: topicTitle,
             userId,
         }
 
@@ -37,9 +37,9 @@ class TopicController extends Controller {
 
         // 新帖子
         let newDiscuss = {
-            topic_id: topicId,
-            reply_content: replyContent,
-            reply_name: user.username,
+            topicId: topicId,
+            replyContent: replyContent,
+            replyName: user.username,
             userId,
         }
 
@@ -72,7 +72,7 @@ class TopicController extends Controller {
 
         // 查询帖子详情
         let follower =  await ctx.service.follow.findFollow({
-            followed_id: userId
+            followedId: userId
         })
         
         // 处理需要查询用户帖子的userId
@@ -87,7 +87,7 @@ class TopicController extends Controller {
 
         // 将所有帖子处理完毕
         for (let topic of topics) {
-            let item = await ctx.service.topic.topicDetailHanderl(topic.topic_id)
+            let item = await ctx.service.topic.topicDetailHanderl(topic.topicId)
             topicList.push(item)
         }
 
@@ -105,13 +105,13 @@ class TopicController extends Controller {
 
         // 新帖子
         let topicStatus = {
-            topic_id: topicId,
+            topicId: topicId,
             userId,
             status
         }
         // 查询条件
         let query = {
-            topic_id: topicId,
+            topicId: topicId,
             userId,
         }
 

@@ -5,10 +5,10 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     const { INTEGER, DATE, STRING, NOW } = Sequelize;
     await queryInterface.createTable('topic', {
-      topic_id: {type: INTEGER, primaryKey: true, autoIncrement: true},//帖子id
+      topicId: {type: INTEGER, primaryKey: true, autoIncrement: true},//帖子id
       userId: {type: INTEGER},//用户id
-      topic_title: {type: STRING(255), allowNull: true}, // 帖子标题
-      topic_img: {type: STRING(1000), allowNull: false},// 图片地址，
+      topicTitle: {type: STRING(255), allowNull: true}, // 帖子标题
+      topicImg: {type: STRING(1000), allowNull: false},// 图片地址，
       address: {type: STRING(255), allowNull: true}, // 发表地址
       created_at: {type: DATE, defaultValue: NOW},// 创建时间
       updated_at: {type: DATE, defaultValue: NOW}// 更新时间

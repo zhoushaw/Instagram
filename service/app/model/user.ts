@@ -7,7 +7,7 @@ module.exports = app => {
       username: {type: STRING(255), allowNull: false}, // 用户名
       email: {type: STRING(255), allowNull: false},// email 地址
       password: {type: STRING(255), allowNull: false},// 密码  
-      avatar_url: {type: STRING(256), defaultValue: 'https://s11.mogucdn.com/mlcdn/c45406/181105_60bdj928jdhjg9ehhg58hje1212ek_640x640.jpg'},// 头像
+      avatarUrl: {type: STRING(256), defaultValue: 'https://s11.mogucdn.com/mlcdn/c45406/181105_60bdj928jdhjg9ehhg58hje1212ek_640x640.jpg'},// 头像
       mobile: STRING(32),// 手机号,
       prefix: STRING(32),// 手机号,
       abstract:  {type: STRING(255), allowNull: true},// 自我介绍

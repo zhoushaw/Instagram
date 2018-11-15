@@ -11,8 +11,8 @@ function SlickDot () {
                     this.props.imageList.map((item,index) => {
                         return (
                             <li 
-                                className={this.state.isActived === index ? 'acitve' : ''} 
-                                onClick={this.changeSlick.bind(this, index)} key={index}
+                                className={this.state.isActived === index ? 'acitve' : ''} key={index}
+                                // onClick={this.changeSlick.bind(this, index)} 
                             ></li>
                         )
                     })

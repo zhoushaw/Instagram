@@ -19,17 +19,18 @@ class AttenTionList extends React.Component {
         this.initBaseData()
     }
     state = {
-        
+        userList: []
     }
     
     async initBaseData () {
         let response = await API.friendList()
-        console.log(response)
+        this.setState({
+            userList: response.data
+        })
     }
     
 
     render () {
-        const {userInfo} = this.props
         let avatarStyle = {
             'width': '44px',
             'height': '44px'
@@ -38,10 +39,14 @@ class AttenTionList extends React.Component {
             <div className={`${Style['attention-list']}`}>
                 <div className="title">推荐</div>
                 <ul className="list">
-                    <li>
-                        <Avatar userInfo={userInfo} avatarStyle={avatarStyle}/>
-                        <Button type="primary">关注</Button>
-                    </li>
+                    {
+                        this.state.userList.map((item, index) => {
+                            return (<li key={index}>
+                                <Avatar userInfo={item} avatarStyle={avatarStyle}/>
+                                <Button type="primary">关注</Button>
+                            </li>)
+                        })
+                    }
                 </ul>
             </div>
         )

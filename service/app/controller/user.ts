@@ -13,7 +13,7 @@ class UserController extends Controller {
         let userInfo = {
             username: user.username,
             email: user.email,
-            avatarUrl: user.avatar_url,
+            avatarUrl: user.avatarUrl,
             abstract: user.abstract,
             account: user.email.replace(/@.*/, ''),
             mobile: user.mobile,
@@ -75,7 +75,7 @@ class UserController extends Controller {
         let topicList: any = [];
         // 将所有帖子处理完毕
         for (let topic of topics.rows) {
-            let item = await ctx.service.topic.topicDetailHanderl(topic.topic_id)
+            let item = await ctx.service.topic.topicDetailHanderl(topic.topicId)
             topicList.push(item)
         }
 
@@ -87,7 +87,7 @@ class UserController extends Controller {
 
         // 用户关注数
         let followCounts = await ctx.service.follow.findFollowCounts({
-            followed_id: userId
+            followedId: userId
         })
 
         ctx.returnBody(200, "获取成功", {

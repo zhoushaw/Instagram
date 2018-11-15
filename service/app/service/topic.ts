@@ -67,7 +67,7 @@ export default class TopicService extends Service {
 
         // 查询帖子详情
         let topic = await ctx.service.topic.queryTopicDetail({
-            topic_id: +topicId // 帖子id
+            topicId: +topicId // 帖子id
         })
 
         let userId = topic.userId
@@ -76,20 +76,20 @@ export default class TopicService extends Service {
 
         // 查询帖子评论
         let discuss = await ctx.service.topic.queryDiscuss({
-            topic_id: +topicId, // 帖子id
+            topicId: +topicId, // 帖子id
             userId: ctx.user.userId
         })
 
         // 查询用户是否已点赞
         let topicLike = await ctx.service.topic.queryTopicLike({
-            topic_id: +topicId, // 帖子id
+            topicId: +topicId, // 帖子id
             userId: ctx.user.userId,
             status: 1
         })
 
         // 查询点赞数量
         let topicLikeCounts = await ctx.service.topic.queryTopicLikeCounts({
-            topic_id: +topicId, // 帖子id
+            topicId: +topicId, // 帖子id
             userId: ctx.user.userId,
             status: 1
         })
@@ -98,8 +98,8 @@ export default class TopicService extends Service {
         // 处理帖子数据
         let disscussList = discuss.map((item) => {
             return {
-                replyName: item.reply_name,
-                replyContent: item.reply_content,
+                replyName: item.replyName,
+                replyContent: item.replyContent,
                 userId: item.userId
             }
         })
@@ -108,11 +108,11 @@ export default class TopicService extends Service {
         const topicDetail = {
             userInfo: {
                 username: user.username,
-                avatarUrl: user.avatar_url
+                avatarUrl: user.avatarUrl
             },
             topic: {
-                topicImgList: JSON.parse(topic.topic_img),
-                createdAt: topic.created_at,
+                topicImgList: JSON.parse(topic.topicImg),
+                created_at: topic.created_at,
                 topicId,
                 topicLike: !!topicLike,
                 topicLikeCounts: topicLikeCounts.count
