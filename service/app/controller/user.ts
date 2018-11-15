@@ -82,12 +82,14 @@ class UserController extends Controller {
 
         // 用户粉丝
         let fansCounts = await ctx.service.follow.findFollowCounts({
-            userId
+            userId,
+            status: 1
         })
 
         // 用户关注数
         let followCounts = await ctx.service.follow.findFollowCounts({
-            followedId: userId
+            followedId: userId,
+            status: 1
         })
 
         ctx.returnBody(200, "获取成功", {

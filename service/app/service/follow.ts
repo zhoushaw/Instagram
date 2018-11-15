@@ -35,7 +35,7 @@ export default class followService extends Service {
         let {ctx} = this
 
         return await ctx.model.Follow.findAll({ 
-            where: query 
+            where: query
         })
     }
 
@@ -47,7 +47,7 @@ export default class followService extends Service {
         let {ctx} = this
 
         return await ctx.model.Follow.findAndCountAll({ 
-            where: query 
+            where: query
         })
     }
 }

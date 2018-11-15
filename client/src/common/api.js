@@ -36,8 +36,6 @@ exports.updatePersonalInfo = (data) => {
 
 
 
-
-
 // 点赞
 exports.topicLike = (data) => {
     return instance.put('/topic/like', data);
@@ -56,8 +54,13 @@ exports.addDiscuss = (data) => {
 
 
 
-// 点赞
+// 未关注列表
 exports.friendList = (data) => {
     return instance.get('/friend/list', data);
+}
+
+// 关注
+exports.followUser = (data) => {
+    return instance.post('/friend/follow', data);
 }
 

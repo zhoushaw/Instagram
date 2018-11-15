@@ -19,18 +19,34 @@ class AttenTionList extends React.Component {
         this.initBaseData()
     }
     state = {
-        userList: []
+        followList: []
     }
     
     async initBaseData () {
         let response = await API.friendList()
+        response.data.forEach((item) => {
+            item.hasFollow = false
+        })
         this.setState({
-            userList: response.data
+            followList: response.data
         })
     }
     
-
+    async setFollowStatus (index, status) {
+        let followList = this.state.followList;
+        await API.followUser({
+            userId: followList[index].userId,
+            status
+        })
+        
+        followList[index].hasFollow = status
+        this.setState({
+            followList
+        })
+    }
+    
     render () {
+        const {userInfo} = this.props
         let avatarStyle = {
             'width': '44px',
             'height': '44px'
@@ -40,12 +56,17 @@ class AttenTionList extends React.Component {
                 <div className="title">推荐</div>
                 <ul className="list">
                     {
-                        this.state.userList.map((item, index) => {
-                            return (<li key={index}>
-                                <Avatar userInfo={item} avatarStyle={avatarStyle}/>
-                                <Button type="primary">关注</Button>
-                                <Button>已关注</Button>
-                            </li>)
+                        this.state.followList.map((item, index) => {
+                            return (
+                                <li key={index}>
+                                    <Avatar userInfo={userInfo} avatarStyle={avatarStyle}/>
+                                    {
+                                        item.hasFollow
+                                        ? <Button onClick={this.setFollowStatus.bind(this,index, false)}>已关注</Button>
+                                        : <Button type="primary"  onClick={this.setFollowStatus.bind(this,index, true)}>关注</Button>
+                                    }
+                                </li>
+                            )
                         })
                     }
                 </ul>
