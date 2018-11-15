@@ -15,6 +15,16 @@ const AutoCompleteOption = AutoComplete.Option;
         return {
             userInfo: store.userInfo
         }
+    },
+    dispatch => {
+        return {
+            changeUserInfo: info => {
+                dispatch({
+                    type: "ADD_USERINFO",
+                    info
+                })
+            }
+        };
     }
 )
 class RegistrationForm extends React.Component {
@@ -37,6 +47,7 @@ class RegistrationForm extends React.Component {
                     message: response.message
                 })
                 console.log('Received values of form: ', values);
+                this.props.changeUserInfo(values)
             }
         });
     }

@@ -42,6 +42,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "react": "^16.4.2",
+    "react-addons-update": "^15.6.2",
     "react-dom": "^16.4.2",
     "react-redux": "^5.1.0",
     "react-router-dom": "^4.3.1",

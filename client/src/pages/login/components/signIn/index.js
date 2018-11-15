@@ -11,7 +11,6 @@ class NormalLoginForm extends React.Component {
   constructor (props) {
     super(props);
     this.state = {}
-    console.log('lalla', this.props)
   }
   
   handleSubmit (e) {

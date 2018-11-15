@@ -10,7 +10,6 @@ class Login extends React.Component {
         this.state = {
             isSignUp: true
         }
-        console.log(this.props)
     }
 
     toggleSign () {
