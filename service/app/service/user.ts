@@ -146,11 +146,27 @@ export default class UserService extends Service {
         let {app} = this
         const Op = app.Sequelize.Op
 
+        // 查询已关注用户
+        let followList  = await this.ctx.model.Follow.findAll({
+            attributes: ['userId'],
+            where: {
+                followedId: userId,
+                status: 1
+            }
+        })
+
+        // 处理数据
+        followList = followList.map(item => {
+            return item.userId
+        })
+
+
         return this.ctx.model.User.findAll({
             attributes: ['userId', 'username', 'email', 'avatarUrl', 'abstract'],
             where: { 
                 userId: {
                     [Op.ne]: userId, 
+                    [Op.notIn]: followList.push(userId)
                 }
             }
         })

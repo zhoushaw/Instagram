@@ -44,6 +44,7 @@ class AttenTionList extends React.Component {
                             return (<li key={index}>
                                 <Avatar userInfo={item} avatarStyle={avatarStyle}/>
                                 <Button type="primary">关注</Button>
+                                <Button>已关注</Button>
                             </li>)
                         })
                     }

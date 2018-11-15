@@ -26,7 +26,7 @@ export default (app: Application) => {
 
     // friend
     apiV2Router.post('/friend/follow', friend.follow); // 关注
-    apiV2Router.get('/friend/list', friend.friendList); // 关注
+    apiV2Router.get('/friend/list', friend.notFollowList); // 关注
 
 
     // topic

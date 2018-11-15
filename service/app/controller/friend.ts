@@ -5,14 +5,14 @@ class FriendController extends Controller {
     // 关注好友
     public async follow() {
         const {ctx} = this
-        const {followedId, status} = ctx.request.body
+        const {userId, status} = ctx.request.body
 
-        let userId = ctx.user.userId
+        let followedId = ctx.user.userId
 
         // 新帖子
         let followMsg = {
-            userId: followedId, // 被关注者id
-            followedId: userId, // 关注者id
+            userId, // 被关注者id
+            followedId, // 关注者id
             status
         }
 
@@ -22,8 +22,8 @@ class FriendController extends Controller {
     }
 
 
-    // 获取用户列表
-    public async friendList() {
+    // 获取未关注用户列表
+    public async notFollowList() {
         const {ctx} = this
 
         let userId = ctx.user.userId

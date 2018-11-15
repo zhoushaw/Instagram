@@ -14,14 +14,14 @@ class DynamicList extends React.Component {
             dynamicList: [
                 {
                     userInfo: {
-                    avatar: 'https://s10.mogucdn.com/mlcdn/c45406/180930_634a7ck1ikea6k139lbgbi343ha2c_150x150.jpg',
-                    username: 'loading',
-                    abstract: 'loading'
+                        avatar: 'https://s10.mogucdn.com/mlcdn/c45406/180930_634a7ck1ikea6k139lbgbi343ha2c_150x150.jpg',
+                        username: 'loading',
+                        abstract: 'loading'
                     },
                     topic: {
-                    topicImgList: [],
-                    createdAt: '',
-                    topicLikeCounts: 0 // 点赞数
+                        topicImgList: [],
+                        createdAt: '',
+                        topicLikeCounts: 0 // 点赞数
                     },
                     discuss: []
                 }
