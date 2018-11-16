@@ -13,14 +13,18 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 25px;
-      color: rgba(255,255,255,0.7);
+      height: 25px;
+      width: 25px;
+      z-index: 1;
+      background-color: rgba(0,0,0,0);
     }
     .pre-btn {
       left: 20px;
+      @include sprite-2x( -155px -311px);
     }
     .next-btn {
       right: 20px;
+      @include sprite-2x( -124px -311px);
     }
     .pre-btn:hover, .next-btn:hover {
       cursor: pointer;

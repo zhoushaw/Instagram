@@ -1,0 +1,92 @@
+
+:local(.post-topic){
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 2;
+    .topic-content {
+        position: relative;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);        
+        width: 540px;
+        background: #fff;
+        border-radius: 5px;
+        header {
+            padding-left: 15px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+        }
+        .image-upload {
+            display: flex;
+            justify-content: row;
+            width: 100%;
+            height: 196px;
+            border-style:dashed none;
+            border-width: 2px;
+            border-color: #cfcfcf;
+            background: #f2f2f2;
+            div:first-child::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                height: 80%;
+                width: 1px;
+                background: #b5b3b3;
+            }
+            div {
+                position: relative;
+                width: 50%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                color: #989898;
+                font-size: 14px;
+                .icon {
+                    display: inline-block;
+                    height: 70px;
+                    width: 70px;
+                    background-size: 100% 100%;
+                }
+                .camera {
+                    background-image: url('https://s10.mogucdn.com/mlcdn/c45406/181116_3fdk1ji4ag74ie70d4012a927lffl_200x200.png');
+                }
+                .network {
+                    background-image: url('https://s10.mogucdn.com/mlcdn/c45406/181116_6kg57j5jkh4kjdehgblf6f8b796d0_200x200.png');
+                }
+            }
+        }
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+            span {
+                height: 30px;
+                width: 42px;
+                line-height: 30px;
+                text-align: center;
+                color: #fff;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            .close {
+                margin-left: 20px;
+                background-color: #9da6af;
+            }
+            .post {
+                margin-right: 20px;
+                background-color: #529ecc;
+            }
+        }
+    }
+}
+

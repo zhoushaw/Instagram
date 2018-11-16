@@ -30,14 +30,12 @@ class Nav extends React.Component{
             <nav className={Style['page-header']}>
                 <div ref="header" className={`header ${this.state.toggle?'' : 'toggle'}`} >
                     <div className="logo-space">
-                        <Dropdown overlay={aboutMenu} >
-                            {
-                                this.state.toggle?
-                                <Link  className="instagram" to={'/'} />
-                                :
-                                <Link  className="icon" to={'/'} />
-                            }
-                        </Dropdown>
+                        {
+                            this.state.toggle?
+                            <Link  className="instagram" to={'/'} />
+                            :
+                            <Link  className="icon" to={'/'} />
+                        }
                     </div>
                     <div className="search">
                     {

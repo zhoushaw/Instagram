@@ -1,5 +1,6 @@
 import React from 'react'
 import DynamicList from './components/dynamic-list'
+import PostTopic from './components/post-topic'
 import Recommend from './components/recommend'
 import AttentionList from './components/attention-list'
 import Nav from '@components/nav/index.js'
@@ -55,6 +56,7 @@ class Detail extends React.Component {
         return (
             <main>
                 <Nav />
+                <PostTopic />
                 <div className="page-container">
                     <span className="loading"></span>
                         {

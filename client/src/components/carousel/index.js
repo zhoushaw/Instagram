@@ -36,7 +36,6 @@ class Carousel extends React.Component{
 
     slickNext () {
         let target = this.state.isActived + 1 >= this.props.imageList.length ? 0 : this.state.isActived + 1
-        debugger
         this.setState({
             isActived: target
         })
@@ -76,8 +75,8 @@ class Carousel extends React.Component{
                     {
                         this.props.imageList.length > 1 ?
                         <div>
-                            <Icon className="pre-btn" type="left-circle" theme="outlined" onClick={this.slickPre.bind(this)}/>
-                            <Icon className="next-btn" type="right-circle" theme="outlined" onClick={this.slickNext.bind(this)}/>
+                            <span className="pre-btn" type="left-circle" theme="outlined" onClick={this.slickPre.bind(this)}></span>
+                            <span className="next-btn" type="right-circle" theme="outlined" onClick={this.slickNext.bind(this)}></span>
                         </div>
                         :
                         ''

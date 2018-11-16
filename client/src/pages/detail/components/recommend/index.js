@@ -4,7 +4,6 @@ import myUtil from '@common/utils.js'
 import Avatar from '@components/avatar'
 import { connect } from "react-redux";
 import { withRouter } from 'react-router'
-import { Button } from 'antd';
 
 @connect(
     store => {
@@ -97,8 +96,8 @@ class Recommend extends React.Component {
                 style={{ left: this.state.attach.left + 'px', top: this.state.attach.top + 'px'}}
                 className={`${Style.recommend} ${this.state.attach.isAttach && 'is-attach'}`} 
                 ref="recommend">
-                <header className="header">
-                    <Avatar onClick={this.goAbout.bind(this)} userInfo={userInfo} avatarStyle={avatarStyle}/>
+                <header className="header" onClick={this.goAbout.bind(this)}>
+                    <Avatar userInfo={userInfo} avatarStyle={avatarStyle}/>
                 </header>
                 <section className="post">
                     发帖
