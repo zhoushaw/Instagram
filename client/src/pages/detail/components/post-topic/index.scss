@@ -23,15 +23,19 @@
             display: flex;
             align-items: center;
         }
-        .image-upload {
-            display: flex;
-            justify-content: row;
+
+        .upload-style {
             width: 100%;
-            height: 196px;
             border-style:dashed none;
             border-width: 2px;
             border-color: #cfcfcf;
             background: #f2f2f2;
+        }
+        .image-upload {
+            width: 100%;
+            height: 196px;
+            display: flex;
+            justify-content: row;
             div:first-child::after {
                 content: '';
                 position: absolute;
@@ -55,15 +59,56 @@
                     height: 70px;
                     width: 70px;
                     background-size: 100% 100%;
+                    cursor: pointer;
                 }
                 .camera {
-                    background-image: url('https://s10.mogucdn.com/mlcdn/c45406/181116_3fdk1ji4ag74ie70d4012a927lffl_200x200.png');
+                    background-image: url('https://s10.mogucdn.com/mlcdn/c45406/181116_61d2kek95bcf474eclie22ibg6fi8_114x116.png');
                 }
                 .network {
-                    background-image: url('https://s10.mogucdn.com/mlcdn/c45406/181116_6kg57j5jkh4kjdehgblf6f8b796d0_200x200.png');
+                    background-image: url('https://s10.mogucdn.com/mlcdn/c45406/181116_3fd65974967jc0ljgig0g2lb33acb_114x112.png');
                 }
             }
         }
+
+        .input-url {
+            height: 36px;
+            .notice {
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: row;
+                color: #989898;
+                cursor: pointer;
+                .icon {
+                    display: inline-block;
+                    height: 24px;
+                    width: 24px; 
+                    background-size: 100% 100%;
+                    background-image: url('https://s10.mogucdn.com/mlcdn/c45406/181116_3fd65974967jc0ljgig0g2lb33acb_114x112.png');
+                }
+               }
+            input {
+                padding-left: 15px;
+                height: 100%;
+                width: 100%;
+                border: none;
+                outline: none;
+            }
+        }
+
+        .descript {
+            padding: 20px;
+            border-bottom: 1px solid rgb(223, 222, 222);
+            textarea {
+                width: 100%;
+                height: 100%;
+                border: none;
+                outline: none;
+                resize:none;
+            }
+        }
+
         .footer {
             display: flex;
             align-items: center;
