@@ -1,9 +1,8 @@
 {
-  "presets": ["es2015", "stage-0", "env", "react"],
+  "presets": ["env", "react", "stage-0"],
   "plugins": [
     "transform-decorators-legacy",
     "transform-runtime",
-    "transform-class-properties",
     [
         "import",
         {

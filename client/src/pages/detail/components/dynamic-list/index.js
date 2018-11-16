@@ -73,7 +73,7 @@ class DynamicList extends React.Component {
                         return (
                         <article className="article" key={index}>
                             <header className="header">
-                            <Avatar userInfo={item.userInfo}/>
+                                <Avatar userInfo={item.userInfo}/>
                             </header>
                             
                             <div className="container">

@@ -100,8 +100,16 @@ class Recommend extends React.Component {
                 <header className="header">
                     <Avatar onClick={this.goAbout.bind(this)} userInfo={userInfo} avatarStyle={avatarStyle}/>
                 </header>
+                <section className="post">
+                    发帖
+                </section>
+
                 <section className="container">
-                    <nav className="title">好友列表</nav>
+                    <nav className="title">快拍</nav>
+                    <p className="notice">你的关注对象动态会展示在这里哦</p>
+                </section>
+                <section className="container">
+                    <nav className="title">推荐好友</nav>
                     {
                     followList.length === 0
                     ?<p className="notice">暂无推荐</p>
@@ -113,15 +121,15 @@ class Recommend extends React.Component {
                                     <li className="list" key={index}>
                                         <Avatar userInfo={item} avatarStyle={avatarStyle2} usernameStyle={{width: '120px', fontSize: '12px'}} abstractStyle={{width: '120px', fontSize: '12px'}}/>
                                         {
-                                            item.hasFollow
-                                                ? <Button size="small" onClick={() => { this.props.setFollowStatus(index, false) }}>已关注</Button>
-                                                : <Button size="small" type="primary" onClick={() => {this.props.setFollowStatus(index, true)}}>关注</Button>
+                                            !item.hasFollow
+                                                ? <span onClick={() => { this.props.setFollowStatus(index, false) }}>已关注</span>
+                                                : <span className="" onClick={() => {this.props.setFollowStatus(index, true)}}>关注</span>
                                         }
                                     </li>
                                 )
                             })
                         }
-                        <p className="more">全部》</p>
+                        {/* <p className="more">全部》</p> */}
                     </ul>
                     }
                 </section>

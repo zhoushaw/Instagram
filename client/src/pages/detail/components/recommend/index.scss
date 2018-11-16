@@ -13,7 +13,21 @@
     width: 300px;
     padding-bottom: 10px;
   }
-  
+
+  // 发帖
+  .post {
+    height: 42px;
+    line-height: 42px;
+    border: 1px solid #efefef;
+    border-radius: 5px;
+    padding: 0 20px;
+    background: #fff;
+    text-align: center;
+    color: #c7c7c7;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
   .container {
     width: 300px;
     max-height: 350px;
@@ -46,8 +60,12 @@
         display: flex;
         align-items: center;
         margin-bottom: 18px;
+        color: #262626;
         &:last-child{
           margin: 0;
+        }
+        .follow {
+            color: #3897f0;
         }
       }
     }

@@ -36,6 +36,7 @@ class Carousel extends React.Component{
 
     slickNext () {
         let target = this.state.isActived + 1 >= this.props.imageList.length ? 0 : this.state.isActived + 1
+        debugger
         this.setState({
             isActived: target
         })

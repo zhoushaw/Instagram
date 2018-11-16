@@ -1,8 +1,8 @@
 const defaultValue = {
     avatarUrl: '',
-    username: '',
+    username: null,
     account: '',
-    abstract: '',
+    abstract: null,
     email: ''
 }
 

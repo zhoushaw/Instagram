@@ -13,7 +13,7 @@ class Detail extends React.Component {
         this.state = {
             hasTopic: true,
             followList: [],
-            showAttentionList: true
+            showAttentionList: false
         }
         this.initBaseData()
     }
@@ -33,7 +33,7 @@ class Detail extends React.Component {
         let followList = this.state.followList;
         await API.followUser({
             userId: followList[index].userId,
-            status
+            status: status? 1 : 0
         })
 
         this.setState({

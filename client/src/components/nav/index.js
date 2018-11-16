@@ -18,22 +18,26 @@ class Nav extends React.Component{
  
     
     render () {
-        const menu = (
+        const aboutMenu = (
             <Menu>
                 <Menu.Item>关于我</Menu.Item>
                 <Menu.Item onClick={this.signOut.bind(this)}>退出登录</Menu.Item>
             </Menu>
         );
+
+
         return (
             <nav className={Style['page-header']}>
                 <div ref="header" className={`header ${this.state.toggle?'' : 'toggle'}`} >
                     <div className="logo-space">
-                    {
-                        this.state.toggle?
-                        <Link  className="instagram" to={'/'} />
-                        :
-                        <Link  className="icon" to={'/'} />
-                    }
+                        <Dropdown overlay={aboutMenu} >
+                            {
+                                this.state.toggle?
+                                <Link  className="instagram" to={'/'} />
+                                :
+                                <Link  className="icon" to={'/'} />
+                            }
+                        </Dropdown>
                     </div>
                     <div className="search">
                     {
@@ -53,7 +57,7 @@ class Nav extends React.Component{
                     <div className="navigate">
                         <Link  className="explore" to={'/'} />
                         <Link  className="love" to={'/'} />
-                        <Dropdown overlay={menu} >
+                        <Dropdown overlay={aboutMenu} >
                             <Link  className="user" to={'/about'}/>
                         </Dropdown>
                     </div>

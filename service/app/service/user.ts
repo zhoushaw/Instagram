@@ -166,7 +166,7 @@ export default class UserService extends Service {
             where: { 
                 userId: {
                     [Op.ne]: userId, 
-                    [Op.notIn]: followList.push(userId)
+                    [Op.notIn]: followList
                 }
             }
         })
