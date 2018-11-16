@@ -111,7 +111,7 @@ class Recommend extends React.Component {
                             followList.map((item, index)=>{
                                 return (
                                     <li className="list" key={index}>
-                                        <Avatar userInfo={item} avatarStyle={avatarStyle2} usernameStyle={{width: '120px', fontSize: '12px'}}/>
+                                        <Avatar userInfo={item} avatarStyle={avatarStyle2} usernameStyle={{width: '120px', fontSize: '12px'}} abstractStyle={{width: '120px', fontSize: '12px'}}/>
                                         {
                                             item.hasFollow
                                                 ? <Button size="small" onClick={() => { this.props.setFollowStatus(index, false) }}>已关注</Button>
@@ -121,6 +121,7 @@ class Recommend extends React.Component {
                                 )
                             })
                         }
+                        <p className="more">全部》</p>
                     </ul>
                     }
                 </section>

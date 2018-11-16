@@ -18,23 +18,25 @@
         height: 50px;
         margin-left: 12px;
         .username {
-          min-height: 10px;
+          min-height: 14px;
           background: #efefef;
           line-height: 10px;
           color: #262626;
           font-weight: 600;
           font-size: 14px;
+          overflow-x: hidden;
+          text-overflow:ellipsis;
+          white-space: nowrap;
         }
         .abstract {
-          width: 100px;
-          min-height: 10px;
+          min-height: 14px;
           margin-top: 10px;
           background: #efefef;
           font-size: 12px;
           line-height: 10px;
           white-space: nowrap;
           color: #999;
-          overflow: hidden;
+          overflow-x: hidden;
           text-overflow:ellipsis;
           white-space: nowrap;
         }

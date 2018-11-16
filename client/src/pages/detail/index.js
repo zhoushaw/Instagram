@@ -12,7 +12,8 @@ class Detail extends React.Component {
         super(props);
         this.state = {
             hasTopic: true,
-            followList: []
+            followList: [],
+            showAttentionList: true
         }
         this.initBaseData()
     }
@@ -57,7 +58,7 @@ class Detail extends React.Component {
                 <div className="page-container">
                     <span className="loading"></span>
                         {
-                            this.state.hasTopic?
+                            !this.state.showAttentionList && this.state.hasTopic?
                             <div className={Style['home-detail']}>
                                 <DynamicList noTopic={this.noTopic}/>
                                 <Recommend  followList={this.state.followList} setFollowStatus={this.setFollowStatus}/>
