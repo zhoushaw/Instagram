@@ -13,7 +13,7 @@ class Avatar extends React.Component{
             <div className={Style['avatar-content']}>
                 <div className="avatar"  style={{...this.props.avatarStyle,'backgroundImage': `url(${userInfo.avatarUrl}`}}></div>
                   <div className="user_abstract">
-                    <div className={`username ${userInfo.username&&'clear-bg'}`}>{userInfo.username}</div>
+                    <div className={`username ${userInfo.username&&'clear-bg'}`} style={{...this.props.usernameStyle}}>{userInfo.username}</div>
                     {
                         userInfo.abstract?
                         <div className={`abstract ${userInfo.abstract&&'clear-bg'}`}>{userInfo.abstract}</div>
@@ -29,6 +29,14 @@ Avatar.defaultProps = {
     avatarStyle: {
         'width': '32px',
         'height': '32px'
+    },
+    usernameStyle: {
+        fontWeight: 600,
+        fontSize: '14px',
+        width: '140px'
+    },
+    buttonStyle: {
+        
     }
 }
 export default Avatar

@@ -60,7 +60,7 @@ class Detail extends React.Component {
                             this.state.hasTopic?
                             <div className={Style['home-detail']}>
                                 <DynamicList noTopic={this.noTopic}/>
-                                <Recommend />
+                                <Recommend  followList={this.state.followList} setFollowStatus={this.setFollowStatus}/>
                             </div>
                             :
                             <AttentionList followList={this.state.followList} setFollowStatus={this.setFollowStatus}/>

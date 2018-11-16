@@ -4,6 +4,7 @@ import myUtil from '@common/utils.js'
 import Avatar from '@components/avatar'
 import { connect } from "react-redux";
 import { withRouter } from 'react-router'
+import { Button } from 'antd';
 
 @connect(
     store => {
@@ -81,12 +82,16 @@ class Recommend extends React.Component {
     }
 
     render () {
-        const {userInfo} = this.props
+        const { userInfo, followList} = this.props
         let avatarStyle = {
-            'width': '50px',
-            'height': '50px'
+            width: '50px',
+            height: '50px'
         }
-        
+        let avatarStyle2 = {
+            width: '40px',
+            height: '40px'
+        }
+
         return (
             <div 
                 style={{ left: this.state.attach.left + 'px', top: this.state.attach.top + 'px'}}
@@ -96,23 +101,25 @@ class Recommend extends React.Component {
                     <Avatar onClick={this.goAbout.bind(this)} userInfo={userInfo} avatarStyle={avatarStyle}/>
                 </header>
                 <section className="container">
-                    <nav className="title">快拍</nav>
+                    <nav className="title">好友列表</nav>
                     {
-                    this.state.friend_list.length === 0
-                    ?<p className="notice">你的关注对象动态会显示在这里哦</p>
+                    followList.length === 0
+                    ?<p className="notice">暂无推荐</p>
                     :<ul className="friend_photo">
+                        <p className="notice">推荐关注</p>
                         {
-                        this.state.friend_list.map((item, index)=>{
-                            return (
-                            <li className="list" key={index}>
-                                <div className="avatar"></div>
-                                <div className="user_abstract">
-                                <div className="username"></div>
-                                <div className="abstract"></div>
-                                </div>
-                            </li>
-                            )
-                        })
+                            followList.map((item, index)=>{
+                                return (
+                                    <li className="list" key={index}>
+                                        <Avatar userInfo={item} avatarStyle={avatarStyle2} usernameStyle={{width: '120px', fontSize: '12px'}}/>
+                                        {
+                                            item.hasFollow
+                                                ? <Button size="small" onClick={() => { this.props.setFollowStatus(index, false) }}>已关注</Button>
+                                                : <Button size="small" type="primary" onClick={() => {this.props.setFollowStatus(index, true)}}>关注</Button>
+                                        }
+                                    </li>
+                                )
+                            })
                         }
                     </ul>
                     }

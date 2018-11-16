@@ -18,7 +18,7 @@ class AttenTionList extends React.Component {
     }
     
     render () {
-        const { userInfo, followList} = this.props
+        const { followList} = this.props
         let avatarStyle = {
             'width': '44px',
             'height': '44px'
@@ -32,7 +32,7 @@ class AttenTionList extends React.Component {
                         followList.map((item, index) => {
                             return (
                                 <li key={index}>
-                                    <Avatar userInfo={userInfo} avatarStyle={avatarStyle} />
+                                    <Avatar userInfo={item} avatarStyle={avatarStyle} />
                                     {
                                         item.hasFollow
                                             ? <Button onClick={() => { this.props.setFollowStatus(index, false) }}>已关注</Button>
