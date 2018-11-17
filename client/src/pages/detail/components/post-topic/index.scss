@@ -71,7 +71,21 @@
         }
 
         .input-url {
+            position: relative;
             height: 36px;
+            &:hover .close {
+                display: block;
+            }   
+            .close {
+                display: none;
+                position: absolute;
+                top: 50%;
+                right: 0;
+                transform: translateY(-50%);
+                font-size: 20px;
+                color: red;
+                cursor: pointer;
+            }
             .notice {
                 height: 100%;
                 display: flex;
@@ -87,9 +101,9 @@
                     background-size: 100% 100%;
                     background-image: url('https://s10.mogucdn.com/mlcdn/c45406/181116_3fd65974967jc0ljgig0g2lb33acb_114x112.png');
                 }
-               }
+            }
             input {
-                padding-left: 15px;
+                padding-left: 20px;
                 height: 100%;
                 width: 100%;
                 border: none;

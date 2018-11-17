@@ -3,12 +3,12 @@ import Style from './index.scss'
 import { connect } from "react-redux";
 import { withRouter } from 'react-router'
 import Avatar from '@components/avatar'
-import { Input } from 'antd';
+import { Input, Icon} from 'antd';
 const { TextArea } = Input;
 
 
 
-let ImageUpload = () => {
+let ImageUpload = ({ toggleImageUpload }) => {
     return (
         <section className="image-upload">
             <div>
@@ -16,21 +16,27 @@ let ImageUpload = () => {
                 <span>上传照片</span>
             </div>
             <div>
-                <span className="icon network"></span>
+                <span className="icon network" onClick={toggleImageUpload}></span>
                 <span>从网络添加图片</span>
             </div>
         </section>
     )
 }
 
-let InputUrl = ({ showInputUrl, changeInpurUrlStatus }) => {
+let InputUrl = ({ showInputUrl, changeInpurUrlStatus, imgList, toggleImageUpload }) => {
     return (
         <section className="input-url">
+            <Icon className="close" type="close-circle" onClick={toggleImageUpload}/>
             {
                 showInputUrl?
                     <div className="notice" onClick={changeInpurUrlStatus}>
                         <i className="icon"></i>
-                        <span>添加另一张</span>
+                        {
+                            imgList.length> 0?
+                            <span>添加另一张</span>
+                            :
+                            <span>添加照片</span>
+                        }
                     </div>
                     : 
                     <input placeholder="输入图片地址后，按回车即可" autoFocus />
@@ -60,9 +66,15 @@ class PostTopic extends React.Component {
     }
 
     state = {
-        showInputImag: true,
+        showImageUpload: true,
         imgList: [],
         showInputUrl: true
+    }
+
+    toggleImageUpload =  () => {
+        this.setState({
+            showImageUpload: !this.state.showImageUpload
+        })
     }
 
     changeInpurUrlStatus = () => {
@@ -90,9 +102,16 @@ class PostTopic extends React.Component {
                     {/* 上次占位图 */}
                     <div className="upload-style">
                         {
-                            this.state.showInputImag?
-                                <InputUrl showInputUrl={this.state.showInputUrl} changeInpurUrlStatus={this.changeInpurUrlStatus}/>
-                                : <ImageUpload />
+                            this.state.showImageUpload?
+                                <ImageUpload 
+                                    toggleImageUpload={this.toggleImageUpload}
+                                />
+                                :
+                                <InputUrl 
+                                    imgList={this.state.imgList}
+                                    showInputUrl={this.state.showInputUrl} 
+                                    toggleImageUpload={this.toggleImageUpload}
+                                    changeInpurUrlStatus={this.changeInpurUrlStatus}/>
                         }
                     </div>
 
