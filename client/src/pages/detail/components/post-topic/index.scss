@@ -24,6 +24,10 @@
             align-items: center;
         }
 
+        .image-list {
+            height: 400px;
+            width: 100%;
+        }
         .upload-style {
             width: 100%;
             border-style:dashed none;
@@ -73,18 +77,17 @@
         .input-url {
             position: relative;
             height: 36px;
-            &:hover .close {
-                display: block;
+            &:hover .close-circle {
+                display: inline-block;
             }   
-            .close {
+            .close-circle {
                 display: none;
                 position: absolute;
-                top: 50%;
+                top: 0;
                 right: 0;
-                transform: translateY(-50%);
-                font-size: 20px;
-                color: red;
-                cursor: pointer;
+                transform: translate(50%, -50%);
+                height: 20px;
+                width: 20px;
             }
             .notice {
                 height: 100%;
@@ -102,12 +105,17 @@
                     background-image: url('https://s10.mogucdn.com/mlcdn/c45406/181116_3fd65974967jc0ljgig0g2lb33acb_114x112.png');
                 }
             }
-            input {
-                padding-left: 20px;
+            .input-container {
                 height: 100%;
                 width: 100%;
-                border: none;
-                outline: none;
+                input {
+                    padding-left: 20px;
+                    padding-right: 35px;
+                    height: 100%;
+                    width: 100%;
+                    border: none;
+                    outline: none;
+                }
             }
         }
 

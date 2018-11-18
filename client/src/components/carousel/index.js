@@ -66,6 +66,13 @@ class Carousel extends React.Component{
                                     className={['carousel-item', this.state.isActived === index ? 'actived': ''].join(' ')} 
                                     key={index}
                                 >
+                                    {/* 是否展示删除图片按钮 */}
+                                    {
+                                        this.props.showCloseBtn ?
+                                            <span className="close-circle"></span>
+                                            : ''
+                                    }
+
                                     <img src={item} height="100%" width="100%"/>
                                 </li>
                             )
@@ -87,5 +94,10 @@ class Carousel extends React.Component{
             </div>
         )
     }
+}
+
+
+Carousel.defaultProps = {
+    showCloseBtn: false
 }
 export default Carousel

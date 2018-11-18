@@ -3,12 +3,12 @@ import Style from './index.scss'
 import { connect } from "react-redux";
 import { withRouter } from 'react-router'
 import Avatar from '@components/avatar'
-import { Input, Icon} from 'antd';
-const { TextArea } = Input;
+import Carousel from '@components/carousel'
+import { Input, Icon, notification, Popconfirm} from 'antd';
 
 
 
-let ImageUpload = ({ toggleImageUpload }) => {
+let ImageUpload = ({ changeUploadStatus }) => {
     return (
         <section className="image-upload">
             <div>
@@ -16,41 +16,24 @@ let ImageUpload = ({ toggleImageUpload }) => {
                 <span>上传照片</span>
             </div>
             <div>
-                <span className="icon network" onClick={toggleImageUpload}></span>
+                <span className="icon network" onClick={() => {changeUploadStatus(1)}}></span>
                 <span>从网络添加图片</span>
             </div>
         </section>
     )
 }
 
-let InputUrl = ({ showInputUrl, changeInpurUrlStatus, imgList, toggleImageUpload }) => {
-    return (
-        <section className="input-url">
-            <Icon className="close" type="close-circle" onClick={toggleImageUpload}/>
-            {
-                showInputUrl?
-                    <div className="notice" onClick={changeInpurUrlStatus}>
-                        <i className="icon"></i>
-                        {
-                            imgList.length> 0?
-                            <span>添加另一张</span>
-                            :
-                            <span>添加照片</span>
-                        }
-                    </div>
-                    : 
-                    <input placeholder="输入图片地址后，按回车即可" autoFocus />
-            }
-        </section>
-    )
-}
 
-let ImgList = () => {
-    return (
-        <section className="input-url">
-            <input />
-        </section>
-    )
+let ImgList = ({ imageList }) => {
+    if (imageList.length > 0) {
+        return (
+            <section className="image-list">
+                <Carousel imageList={imageList} showCloseBtn={true}></Carousel>
+            </section>
+        )
+    }
+
+    return ''
 }
 
 @connect(
@@ -66,21 +49,53 @@ class PostTopic extends React.Component {
     }
 
     state = {
-        showImageUpload: true,
-        imgList: [],
-        showInputUrl: true
+        uploadStatus: 0, // 0: 默认占位图 1: inputUrl 状态 2: 选择照片状态
+        imageList: [],
+        showInputUrl: false,
+        inputUrl: ''
     }
 
-    toggleImageUpload =  () => {
+    changeUploadStatus =  (status) => {
         this.setState({
-            showImageUpload: !this.state.showImageUpload
+            uploadStatus: status,
+            imageList: []
         })
     }
 
     changeInpurUrlStatus = () => {
         this.setState({
-            showInputUrl: false
+            showInputUrl: !this.state.showInputUrl,
+            inputUrl: ''
         })
+    }
+
+    handelChange = (event) => {
+        this.setState({ inputUrl: event.target.value })
+    }
+
+    pushImgUrl = (event) => {
+        if (event.key === 'Enter') {
+            let url = event.target.value
+            var img = document.createElement('img');
+            img.style.display = 'none';
+            img.crossorigin = 'anonymous';
+            img.src = url;
+
+            // 图片无效
+            img.onerror = () => {
+                notification['error']({
+                    message: '请输入正确图片地址'
+                })
+            };
+
+            // 图片有效
+            img.onload = () => {
+                this.setState({
+                    imageList: [...this.state.imageList, url],
+                    inputUrl: ''
+                })
+            };
+        }
     }
 
     render () {
@@ -91,6 +106,44 @@ class PostTopic extends React.Component {
             height: '50px'
         }
 
+        let InputUrl = () => {
+            return (
+                <section className="input-url">
+                    {
+                        !this.state.showInputUrl ?
+                            <div className="notice" onClick={this.changeInpurUrlStatus}>
+                                <i className="icon"></i>
+                                {
+                                    this.state.imageList.length > 0 ?
+                                        <span>添加另一张</span>
+                                        :
+                                        <span>添加照片</span>
+                                }
+                            </div>
+                            :
+                            <div className="input-container">
+                                <Popconfirm title="关闭后将会清空已输入图片?" onConfirm={this.toggleImageUpload} okText="Yes" cancelText="No">
+                                    <span className="close-circle"></span>
+                                </Popconfirm>
+                                <input value={this.state.inputUrl} onChange={this.handelChange} onKeyUp={this.pushImgUrl} placeholder="输入图片地址后，按回车即可" autoFocus />
+                            </div>
+                        }
+                </section>
+            )
+        }
+
+        let Upload = () => {
+            let view;
+            switch (this.state.uploadStatus) {
+                case 1:
+                    view = <InputUrl />;break;
+                default:
+                    view = <ImageUpload
+                        changeUploadStatus={this.changeUploadStatus}
+                    />;
+            }
+            return view;
+        }
 
         return (
             <div className={`${Style['post-topic']}`} >
@@ -98,23 +151,14 @@ class PostTopic extends React.Component {
                     <header>
                         <Avatar userInfo={userInfo} avatarStyle={avatarStyle}/>
                     </header>
+                    
+                    <ImgList imageList={this.state.imageList} />
+
 
                     {/* 上次占位图 */}
                     <div className="upload-style">
-                        {
-                            this.state.showImageUpload?
-                                <ImageUpload 
-                                    toggleImageUpload={this.toggleImageUpload}
-                                />
-                                :
-                                <InputUrl 
-                                    imgList={this.state.imgList}
-                                    showInputUrl={this.state.showInputUrl} 
-                                    toggleImageUpload={this.toggleImageUpload}
-                                    changeInpurUrlStatus={this.changeInpurUrlStatus}/>
-                        }
+                        <Upload />
                     </div>
-
 
                     <div className="descript">
                         <textarea rows="4" cols="50" placeholder="愿意的话可以添加说明"></textarea>

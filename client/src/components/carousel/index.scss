@@ -7,6 +7,19 @@
   width: 100%;
 //   overflow: hidden;
   .carousel-list {
+    &:hover .close-circle {
+        display: inline-block;
+    }
+    .close-circle {
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(50%, -50%);
+        height: 20px;
+        width: 20px;
+    }
+
     position: relative;
     // 左右切换按钮
     .pre-btn, .next-btn {
