@@ -43,6 +43,7 @@ let ImgList = ({ imageList }) => {
         }
     }
 )
+
 class PostTopic extends React.Component {
     constructor(props){
         super(props);
@@ -51,10 +52,11 @@ class PostTopic extends React.Component {
     state = {
         uploadStatus: 0, // 0: 默认占位图 1: inputUrl 状态 2: 选择照片状态
         imageList: [],
-        showInputUrl: false,
+        showInputNotice: true,
         inputUrl: ''
     }
 
+    // 更改图片输入状态
     changeUploadStatus =  (status) => {
         this.setState({
             uploadStatus: status,
@@ -62,17 +64,34 @@ class PostTopic extends React.Component {
         })
     }
 
+    // 改变展示输入框提示
     changeInpurUrlStatus = () => {
         this.setState({
-            showInputUrl: !this.state.showInputUrl,
+            showInputNotice: !this.state.showInputNotice,
             inputUrl: ''
         })
     }
 
+    // 关闭输入网络图片
+    closeInputUrl = () => {
+        let imgLength = this.state.imageList.length
+        if (imgLength === 0) {
+            this.setState({
+                uploadStatus: 0
+            })
+        } else if (imgLength > 0) {
+            this.setState({
+                showInputNotice: true
+            })
+        }
+    }
+
+    // 双向绑定
     handelChange = (event) => {
         this.setState({ inputUrl: event.target.value })
     }
 
+    // 添加网络图片
     pushImgUrl = (event) => {
         if (event.key === 'Enter') {
             let url = event.target.value
@@ -90,6 +109,12 @@ class PostTopic extends React.Component {
 
             // 图片有效
             img.onload = () => {
+
+                if (this.state.imageList.length === 0) {
+                    this.setState({
+                        showInputNotice: true
+                    })
+                }
                 this.setState({
                     imageList: [...this.state.imageList, url],
                     inputUrl: ''
@@ -110,7 +135,7 @@ class PostTopic extends React.Component {
             return (
                 <section className="input-url">
                     {
-                        !this.state.showInputUrl ?
+                        this.state.showInputNotice ?
                             <div className="notice" onClick={this.changeInpurUrlStatus}>
                                 <i className="icon"></i>
                                 {
@@ -122,9 +147,7 @@ class PostTopic extends React.Component {
                             </div>
                             :
                             <div className="input-container">
-                                <Popconfirm title="关闭后将会清空已输入图片?" onConfirm={this.toggleImageUpload} okText="Yes" cancelText="No">
-                                    <span className="close-circle"></span>
-                                </Popconfirm>
+                                <span className="close-circle" onClick={this.closeInputUrl}></span>
                                 <input value={this.state.inputUrl} onChange={this.handelChange} onKeyUp={this.pushImgUrl} placeholder="输入图片地址后，按回车即可" autoFocus />
                             </div>
                         }
