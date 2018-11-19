@@ -35,6 +35,10 @@ exports.updatePersonalInfo = (data) => {
 
 
 
+// 新增帖子
+exports.addTopic = (data) => {
+    return instance.post('/topic/add', data);
+}
 
 // 点赞
 exports.topicLike = (data) => {

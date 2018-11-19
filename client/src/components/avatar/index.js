@@ -14,11 +14,7 @@ class Avatar extends React.Component{
                 <div className="avatar"  style={{...this.props.avatarStyle,'backgroundImage': `url(${userInfo.avatarUrl}`}}></div>
                   <div className="user_abstract">
                     <div className={`username ${userInfo.username&&'clear-bg'}`} style={{...this.props.usernameStyle}}>{userInfo.username}</div>
-                    {
-                        userInfo.abstract===''?
-                        <div className={`abstract ${userInfo.abstract&&'clear-bg'}`} style={{...this.props.abstractStyle}}>{userInfo.abstract}</div>
-                        : ''
-                    }
+                    <div className={`abstract ${userInfo.abstract&&'clear-bg'} ${userInfo.abstract === '' || userInfo.abstract === undefined ? 'hidden': ''}`} style={{...this.props.abstractStyle}}>{userInfo.abstract}</div>
                   </div>
             </div>
         )

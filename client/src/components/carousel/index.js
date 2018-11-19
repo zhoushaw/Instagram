@@ -2,27 +2,7 @@ import React from 'react'
 import Style from './index.scss'
 import { Icon } from 'antd';
 
-function SlickDot () {
-    return (
-        this.props.imageList.length > 1?
-        (   
-            <ul className="slick-dot">
-                {
-                    this.props.imageList.map((item,index) => {
-                        return (
-                            <li 
-                                className={this.state.isActived === index ? 'acitve' : ''} key={index}
-                                // onClick={this.changeSlick.bind(this, index)} 
-                            ></li>
-                        )
-                    })
-                }
-            </ul>
-        )
-        : 
-        ''
-    )
-}
+
 
 class Carousel extends React.Component{
     constructor(props){
@@ -30,8 +10,6 @@ class Carousel extends React.Component{
         this.state = {
             isActived: 0
         }
-        // 更改作用域
-        SlickDot = SlickDot.bind(this)
     }
 
     slickNext () {
@@ -54,7 +32,42 @@ class Carousel extends React.Component{
         })
     }
 
+    delectPhoto (index) {
+        this.props.delectPhoto(index)
+        debugger
+        if (index === 0 && this.props.imageList.length > 1) {
+            this.setState({
+                isActived: this.state.isActived + 1
+            })
+        } else if(index === this.props.imageList.length &&  this.props.imageList.length > 1) {
+            this.setState({
+                isActived: this.state.isActived - 1
+            })
+        }
+    }
     render () {
+        let SlickDot = () => {
+            return (
+                this.props.imageList.length > 1 && this.props.showSlickDot?
+                (   
+                    <ul className="slick-dot">
+                        {
+                            this.props.imageList.map((item,index) => {
+                                return (
+                                    <li 
+                                        className={this.state.isActived === index ? 'acitve' : ''} key={index}
+                                        // onClick={this.changeSlick.bind(this, index)} 
+                                    ></li>
+                                )
+                            })
+                        }
+                    </ul>
+                )
+                : 
+                ''
+            )
+        }
+
         return (
             <div className={Style['carousel']}>
                 <ul className="carousel-list">
@@ -69,7 +82,7 @@ class Carousel extends React.Component{
                                     {/* 是否展示删除图片按钮 */}
                                     {
                                         this.props.showCloseBtn ?
-                                            <span className="close-circle"></span>
+                                            <span className="close-circle" onClick={() => {this.delectPhoto.bind(this, index)}}></span>
                                             : ''
                                     }
 
@@ -98,6 +111,7 @@ class Carousel extends React.Component{
 
 
 Carousel.defaultProps = {
-    showCloseBtn: false
+    showCloseBtn: false,
+    showSlickDot: true
 }
 export default Carousel

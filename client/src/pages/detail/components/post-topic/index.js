@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import { withRouter } from 'react-router'
 import Avatar from '@components/avatar'
 import Carousel from '@components/carousel'
-import { Input, Icon, notification, Popconfirm} from 'antd';
-
+import { notification} from 'antd';
+import API from '@common/api.js'
 
 
 let ImageUpload = ({ changeUploadStatus }) => {
@@ -21,19 +21,6 @@ let ImageUpload = ({ changeUploadStatus }) => {
             </div>
         </section>
     )
-}
-
-
-let ImgList = ({ imageList }) => {
-    if (imageList.length > 0) {
-        return (
-            <section className="image-list">
-                <Carousel imageList={imageList} showCloseBtn={true}></Carousel>
-            </section>
-        )
-    }
-
-    return ''
 }
 
 @connect(
@@ -53,7 +40,8 @@ class PostTopic extends React.Component {
         uploadStatus: 0, // 0: 默认占位图 1: inputUrl 状态 2: 选择照片状态
         imageList: [],
         showInputNotice: true,
-        inputUrl: ''
+        inputUrl: '',
+        topicDescript: ''
     }
 
     // 更改图片输入状态
@@ -91,6 +79,18 @@ class PostTopic extends React.Component {
         this.setState({ inputUrl: event.target.value })
     }
 
+    // 双向绑定textarea
+    handelChangeTextArea = (event) => {
+        this.setState({ topicDescript: event.target.value })
+    }
+
+    // 从列表中去除图片
+    delectPhoto = (index) => {
+        this.setState({
+            imageList:  this.state.imageList.filter((_, i) => i !== index)
+        })
+    }
+
     // 添加网络图片
     pushImgUrl = (event) => {
         if (event.key === 'Enter') {
@@ -121,6 +121,17 @@ class PostTopic extends React.Component {
                 })
             };
         }
+    }
+
+    // 发帖
+    postTopic = async () => {
+        let resposne = await API.addTopic({
+            topicImg: this.imageList,
+            topicTitle: this.state.topicDescript
+        })
+        notification['success']({
+            message: resposne.data.message
+        });
     }
 
     render () {
@@ -175,8 +186,16 @@ class PostTopic extends React.Component {
                         <Avatar userInfo={userInfo} avatarStyle={avatarStyle}/>
                     </header>
                     
-                    <ImgList imageList={this.state.imageList} />
-
+                    {
+                        this.state.imageList.length > 0?
+                        (
+                            <section className="image-list">
+                                <Carousel imageList={this.state.imageList} delectPhoto={this.delectPhoto} showCloseBtn={true} showSlickDot={false}></Carousel>
+                            </section>
+                        )
+                        :
+                        ""
+                    }
 
                     {/* 上次占位图 */}
                     <div className="upload-style">
@@ -184,7 +203,7 @@ class PostTopic extends React.Component {
                     </div>
 
                     <div className="descript">
-                        <textarea rows="4" cols="50" placeholder="愿意的话可以添加说明"></textarea>
+                        <textarea  value={this.state.topicDescript} onChange={this.handelChangeTextArea} autoFocus rows="4" cols="50" placeholder="愿意的话可以添加说明"></textarea>
                     </div>
 
                     <footer className="footer">
