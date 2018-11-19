@@ -34,12 +34,7 @@ class Carousel extends React.Component{
 
     delectPhoto (index) {
         this.props.delectPhoto(index)
-        debugger
-        if (index === 0 && this.props.imageList.length > 1) {
-            this.setState({
-                isActived: this.state.isActived + 1
-            })
-        } else if(index === this.props.imageList.length &&  this.props.imageList.length > 1) {
+        if(index === this.props.imageList.length -1 &&  this.props.imageList.length > 1) {
             this.setState({
                 isActived: this.state.isActived - 1
             })
@@ -81,8 +76,8 @@ class Carousel extends React.Component{
                                 >
                                     {/* 是否展示删除图片按钮 */}
                                     {
-                                        this.props.showCloseBtn ?
-                                            <span className="close-circle" onClick={() => {this.delectPhoto.bind(this, index)}}></span>
+                                        this.props.showCloseBtn && this.state.isActived === index?
+                                            <span className="close-circle" onClick={this.delectPhoto.bind(this,index)}></span>
                                             : ''
                                     }
 
