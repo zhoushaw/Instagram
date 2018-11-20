@@ -18,6 +18,12 @@ import { connect } from "react-redux";
                     type: 'ADD_COMMENT',
                     ...info
                 })
+            },
+            topicLikeFn: info => {
+                dispatch({
+                    type: 'TOPIC_LIKE',
+                    ...info
+                })
             }
         };
     }
@@ -61,7 +67,13 @@ class Comments extends React.Component {
         } else {
             dotCounts = this.props.dotCounts - 1 >= 0 ? this.props.dotCounts - 1 : 0;
         }
-        this.props.topicLikeFn(dotCounts, response.data.status === 1)
+
+        // 更新store中的点赞状态
+        this.props.topicLikeFn({
+            topicLikeCounts: dotCounts, 
+            topicLike: response.data.status === 1,
+            index: this.props.topicIndex
+        })
     }
 
     // 添加评论

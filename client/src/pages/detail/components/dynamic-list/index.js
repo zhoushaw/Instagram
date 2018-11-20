@@ -18,37 +18,9 @@ import { connect } from 'react-redux'
 class DynamicList extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-            dynamicList: [
-                {
-                    userInfo: {
-                        avatar: 'https://s10.mogucdn.com/mlcdn/c45406/180930_634a7ck1ikea6k139lbgbi343ha2c_150x150.jpg',
-                        username: 'loading',
-                        abstract: 'loading'
-                    },
-                    topic: {
-                        topicImgList: [],
-                        createdAt: '',
-                        topicLikeCounts: 0 // 点赞数
-                    },
-                    discuss: []
-                }
-            ]
-        }
+        this.state = {}
     }
-
-    // 点赞
-    topicLike(index, dotCounts, topicLike) {
-        let targetTopic = this.state.dynamicList[index].topic
-        this.setState(Object.assign(
-            targetTopic,
-            {
-                topicLikeCounts: dotCounts,
-                topicLike
-            }
-        ))
-    }
-
+    
     render() {
         return (
             <div className={Style['dynamic-list']}>
@@ -70,8 +42,7 @@ class DynamicList extends React.Component {
                                 discuss={item.discuss} 
                                 topicId={item.topic.topicId} 
                                 topicLike={item.topic.topicLike}
-                                dotCounts={item.topic.topicLikeCounts}
-                                topicLikeFn={(dotCounts, topicLike) => this.topicLike(index, dotCounts, topicLike)}>
+                                dotCounts={item.topic.topicLikeCounts}>
                             </Comments>
                         </article>
                         )
