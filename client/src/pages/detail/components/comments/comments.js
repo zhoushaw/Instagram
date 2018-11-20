@@ -2,8 +2,26 @@ import React from 'react'
 import Style from './comments.scss'
 import API from '@common/api.js'
 import { notification } from 'antd';
+import { connect } from "react-redux";
 
 
+@connect(
+    store => {
+        return {
+            userInfo: store.userInfo
+        }
+    },
+    dispatch => {
+        return {
+            addComments: info => {
+                dispatch({
+                    type: 'ADD_COMMENT',
+                    ...info
+                })
+            }
+        };
+    }
+)
 class Comments extends React.Component {
     constructor(props){
         super(props);
@@ -61,10 +79,13 @@ class Comments extends React.Component {
 				message: response.message
             })
             
-            // 向父组件通信，添加评论
-            this.props.addComments(
-                this.state.replyContent
-            )
+
+            // dispatch，添加评论
+            this.props.addComments({
+                replyContent: this.state.replyContent,
+                replyName: this.props.userInfo.username,
+                index: this.props.topicIndex
+            })
 
             // 清空评论
             this.setState({

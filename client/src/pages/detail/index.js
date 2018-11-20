@@ -7,19 +7,40 @@ import Nav from '@components/nav/index.js'
 import Style from './index.scss'
 import API from '@common/api.js'
 import update from 'react-addons-update'; // ES6
+import { connect } from "react-redux";
 
+
+@connect(
+    store => {
+        return {
+            topicList: store.topicList
+        }
+    },
+    dispatch => {
+        return {
+            addTopicList: info => {
+                dispatch({
+                    type: 'ADD_TOPICLIST',
+                    info: info
+                })
+            }
+        };
+    }
+)
 class Detail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             hasTopic: true,
             followList: [],
-            showAttentionList: false
+            showAttentionList: false,
+            showPostTopic: false
         }
-        this.initBaseData()
+        this.initFriendList()
+        this.initTopicList()
     }
 
-    async initBaseData() {
+    async initFriendList() {
         let response = await API.friendList()
         response.data.forEach((item) => {
             item.hasFollow = false
@@ -27,8 +48,14 @@ class Detail extends React.Component {
         this.setState({
             followList: response.data
         })
+
     }
 
+    async initTopicList () {
+        // 获取用户帖子列表
+        let topicResponse = await API.frientTopicList()
+        this.props.addTopicList(topicResponse.data)
+    }
 
     setFollowStatus = async (index, status) => {
         let followList = this.state.followList;
@@ -46,24 +73,34 @@ class Detail extends React.Component {
         })
     }
 
-    noTopic =  (status) => {
+
+    togglePostTopic = (refresh) => {
         this.setState({
-            hasTopic: status
+            showPostTopic: !this.state.showPostTopic
         })
+        
+        // 刷新数据
+        if (refresh) {
+            this.initBaseData()
+        }
     }
 
     render() {
         return (
             <main>
                 <Nav />
-                <PostTopic />
+                {
+                    this.state.showPostTopic?
+                    <PostTopic togglePostTopic={this.togglePostTopic} />
+                    : ''
+                }
                 <div className="page-container">
                     <span className="loading"></span>
                         {
-                            !this.state.showAttentionList && this.state.hasTopic?
+                            !this.state.showAttentionList && this.props.topicList.length > 0?
                             <div className={Style['home-detail']}>
-                                <DynamicList noTopic={this.noTopic}/>
-                                <Recommend  followList={this.state.followList} setFollowStatus={this.setFollowStatus}/>
+                                <DynamicList/>
+                                <Recommend togglePostTopic={this.togglePostTopic}  followList={this.state.followList} setFollowStatus={this.setFollowStatus}/>
                             </div>
                             :
                             <AttentionList followList={this.state.followList} setFollowStatus={this.setFollowStatus}/>

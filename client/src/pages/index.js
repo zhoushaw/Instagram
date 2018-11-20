@@ -11,8 +11,27 @@ import Detail from './detail/index'
 import About from './about/index'
 import NotFoundPage from './404/index'
 import Accounts from './accounts'
+import { connect } from "react-redux";
 
 
+
+@connect(
+    store => {
+        return {
+            userInfo: store.userInfo
+        }
+    },
+    dispatch => {
+        return {
+            addUserInfo: info => {
+                dispatch({
+                    type: 'ADD_USERINFO',
+                    info: info
+                })
+            }
+        };
+    }
+)
 class Intagram extends React.Component {
     constructor(props) {
         super(props);
@@ -24,10 +43,7 @@ class Intagram extends React.Component {
         
         if (allowPath.indexOf(pathname) !== -1) {
             API.getUserInfo().then(response => {
-                store.dispatch({
-                    type: 'ADD_USERINFO',
-                    info: response.data
-                })
+                this.props.addUserInfo(response.data)
             })
         }
     }

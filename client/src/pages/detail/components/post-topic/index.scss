@@ -14,7 +14,7 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);        
-        width: 540px;
+        width: 350px;
         background: #fff;
         border-radius: 5px;
         header {
@@ -25,7 +25,7 @@
         }
 
         .image-list {
-            height: 400px;
+            height: 200px;
             width: 100%;
         }
         .upload-style {
@@ -60,8 +60,8 @@
                 font-size: 14px;
                 .icon {
                     display: inline-block;
-                    height: 70px;
-                    width: 70px;
+                    height: 40px;
+                    width: 40px;
                     background-size: 100% 100%;
                     cursor: pointer;
                 }

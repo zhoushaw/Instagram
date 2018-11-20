@@ -53,7 +53,7 @@ export default class TopicService extends Service {
                     [Op.in]: query
                 }
             },
-            order: sequelize.col('created_at')
+            order:  [['created_at', 'DESC']]
         })
     }
 

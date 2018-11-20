@@ -7,6 +7,14 @@ import Avatar from '@components/avatar'
 import { connect } from 'react-redux'
 
 
+@connect(
+    store => {
+        return {
+            dynamicList: store.topicList,
+            userInfo: store.userInfo
+        }
+    }
+)
 class DynamicList extends React.Component {
     constructor(props){
         super(props);
@@ -27,30 +35,6 @@ class DynamicList extends React.Component {
                 }
             ]
         }
-        this.initBaseData()
-    }
-
-    // 初始化朋友圈
-    async initBaseData () {
-        let response = await API.frientTopicList()
-        if (response.data.length > 0) {
-            this.setState({
-                dynamicList: response.data
-            })
-        } else {
-            this.props.noTopic()
-        }
-    }
-
-    // 新增评论
-    addComments(index, replyContent) {
-        let targetTopic = this.state.dynamicList[index]
-        let replyName = this.props.userInfo.username
-        let sourceComment = {
-            replyName,
-            replyContent
-        }
-        targetTopic.discuss.push(sourceComment)
     }
 
     // 点赞
@@ -69,7 +53,7 @@ class DynamicList extends React.Component {
         return (
             <div className={Style['dynamic-list']}>
                 {
-                    this.state.dynamicList.map((item,index) => {
+                    this.props.dynamicList.map((item,index) => {
                         return (
                         <article className="article" key={index}>
                             <header className="header">
@@ -82,12 +66,12 @@ class DynamicList extends React.Component {
                             
                             {/* 评论区 */}
                             <Comments 
+                                topicIndex={index}
                                 discuss={item.discuss} 
                                 topicId={item.topic.topicId} 
                                 topicLike={item.topic.topicLike}
                                 dotCounts={item.topic.topicLikeCounts}
-                                topicLikeFn={(dotCounts, topicLike) => this.topicLike(index, dotCounts, topicLike)}
-                                addComments={(replyContent) => this.addComments(index, replyContent)}>
+                                topicLikeFn={(dotCounts, topicLike) => this.topicLike(index, dotCounts, topicLike)}>
                             </Comments>
                         </article>
                         )

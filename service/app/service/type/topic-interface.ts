@@ -5,7 +5,7 @@
 
 // 新增帖子参数
 export interface insertTopicParams {
-    topicImg: Array<String>, // 图片地址
+    topicImg: string, // 图片地址
     topicTitle: string, // 帖子标题
     userId: string // 用户id
 }

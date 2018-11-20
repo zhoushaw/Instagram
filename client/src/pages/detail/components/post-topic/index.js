@@ -75,8 +75,8 @@ class PostTopic extends React.Component {
     }
 
     // 双向绑定
-    handelChange = (event) => {
-        this.setState({ inputUrl: event.target.value })
+    handelChange = (value) => {
+        this.setState({ inputUrl: value })
     }
 
     // 双向绑定textarea
@@ -125,21 +125,31 @@ class PostTopic extends React.Component {
 
     // 发帖
     postTopic = async () => {
+        if (this.state.imageList.length === 0) { 
+            notification['error']({
+                message: "请选择图片"
+            });
+            return
+        }
+
         let resposne = await API.addTopic({
-            topicImg: this.imageList,
+            topicImg: this.state.imageList,
             topicTitle: this.state.topicDescript
         })
         notification['success']({
-            message: resposne.data.message
+            message: resposne.message
         });
+        // 关闭发帖弹窗
+
+        this.props.togglePostTopic(true)
     }
 
     render () {
         let {userInfo} = this.props
 
         let avatarStyle = {
-            width: '50px',
-            height: '50px'
+            width: '40px',
+            height: '40px'
         }
 
         let InputUrl = () => {
@@ -159,7 +169,13 @@ class PostTopic extends React.Component {
                             :
                             <div className="input-container">
                                 <span className="close-circle" onClick={this.closeInputUrl}></span>
-                                <input value={this.state.inputUrl} onChange={this.handelChange} onKeyUp={this.pushImgUrl} placeholder="输入图片地址后，按回车即可" autoFocus />
+                                <input 
+                                    type = 'text' 
+                                    defaultValue={this.state.inputUrl} 
+                                    // onChange={this.handelChange} 
+                                    // onChange={(event) => { this.handelChange(event.target.value) }}
+                                    onKeyPress={this.pushImgUrl} 
+                                    placeholder="输入图片地址后，按回车即可" />
                             </div>
                         }
                 </section>
@@ -203,12 +219,12 @@ class PostTopic extends React.Component {
                     </div>
 
                     <div className="descript">
-                        <textarea  value={this.state.topicDescript} onChange={this.handelChangeTextArea} autoFocus rows="4" cols="50" placeholder="愿意的话可以添加说明"></textarea>
+                        <textarea  value={this.state.topicDescript} onChange={this.handelChangeTextArea} rows="4" cols="50" placeholder="愿意的话可以添加说明"></textarea>
                     </div>
 
                     <footer className="footer">
-                        <span className="close">关闭</span>
-                        <span className="post">发帖</span>
+                        <span className="close" onClick={()=> this.props.togglePostTopic()}>关闭</span>
+                        <span className="post" onClick={this.postTopic}>发帖</span>
                     </footer>
                 </section>
             </div>

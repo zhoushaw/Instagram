@@ -99,7 +99,7 @@ class Recommend extends React.Component {
                 <header className="header" onClick={this.goAbout.bind(this)}>
                     <Avatar userInfo={userInfo} avatarStyle={avatarStyle}/>
                 </header>
-                <section className="post">
+                <section className="post" onClick={()=> this.props.togglePostTopic()}>
                     发帖
                 </section>
 

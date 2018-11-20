@@ -12,15 +12,14 @@ class TopicController extends Controller {
         let userId = ctx.user.userId
 
         let newTopic = {
-            topicImg: topicImg,
+            topicImg: JSON.stringify(topicImg),
             topicTitle: topicTitle,
             userId,
         }
 
-        let topic: any =  await ctx.service.topic.insertTopic(newTopic)
+        await ctx.service.topic.insertTopic(newTopic)
         
-        topic && ctx.returnBody(200, "发帖成功")
-        !topic && ctx.returnBody(400, "网络异常请稍后重试")
+        ctx.returnBody(200, "发帖成功")
     }
 
 
