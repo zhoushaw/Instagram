@@ -171,7 +171,8 @@ export default class TopicService extends Service {
         let { ctx } = this
 
         return await ctx.model.Topic.findAndCountAll({
-            where: query
+            where: query,
+            order:  [['created_at', 'DESC']]
         });
     }
     

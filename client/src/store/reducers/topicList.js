@@ -2,8 +2,8 @@ const defaultValue = [
     {
         userInfo: {
             avatar: 'https://s10.mogucdn.com/mlcdn/c45406/180930_634a7ck1ikea6k139lbgbi343ha2c_150x150.jpg',
-            username: 'loading',
-            abstract: 'loading'
+            username: '',
+            abstract: false
         },
         topic: {
             topicImgList: [],

@@ -2,7 +2,7 @@ const defaultValue = {
     avatarUrl: '',
     username: null,
     account: '',
-    abstract: null,
+    abstract: false,
     email: ''
 }
 

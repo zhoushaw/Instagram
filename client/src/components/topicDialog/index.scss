@@ -1,0 +1,13 @@
+
+@import '~@scss/mixin.scss';
+
+:local(.topic-dialog){
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  background-color: #fff;
+  border-bottom: 1px solid rgba(0,0,0,.0975);
+  transition: height .2s ease-in-out;
+  
+}

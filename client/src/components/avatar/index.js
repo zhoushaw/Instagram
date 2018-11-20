@@ -14,7 +14,8 @@ class Avatar extends React.Component{
                 <div className="avatar"  style={{...this.props.avatarStyle,'backgroundImage': `url(${userInfo.avatarUrl}`}}></div>
                   <div className="user_abstract">
                     <div className={`username ${userInfo.username&&'clear-bg'}`} style={{...this.props.usernameStyle}}>{userInfo.username}</div>
-                    <div className={`abstract ${userInfo.abstract&&'clear-bg'} ${userInfo.abstract === '' || userInfo.abstract === undefined ? 'hidden': ''}`} style={{...this.props.abstractStyle}}>{userInfo.abstract}</div>
+                    {/* 设置abstract默认为false，可保持背景色 */}
+                    <div className={`abstract ${userInfo.username&&'clear-bg'}`} style={{...this.props.abstractStyle, 'display': userInfo.abstract===false || userInfo.abstract ?'inline-block':'none'}}>{userInfo.abstract}</div>
                   </div>
             </div>
         )
@@ -22,6 +23,9 @@ class Avatar extends React.Component{
 }
 
 Avatar.defaultProps = {
+    userInfo: {
+        abstract: false
+    },
     avatarStyle: {
         'width': '32px',
         'height': '32px'

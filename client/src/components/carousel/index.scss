@@ -26,18 +26,18 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      height: 25px;
-      width: 25px;
+      height: 30px;
+      width: 30px;
       z-index: 1;
       background-color: rgba(0,0,0,0);
     }
     .pre-btn {
       left: 20px;
-      @include sprite-2x( -155px -311px);
+      @include sprite-2x( -150px -308px);
     }
     .next-btn {
       right: 20px;
-      @include sprite-2x( -124px -311px);
+      @include sprite-2x( -121px -307px);
     }
     .pre-btn:hover, .next-btn:hover {
       cursor: pointer;
