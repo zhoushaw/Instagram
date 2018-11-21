@@ -1,7 +1,7 @@
 import React from 'react'
 import Style from './index.scss'
 import Carousel from '@components/carousel'
-import Comments from '@components/comments/comments.js'
+import Comments from '@components/comments'
 import Avatar from '@components/avatar'
 import { connect } from 'react-redux'
 

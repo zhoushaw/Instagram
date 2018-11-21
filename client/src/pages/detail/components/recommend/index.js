@@ -103,17 +103,18 @@ class Recommend extends React.Component {
                     发帖
                 </section>
 
-                <section className="container">
+                {/* <section className="container">
                     <nav className="title">快拍</nav>
                     <p className="notice">你的关注对象动态会展示在这里哦</p>
-                </section>
+                </section> */}
+
                 <section className="container">
-                    <nav className="title">推荐好友</nav>
+                    <nav className="title">推荐关注</nav>
                     {
                     followList.length === 0
                     ?<p className="notice">暂无推荐</p>
                     :<ul className="friend_photo">
-                        <p className="notice">推荐关注</p>
+                        {/* <p className="notice">推荐关注</p> */}
                         {
                             followList.map((item, index)=>{
                                 return (

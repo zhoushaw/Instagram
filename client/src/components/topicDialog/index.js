@@ -3,8 +3,9 @@ import Style from './index.scss'
 import ReactDOM from 'react-dom'
 import Carousel from '@components/carousel'
 import Avatar from '@components/avatar'
-import Comments from '@components/comments/comments.js'
+import Comments from '@components/comments'
 import store from '@/src/store'
+import { Icon } from 'antd';
 
 let defaultState = {
     alertStatus: false,
@@ -18,24 +19,24 @@ let defaultState = {
         email: ''
     },
     topic: {
+        index: 0,
         topicImgList: ["http://img1.3lian.com/img013/v4/96/d/41.jpg"],
         topicLike: false,
-        topicLikeCounts: 20,
-        discuss: [
-            {
-                replyContent: "我的天",
-                replyName: "shwazhou",
-                userId: "3c1c52769881489aa6a05f36e415d0da"
-            }
-        ]
+        topicLikeCounts: 20
     },
+    discuss: [
+        {
+            replyContent: "我的天",
+            replyName: "shwazhou",
+            userId: "3c1c52769881489aa6a05f36e415d0da"
+        }
+    ]
 }
 
 class TopicDialog extends React.Component{
     
     state = {
-        ...defaultState,
-       topicImgList: ["http://img1.3lian.com/img013/v4/96/d/41.jpg"]
+        ...defaultState
     }
  
     // 关闭弹框
@@ -49,6 +50,7 @@ class TopicDialog extends React.Component{
 
     // 打开弹窗
     open =(options)=>{
+        console.log(options)
         options = options || {};
         options.alertStatus = true;
         this.setState({
@@ -79,13 +81,14 @@ class TopicDialog extends React.Component{
             width: '40px',
             height: '40px'
         }
-        let topic = this.state.topic
+        let {topic} = this.state
         return (
             <section className={Style['topic-dialog']} style={this.state.alertStatus? {display:'block'}:{display:'none'}}>
                 <div className="container">
+                    <Icon type="close" className="close-btn" onClick={this.confirm} />
                     <article className="topic cl-float">
                         <div className="carousel fl-left">
-                            <Carousel imageList={this.state.topicImgList} showSlickDot={false}/>
+                            <Carousel imageList={topic.topicImgList} showSlickDot={false}/>
                         </div>
                         <div className="comment fl-right">
                             <header>
@@ -96,7 +99,7 @@ class TopicDialog extends React.Component{
                             <Comments 
                                 store={store}
                                 topicIndex={topic.index}
-                                discuss={topic.discuss} 
+                                discuss={this.state.discuss} 
                                 topicId={topic.topicId} 
                                 topicLike={topic.topicLike}
                                 dialog={true}

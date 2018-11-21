@@ -1,5 +1,5 @@
 import React from 'react'
-import Style from './comments.scss'
+import Style from './index.scss'
 import API from '@common/api.js'
 import { notification } from 'antd';
 import { connect } from "react-redux";

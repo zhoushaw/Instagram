@@ -31,26 +31,27 @@ class Detail extends React.Component {
             })
         })
     }  
-  render() {
-    return (
-      <main>
-        <Nav />
-        <div className="page-container">
-          <div className={Style['personal-about']}>
-            <UserInfos personalInfo={
-                    {
-                        topicCounts: this.state.topic.counts,
-                        fansCounts: this.state.fansCounts,
-                        followCounts: this.state.followCounts
-                    }
-                } />
-            <FavoriteList topicList={this.state.topic.topicList}/>
-            <Footer />
-          </div>
-        </div>
-      </main>
-    )
-  }
+
+    render() {
+        return (
+            <main>
+                <Nav />
+                <div className="page-container">
+                <div className={Style['personal-about']}>
+                    <UserInfos personalInfo={
+                            {
+                                topicCounts: this.state.topic.counts,
+                                fansCounts: this.state.fansCounts,
+                                followCounts: this.state.followCounts
+                            }
+                        } />
+                    <FavoriteList topicList={this.state.topic.topicList}/>
+                    <Footer />
+                </div>
+                </div>
+            </main>
+        )
+    }
 }
 
 export default Detail

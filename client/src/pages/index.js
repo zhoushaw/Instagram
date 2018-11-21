@@ -11,7 +11,6 @@ import About from './about/index'
 import NotFoundPage from './404/index'
 import Accounts from './accounts'
 import { connect } from "react-redux";
-import TopicDialog from '@components/topicDialog'
 
 @connect(
     store => {
@@ -44,8 +43,6 @@ class Intagram extends React.Component {
                 this.props.addUserInfo(response.data)
             })
         }
-
-        TopicDialog.open();
     }
 
     render() {
