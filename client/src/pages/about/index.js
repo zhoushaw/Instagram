@@ -5,34 +5,42 @@ import UserInfos from './components/userInfos/index.js'
 import FavoriteList from './components/favoriteList/index.js'
 import Footer from '@components/footer'
 import API from '@common/api'
+import { connect } from "react-redux";
 
+@connect(
+    store => {
+        return {
+            personalInfo: store.personalInfo
+        }
+    },
+    dispatch => {
+        return {
+            addPersonalInfo: info => {
+                dispatch({
+                    type: 'ADD_PERSONAL_INFO',
+                    info: info
+                })
+            }
+        };
+    }
+)
 class Detail extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            topic: {
-                counts: 0,
-                topicList: []
-            },
-            fansCounts: 0,
-            followCounts: 0,
-        }
-        this.initData()
+        this.initPersonalInfo()
     }
 
-    initData() {
-        // 获取帖子、粉丝
-        API.getPersonalInfo().then(response => {
-            let { topic, fansCounts, followCounts } = response.data
-            this.setState({
-                topic,
-                fansCounts,
-                followCounts
-            })
-        })
-    }  
+
+    async initPersonalInfo () {
+        // 获取用户帖子列表
+        let response = await API.getPersonalInfo()
+        this.props.addPersonalInfo(response.data)
+        console.log(this.props.personalInfo)
+    }
+
 
     render() {
+        let {topic, fansCounts, followCounts} = this.props.personalInfo
         return (
             <main>
                 <Nav />
@@ -40,12 +48,12 @@ class Detail extends React.Component {
                 <div className={Style['personal-about']}>
                     <UserInfos personalInfo={
                             {
-                                topicCounts: this.state.topic.counts,
-                                fansCounts: this.state.fansCounts,
-                                followCounts: this.state.followCounts
+                                topicCounts: topic.counts,
+                                fansCounts: fansCounts,
+                                followCounts: followCounts
                             }
                         } />
-                    <FavoriteList topicList={this.state.topic.topicList}/>
+                    <FavoriteList topicList={topic.topicList}/>
                     <Footer />
                 </div>
                 </div>

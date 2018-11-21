@@ -20,17 +20,13 @@ let defaultState = {
     },
     topic: {
         index: 0,
-        topicImgList: ["http://img1.3lian.com/img013/v4/96/d/41.jpg"],
+        topicImgList: [],
         topicLike: false,
         topicLikeCounts: 20
     },
-    discuss: [
-        {
-            replyContent: "我的天",
-            replyName: "shwazhou",
-            userId: "3c1c52769881489aa6a05f36e415d0da"
-        }
-    ]
+    discuss: [],
+    addComments: () => {}, // 添加评论
+    topicLikeFn: () => {} // 点赞
 }
 
 class TopicDialog extends React.Component{
@@ -75,12 +71,20 @@ class TopicDialog extends React.Component{
         }
     }
 
+    addComments = (...params) => {
+        this.props.addComments(...params)
+    }
+
+    topicLikeFn = (...params) => {
+        this.props.topicLikeFn(...params)
+    }
+
     render () {
         let avatarStyle = {
             width: '40px',
             height: '40px'
         }
-        let {topic} = this.state
+        let {topic, topicIndex} = this.state
         return (
             <section className={Style['topic-dialog']} style={this.state.alertStatus? {display:'block'}:{display:'none'}}>
                 <div className="container">
@@ -96,8 +100,10 @@ class TopicDialog extends React.Component{
 
                             {/* 评论区 */}
                             <Comments 
+                                topicLikeFn={this.topicLikeFn}
+                                addComments={this.addComments}
                                 store={store}
-                                topicIndex={topic.index}
+                                topicIndex={topicIndex}
                                 discuss={this.state.discuss} 
                                 topicId={topic.topicId} 
                                 topicLike={topic.topicLike}

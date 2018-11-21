@@ -2,8 +2,33 @@ import React from 'react'
 import { Icon } from 'antd';
 import Style from './index.scss'
 import TopicDialog from '@components/topicDialog'
+import { connect } from 'react-redux'
 
 
+@connect(
+    store => {
+        return {
+            dynamicList: store.topicList,
+            userInfo: store.userInfo
+        }
+    },
+    dispatch => {
+        return {
+            addComments: info => {
+                dispatch({
+                    type: 'ADD_COMMENT',
+                    info
+                })
+            },
+            topicLikeFn: info => {
+                dispatch({
+                    type: 'TOPIC_LIKE',
+                    info
+                })
+            }
+        };
+    }
+)
 class FavoriteList extends React.Component {
     constructor(props) {
         super(props);
@@ -12,10 +37,13 @@ class FavoriteList extends React.Component {
         }
     }
 
-    showDialog = (item) => {
+    showDialog = (item, topicIndex) => {
         // 显示弹窗内容
         TopicDialog.open({
-            ...item
+            ...item,
+            topicIndex,
+            addComments: this.props.addComments,
+            topicLikeFn: this.props.topicLikeFn
         });
     }
 
@@ -33,9 +61,9 @@ class FavoriteList extends React.Component {
                         <div className="descript">
                             <ul className="topic-list">
                                 {
-                                    this.props.topicList.map((item) => {
+                                    this.props.topicList.map((item, index) => {
                                         return (
-                                            <li className="topic" key={item.topic.topicId} onClick={() =>{ this.showDialog(item)}}>
+                                            <li className="topic" key={item.topic.topicId} onClick={() =>{ this.showDialog(item, index)}}>
                                                 <img src={item.topic.topicImgList[0]} height="293px"  width="293px"/>
                                                 <div className="abstract">
                                                     {
