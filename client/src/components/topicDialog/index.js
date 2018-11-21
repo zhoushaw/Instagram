@@ -50,7 +50,6 @@ class TopicDialog extends React.Component{
 
     // 打开弹窗
     open =(options)=>{
-        console.log(options)
         options = options || {};
         options.alertStatus = true;
         this.setState({

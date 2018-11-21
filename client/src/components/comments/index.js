@@ -10,22 +10,6 @@ import { connect } from "react-redux";
         return {
             userInfo: store.userInfo
         }
-    },
-    dispatch => {
-        return {
-            addComments: info => {
-                dispatch({
-                    type: 'ADD_COMMENT',
-                    ...info
-                })
-            },
-            topicLikeFn: info => {
-                dispatch({
-                    type: 'TOPIC_LIKE',
-                    ...info
-                })
-            }
-        };
     }
 )
 class Comments extends React.Component {
@@ -67,8 +51,7 @@ class Comments extends React.Component {
         } else {
             dotCounts = this.props.dotCounts - 1 >= 0 ? this.props.dotCounts - 1 : 0;
         }
-
-        // 更新store中的点赞状态
+        // 更新点赞状态
         this.props.topicLikeFn({
             topicLikeCounts: dotCounts, 
             topicLike: response.data.status === 1,
@@ -92,7 +75,7 @@ class Comments extends React.Component {
             })
             
 
-            // dispatch，添加评论
+            // 添加评论
             this.props.addComments({
                 replyContent: this.state.replyContent,
                 replyName: this.props.userInfo.username,

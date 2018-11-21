@@ -19,9 +19,9 @@ const topicList = (state = defaultValue, action) => {
         case 'ADD_TOPICLIST':
             return [...action.info]
         case 'ADD_COMMENT':
-            return addComments(state,action)
+            return addComments(state,action.info)
         case 'TOPIC_LIKE':
-            return topicLike(state,action)
+            return topicLike(state,action.info)
         default:
             return state
     }

@@ -12,6 +12,22 @@ import { connect } from 'react-redux'
             dynamicList: store.topicList,
             userInfo: store.userInfo
         }
+    },
+    dispatch => {
+        return {
+            addComments: info => {
+                dispatch({
+                    type: 'ADD_COMMENT',
+                    info
+                })
+            },
+            topicLikeFn: info => {
+                dispatch({
+                    type: 'TOPIC_LIKE',
+                    info
+                })
+            }
+        };
     }
 )
 class DynamicList extends React.Component {
@@ -38,6 +54,8 @@ class DynamicList extends React.Component {
                             {/* 评论区 */}
                             <div className="comments-content">
                                 <Comments 
+                                    topicLikeFn={this.props.topicLikeFn}
+                                    addComments={this.props.addComments}
                                     topicIndex={index}
                                     discuss={item.discuss} 
                                     topicId={item.topic.topicId} 
