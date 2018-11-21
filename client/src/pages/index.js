@@ -1,6 +1,5 @@
 import { BrowserRouter as Router,Switch,Route,Redirect} from "react-router-dom";
 import React from 'react'
-import store from '@/src/store'
 import API from '@common/api.js'
 import '@scss/base.scss'
 import './index.scss'
@@ -12,8 +11,7 @@ import About from './about/index'
 import NotFoundPage from './404/index'
 import Accounts from './accounts'
 import { connect } from "react-redux";
-
-
+import TopicDialog from '@components/topicDialog'
 
 @connect(
     store => {
@@ -46,19 +44,21 @@ class Intagram extends React.Component {
                 this.props.addUserInfo(response.data)
             })
         }
+
+        TopicDialog.open();
     }
 
     render() {
         return (
-          <Router>
-            <Switch>
-              <Route exact path="/" component={Detail}/>
-              <Route exact path="/login" component={Login}/>
-              <Route exact path="/about" component={About}/>
-              <Route exact path="/accounts" component={Accounts}/>
-              <Route exact path = '*' component={NotFoundPage} />
-            </Switch>
-          </Router>
+            <Router>
+                <Switch>
+                    <Route exact path="/" component={Detail}/>
+                    <Route exact path="/login" component={Login}/>
+                    <Route exact path="/about" component={About}/>
+                    <Route exact path="/accounts" component={Accounts}/>
+                    <Route exact path = '*' component={NotFoundPage} />
+                </Switch>
+            </Router>
         )
     }
 }

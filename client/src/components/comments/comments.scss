@@ -3,7 +3,7 @@
 
 :local(.comments-section){
     background: #fff;
-    padding: 0 20px;
+    // padding: 0 20px;
 
     // 点赞、评论按钮
     .opetions {
@@ -47,7 +47,7 @@
 
     // 评论列表
     .comments-list {
-        width: 580px;
+        width: 100%;
         margin: 0;
         .content {
             margin: 5px 0;
@@ -63,6 +63,10 @@
                 cursor: pointer;
                 font-weight: 500;
             }
+        }
+        &.fill {
+            height: 360px;
+            overflow-y: auto;
         }
     }
 

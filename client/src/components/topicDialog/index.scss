@@ -2,12 +2,44 @@
 @import '~@scss/mixin.scss';
 
 :local(.topic-dialog){
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1;
-  background-color: #fff;
-  border-bottom: 1px solid rgba(0,0,0,.0975);
-  transition: height .2s ease-in-out;
-  
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 2;
+    overflow-y: auto;
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        .topic {
+            height:  600px;
+            width: 935px;
+            margin: 0 auto;
+            background: #fff;
+            // 轮播图
+            .carousel {
+                width: 600px;
+                height: 100%;
+            }
+
+            // 评论区
+            .comment {
+                width: 335px;
+                height: 100%;
+                padding: 0 20px;
+                header {
+                    display: flex;
+                    align-items: center;
+                    height: 78px;
+                    border-bottom: 1px solid #efefef;
+                }
+            }
+
+        }
+    }
 }

@@ -1,8 +1,7 @@
 import React from 'react'
 import Style from './index.scss'
-import API from '@common/api.js'
 import Carousel from '@components/carousel'
-import Comments from '../comments/comments.js'
+import Comments from '@components/comments/comments.js'
 import Avatar from '@components/avatar'
 import { connect } from 'react-redux'
 
@@ -35,15 +34,17 @@ class DynamicList extends React.Component {
                             <div className="container">
                                 <Carousel imageList={item.topic.topicImgList}></Carousel>
                             </div>
-                            
+
                             {/* 评论区 */}
-                            <Comments 
-                                topicIndex={index}
-                                discuss={item.discuss} 
-                                topicId={item.topic.topicId} 
-                                topicLike={item.topic.topicLike}
-                                dotCounts={item.topic.topicLikeCounts}>
-                            </Comments>
+                            <div className="comments-content">
+                                <Comments 
+                                    topicIndex={index}
+                                    discuss={item.discuss} 
+                                    topicId={item.topic.topicId} 
+                                    topicLike={item.topic.topicLike}
+                                    dotCounts={item.topic.topicLikeCounts}>
+                                </Comments>
+                            </div>
                         </article>
                         )
                     })

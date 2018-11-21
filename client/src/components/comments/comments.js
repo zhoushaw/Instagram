@@ -107,23 +107,9 @@ class Comments extends React.Component {
     }
 
     render () {
-
-        return (
-            <div className={Style['comments-section']}>
-                <div className="opetions">
-                    <div className="fl-left">
-                        <span className={`favorite  ${this.props.topicLike && 'active'}`} onClick={this.topicLike.bind(this)}></span>
-                        <span className="comments" onClick={this.focus.bind(this)}></span>
-                    </div>
-                    <span className="fl-right collect"></span>
-                </div>
-                {
-                    this.props.dotCounts?
-                    <div className="dot-counts u-f-black">{this.props.dotCounts}次赞</div>
-                    :
-                    <div className="dot-counts u-f-black">抢先 点赞</div>
-                }
-                <ul className="comments-list">
+        const CommentsList = () => {
+            return (
+                <ul className={`comments-list ${this.props.dialog && 'fill'}`}>
                     { 
                         this.props.discuss.map((item,index) => {
                             if (index!==3) {
@@ -154,6 +140,34 @@ class Comments extends React.Component {
                         })
                     }
                 </ul>
+            )
+        }
+        return (
+            <div className={Style['comments-section']}>
+                {
+                    this.props.dialog?
+                        <CommentsList />
+                        :''
+                }
+                <div className="opetions">
+                    <div className="fl-left">
+                        <span className={`favorite  ${this.props.topicLike && 'active'}`} onClick={this.topicLike.bind(this)}></span>
+                        <span className="comments" onClick={this.focus.bind(this)}></span>
+                    </div>
+                    <span className="fl-right collect"></span>
+                </div>
+                {
+                    this.props.dotCounts?
+                    <div className="dot-counts u-f-black">{this.props.dotCounts}次赞</div>
+                    :
+                    <div className="dot-counts u-f-black">抢先 点赞</div>
+                }
+                {/* 弹窗类型、与列表类型，评论列表位置不同 */}
+                {
+                    !this.props.dialog?
+                        <CommentsList />
+                        :''
+                }
                 <div className="release-time u-f-lightblack2">3天前</div>
                 <div className="add-comments">
                     <input type="text" 
@@ -168,6 +182,10 @@ class Comments extends React.Component {
             </div>
         )
     }
+}
+
+Comments.defaultProps = {
+    dialog: false
 }
 
 export default Comments

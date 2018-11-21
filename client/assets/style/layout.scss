@@ -20,3 +20,14 @@
 .fl-right {
     float: right;
 }
+
+.cl-float{
+    zoom:1;
+    &:after {
+        content:"";
+        display:block;
+        clear:both;
+        visibility:hidden;
+        height:0
+    }
+}
