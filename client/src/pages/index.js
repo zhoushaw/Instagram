@@ -58,5 +58,4 @@ class Intagram extends React.Component {
         )
     }
 }
-
 export default Intagram

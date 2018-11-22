@@ -2,7 +2,6 @@ import React from 'react'
 import Style from './index.scss'
 import Avatar from '@components/avatar'
 import { connect } from "react-redux";
-import { withRouter } from 'react-router'
 import { Button } from 'antd';
 
 @connect(
@@ -29,6 +28,9 @@ class AttenTionList extends React.Component {
                 <div className="title">推荐</div>
                 <ul className="list">
                     {
+                        followList.length === 0?
+                        <li>天啊噜，目前居然没有可关注的人，快来成为第一个发帖人吧</li>
+                        :
                         followList.map((item, index) => {
                             return (
                                 <li key={index}>
@@ -48,4 +50,4 @@ class AttenTionList extends React.Component {
     }
 }
 
-export default withRouter(AttenTionList)
+export default AttenTionList

@@ -3,8 +3,8 @@ import Style from './index.scss'
 
 
 class Avatar extends React.Component{
-    constructor(props){
-        super(props)
+    constructor(props, context){
+        super(props, context)
     }
 
     componentDidMount () {
