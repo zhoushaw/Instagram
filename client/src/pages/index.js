@@ -12,6 +12,7 @@ import NotFoundPage from './404/index'
 import Accounts from './accounts'
 import { connect } from "react-redux";
 
+
 @connect(
     store => {
         return {

@@ -40,6 +40,7 @@ class Detail extends React.Component {
         this.initTopicList()
     }
 
+
     async initFriendList() {
         let response = await API.friendList()
         response.data.forEach((item) => {

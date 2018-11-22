@@ -1,5 +1,6 @@
 import React from 'react'
 import Style from './index.scss'
+import PropTypes from "prop-types";
 
 
 class Avatar extends React.Component{
@@ -7,8 +8,8 @@ class Avatar extends React.Component{
         super(props, context)
     }
 
-    componentDidMount () {
-        console.log(this)
+    static contextTypes = {
+        router: PropTypes.object
     }
 
     render () {
