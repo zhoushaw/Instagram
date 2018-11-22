@@ -71,12 +71,25 @@ class TopicDialog extends React.Component{
         }
     }
 
+    // 修改评论，修改上层数据
     addComments = (...params) => {
-        this.props.addComments(...params)
+        let newDiscuss = [...this.state.discuss, ...params]
+        this.setState({
+            discuss: newDiscuss
+        })
+        this.state.addComments(...params)
     }
 
+    // 改变dialog数据，修改上层数据
     topicLikeFn = (...params) => {
-        this.props.topicLikeFn(...params)
+        this.setState({
+            topic: Object.assign(
+                {}, 
+                this.state.topic,
+                ...params
+            )
+        })
+        this.state.topicLikeFn(...params)
     }
 
     render () {

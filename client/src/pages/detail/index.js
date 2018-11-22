@@ -45,8 +45,13 @@ class Detail extends React.Component {
         response.data.forEach((item) => {
             item.hasFollow = false
         })
+
+        let followList = response.data.map((item) => {
+            item.hasFollow = false
+            return item
+        });
         this.setState({
-            followList: response.data
+            followList
         })
 
     }
@@ -81,7 +86,7 @@ class Detail extends React.Component {
         
         // 刷新数据
         if (refresh) {
-            this.initBaseData()
+            this.initTopicList()
         }
     }
 

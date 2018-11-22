@@ -11,9 +11,9 @@ const personalInfo = (state = defaultValue, action) => {
     switch (action.type) {
         case 'ADD_PERSONAL_INFO':
             return Object.assign({}, state, action.info)
-        case 'ADD_COMMENT':
+        case 'ADD_PERSONAL_COMMENT':
             return addComments(state,action.info)
-        case 'TOPIC_LIKE':
+        case 'TOPIC_PERSONAL_LIKE':
             return topicLike(state,action.info)
         default:
             return state
@@ -43,14 +43,15 @@ function topicLike (state, {
 function addComments (state, {
     index, replyContent, replyName
 }) {
-    let newArray = [...state]
+    let newState = Object.assign({}, state)
+    let newArray = [...newState.topic.topicList]
     let sourceComment = {
         replyName,
         replyContent
     }
     
     newArray[index].discuss.push(sourceComment)
-    return newArray
+    return newState
 }
 
 

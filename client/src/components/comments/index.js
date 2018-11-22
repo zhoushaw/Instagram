@@ -95,9 +95,10 @@ class Comments extends React.Component {
                 <ul className={`comments-list ${this.props.dialog && 'fill'}`}>
                     { 
                         this.props.discuss.map((item,index) => {
-                            if (index!==3) {
+                            // 非弹窗展示三个
+                            if (this.props.dialog || index!==3) {
                                 return (
-                                    <li className={`content ${index > 3 && 'hidden'} ${this.state.showMoreComments && 'no-hidden'}`} key={index}>
+                                    <li className={`content ${(index > 3 && !this.props.dialog) && 'hidden'} ${this.state.showMoreComments && 'no-hidden'}`} key={index}>
                                         <span className="username  u-f-black">{item.replyName}</span>
                                         <span className="replay-content u-f-black-blod">{item.replyContent}</span>
                                     </li>

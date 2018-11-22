@@ -61,10 +61,16 @@
       li {
         display: flex;
         align-items: center;
+        justify-content: space-between;
         margin-bottom: 18px;
         color: #262626;
         &:last-child{
           margin: 0;
+        }
+        span {
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
         }
         .follow {
             color: #3897f0;

@@ -121,9 +121,9 @@ class Recommend extends React.Component {
                                     <li className="list" key={index}>
                                         <Avatar userInfo={item} avatarStyle={avatarStyle2} usernameStyle={{width: '120px', fontSize: '12px'}} abstractStyle={{width: '120px', fontSize: '12px'}}/>
                                         {
-                                            !item.hasFollow
+                                            item.hasFollow
                                                 ? <span onClick={() => { this.props.setFollowStatus(index, false) }}>已关注</span>
-                                                : <span className="" onClick={() => {this.props.setFollowStatus(index, true)}}>关注</span>
+                                                : <span className="follow" onClick={() => {this.props.setFollowStatus(index, true)}}>关注</span>
                                         }
                                     </li>
                                 )
