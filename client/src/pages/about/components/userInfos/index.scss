@@ -28,6 +28,11 @@
         border: 1px solid #dedede;
         border-radius: 5px;
         cursor: pointer;
+        &.blue {
+            background-color: #3897f0;
+            color: #fff;
+            border: none;
+        }
       }
       .icon {
         font-size: 20px;

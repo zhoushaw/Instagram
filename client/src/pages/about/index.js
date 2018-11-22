@@ -6,6 +6,7 @@ import FavoriteList from './components/favoriteList/index.js'
 import Footer from '@components/footer'
 import API from '@common/api'
 import { connect } from "react-redux";
+import { withRouter } from 'react-router'
 
 @connect(
     store => {
@@ -27,15 +28,21 @@ import { connect } from "react-redux";
 class Detail extends React.Component {
     constructor(props) {
         super(props);
-        this.initPersonalInfo()
+        this.initBaseData()
     }
 
-
-    async initPersonalInfo () {
+    componentDidMount () {
+        console.log(this.props)
+    }
+    
+    async initBaseData () {
+        // API.getUserInfo().then(response => {
+        //     this.props.addUserInfo(response.data)
+        // })
+        
         // 获取用户帖子列表
         let response = await API.getPersonalInfo()
         this.props.addPersonalInfo(response.data)
-        console.log(this.props.personalInfo)
     }
 
 
@@ -62,4 +69,4 @@ class Detail extends React.Component {
     }
 }
 
-export default Detail
+export default withRouter(Detail)

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router,Switch,Route,Redirect} from "react-router-dom";
+import { BrowserRouter as Router,Switch,Route} from "react-router-dom";
 import React from 'react'
 import API from '@common/api.js'
 import '@scss/base.scss'
@@ -37,7 +37,6 @@ class Intagram extends React.Component {
     componentDidMount () {
         let pathname = location.pathname
         let allowPath = ['/accounts','/about', '/']
-        
         if (allowPath.indexOf(pathname) !== -1) {
             API.getUserInfo().then(response => {
                 this.props.addUserInfo(response.data)

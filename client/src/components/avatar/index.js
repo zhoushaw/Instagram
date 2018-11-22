@@ -7,6 +7,10 @@ class Avatar extends React.Component{
         super(props)
     }
 
+    componentDidMount () {
+        console.log(this)
+    }
+
     render () {
         const {userInfo} = this.props
         return (

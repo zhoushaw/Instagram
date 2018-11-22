@@ -18,14 +18,22 @@ class UserInfos extends React.Component {
             topicCounts: 0,
             fansCounts: 20,
             followCounts: 100,
-            avator: ''
+            avator: '',
+            // 本人相关
+            isSelf: true,
+            hasAttention: false
         }
     }
-
 
     goEditAccounts = () => {
         const { history } = this.props;
         history.push('/accounts')
+    }
+
+    attentionUser = () => {
+        this.setState({
+            hasAttention: !this.state.hasAttention
+        })
     }
 
     render() {
@@ -35,11 +43,23 @@ class UserInfos extends React.Component {
                 <div className={Style['user-infos']}>
                     <div className="avator" style={{'backgroundImage': `url(${userInfo.avatarUrl})`}}></div>
                     <div className="user-infos">
-                    <p className="operate">
-                        <span className="user-account">{userInfo.account}</span>
-                        <span className="modify" onClick={this.goEditAccounts}>编辑个人主页</span>
-                        <Icon className="icon" type="setting" theme="filled"  onClick={this.goEditAccounts}/>
-                    </p>
+
+                    {
+                        this.state.isSelf?
+                        <p className="operate">
+                            <span className="user-account">{userInfo.account}</span>
+                            <span className="modify" onClick={this.goEditAccounts}>编辑个人主页</span>
+                            <Icon className="icon" type="setting" theme="filled"  onClick={this.goEditAccounts}/>
+                        </p>
+                        :
+                        <p className="operate">
+                            <span className="user-account">{userInfo.account}</span>
+                            <span className={`modify ${!this.state.hasAttention && 'blue'}`} onClick={this.attentionUser}>
+                                {this.state.hasAttention?'已关注': '关注'}
+                            </span>
+                        </p>
+                    }
+
                     <p className="attention-status">
                         <span><b>{this.props.personalInfo.topicCounts}</b>帖子</span>
                         <span><b>{this.props.personalInfo.fansCounts}</b>粉丝</span>

@@ -6,7 +6,7 @@ class UserController extends Controller {
     public async userInfo() {
         const {ctx} = this
 
-        let userId = ctx.user.userId
+        let userId = ctx.query.userId || ctx.user.userId
 
         // 获取并填充数据
         let user = await this.service.user.getUserByUserId(userId)
