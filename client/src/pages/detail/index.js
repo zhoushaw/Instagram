@@ -43,9 +43,6 @@ class Detail extends React.Component {
 
     async initFriendList() {
         let response = await API.friendList()
-        response.data.forEach((item) => {
-            item.hasFollow = false
-        })
 
         let followList = response.data.map((item) => {
             item.hasFollow = false
