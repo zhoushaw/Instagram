@@ -12,11 +12,15 @@ class Avatar extends React.Component{
         router: PropTypes.object
     }
 
+    componentDidMount () {
+
+    }
+
     goAbout = () => {
         let data = {userId: this.props.userInfo.userId};
         let path = {
             pathname:'/about',
-            query:data,
+            params: data
         }
         this.context.router.history.push(path)
     }

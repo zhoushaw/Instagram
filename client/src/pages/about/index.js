@@ -11,7 +11,9 @@ import { withRouter } from 'react-router'
 @connect(
     store => {
         return {
-            personalInfo: store.personalInfo
+            personalInfo: store.personalInfo,
+            userInfo: store.userInfo,
+            isSelf: true
         }
     },
     dispatch => {
@@ -32,7 +34,21 @@ class Detail extends React.Component {
     }
 
     componentDidMount () {
-        console.log(this.props)
+        let isSelf;
+        let params = this.props.location.params || {}
+        let userId = this.props.userInfo.userId
+        let getUserId = params.userId
+
+        // 与当前登录用户userId不相同或没传输userId视为当前about页面不是本人信息
+        if (getUserId === userId || !getUserId) {
+            isSelf = true
+        } else {
+            isSelf = false
+        }
+        console.log(params, userId, getUserId)
+        this.setState({
+            isSelf
+        })
     }
     
     async initBaseData () {

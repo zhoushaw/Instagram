@@ -47,7 +47,7 @@ class UserInfos extends React.Component {
                     {
                         this.state.isSelf?
                         <p className="operate">
-                            <span className="user-account">{userInfo.account}</span>
+                            <span className="user-account">{userInfo.username}</span>
                             <span className="modify" onClick={this.goEditAccounts}>编辑个人主页</span>
                             <Icon className="icon" type="setting" theme="filled"  onClick={this.goEditAccounts}/>
                         </p>

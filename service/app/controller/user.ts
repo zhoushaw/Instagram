@@ -17,7 +17,8 @@ class UserController extends Controller {
             abstract: user.abstract,
             account: user.email.replace(/@.*/, ''),
             mobile: user.mobile,
-            sex: user.sex
+            sex: user.sex,
+            userId: user.userId
         }
         ctx.returnBody(200, "获取成功", userInfo)
     }

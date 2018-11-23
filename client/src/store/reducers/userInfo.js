@@ -3,7 +3,8 @@ const defaultValue = {
     username: null,
     account: '',
     abstract: false,
-    email: ''
+    email: '',
+    userId: ''
 }
 
 const userInfo = (state = defaultValue, action) => {
