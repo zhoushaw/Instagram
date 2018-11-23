@@ -105,7 +105,7 @@ class Detail extends React.Component {
                         {
                             !this.state.showAttentionList && this.props.topicList.length > 0?
                             <div className={Style['home-detail']}>
-                                <DynamicList context={this.props.location}/>
+                                <DynamicList/>
                                 <Recommend togglePostTopic={this.togglePostTopic}  followList={this.state.followList} setFollowStatus={this.setFollowStatus}/>
                             </div>
                             :

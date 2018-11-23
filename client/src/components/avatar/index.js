@@ -12,11 +12,20 @@ class Avatar extends React.Component{
         router: PropTypes.object
     }
 
+    goAbout = () => {
+        let data = {userId: this.props.userInfo.userId};
+        let path = {
+            pathname:'/about',
+            query:data,
+        }
+        this.context.router.history.push(path)
+    }
+
     render () {
         const {userInfo} = this.props
         return (
             <div className={Style['avatar-content']}>
-                <div className="avatar"  style={{...this.props.avatarStyle,'backgroundImage': `url(${userInfo.avatarUrl}`}}></div>
+                <div className="avatar" onClick={this.goAbout} style={{...this.props.avatarStyle,'backgroundImage': `url(${userInfo.avatarUrl}`}}></div>
                   <div className="user_abstract">
                     <div className={`username ${userInfo.username&&'clear-bg'}`} style={{...this.props.usernameStyle}}>{userInfo.username}</div>
                     {/* 设置abstract默认为false，可保持背景色 */}

@@ -108,7 +108,8 @@ export default class TopicService extends Service {
         const topicDetail = {
             userInfo: {
                 username: user.username,
-                avatarUrl: user.avatarUrl
+                avatarUrl: user.avatarUrl,
+                userId: user.userId
             },
             topic: {
                 topicImgList: JSON.parse(topic.topicImg),
