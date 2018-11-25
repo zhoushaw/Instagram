@@ -71,7 +71,8 @@ class TopicController extends Controller {
 
         // 查询帖子详情
         let follower =  await ctx.service.follow.findFollow({
-            followedId: userId
+            followedId: userId,
+            status: 1
         })
         
         // 处理需要查询用户帖子的userId

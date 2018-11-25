@@ -66,7 +66,7 @@ class UserController extends Controller {
     public async userPersonalInfo () {
         const {ctx} = this
 
-        let userId = ctx.user.userId
+        let userId = ctx.query.userId || ctx.user.userId
 
         // 用户帖子
         let topics = await ctx.service.topic.queryTopicCounts({
