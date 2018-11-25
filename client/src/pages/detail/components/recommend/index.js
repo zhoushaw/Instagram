@@ -76,9 +76,6 @@ class Recommend extends React.Component {
         window.removeEventListener("scroll", this.attachFn);
     }
 
-    goAbout () {
-        this.props.history.push('/about')
-    }
 
     render () {
         const { userInfo, followList} = this.props
@@ -96,7 +93,7 @@ class Recommend extends React.Component {
                 style={{ left: this.state.attach.left + 'px', top: this.state.attach.top + 'px'}}
                 className={`${Style.recommend} ${this.state.attach.isAttach && 'is-attach'}`} 
                 ref="recommend">
-                <header className="header" onClick={this.goAbout.bind(this)}>
+                <header className="header">
                     <Avatar userInfo={userInfo} avatarStyle={avatarStyle}/>
                 </header>
                 <section className="post" onClick={()=> this.props.togglePostTopic()}>

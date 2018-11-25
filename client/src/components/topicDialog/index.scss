@@ -26,18 +26,23 @@
             cursor: pointer;
         }
         .topic {
+            position: relative;
             height:  600px;
-            width: 935px;
+            min-width: 935px;
             margin: 0 auto;
             background: #fff;
             // 轮播图
             .carousel {
+                position: absolute;
+                left: 0;
                 width: 600px;
                 height: 100%;
             }
 
             // 评论区
             .comment {
+                position: absolute;
+                right: 0;
                 width: 335px;
                 height: 100%;
                 padding: 0 20px;

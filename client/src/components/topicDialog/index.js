@@ -102,11 +102,11 @@ class TopicDialog extends React.Component{
             <section className={Style['topic-dialog']} style={this.state.alertStatus? {display:'block'}:{display:'none'}}>
                 <div className="container">
                     <Icon type="close" className="close-btn" onClick={this.confirm} />
-                    <article className="topic cl-float">
-                        <div className="carousel fl-left">
+                    <article className="topic">
+                        <div className="carousel">
                             <Carousel imageList={topic.topicImgList} showSlickDot={false}/>
                         </div>
-                        <div className="comment fl-right">
+                        <div className="comment">
                             <header>
                                 <Avatar userInfo={this.state.userInfo} avatarStyle={avatarStyle}/>
                             </header>

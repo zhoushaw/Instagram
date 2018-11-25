@@ -2,15 +2,8 @@ import React from 'react'
 import { Icon } from 'antd';
 import Style from './index.scss'
 import { withRouter } from 'react-router'
-import { connect } from "react-redux";
+import API from '@common/api.js'
 
-@connect(
-    store => {
-        return {
-            userInfo: store.userInfo
-        }
-    }
-)
 class UserInfos extends React.Component {
     constructor(props) {
         super(props);
@@ -20,8 +13,7 @@ class UserInfos extends React.Component {
             followCounts: 100,
             avator: '',
             // 本人相关
-            isSelf: true,
-            hasAttention: false
+            hasAttention: true
         }
     }
 
@@ -30,22 +22,29 @@ class UserInfos extends React.Component {
         history.push('/accounts')
     }
 
-    attentionUser = () => {
+    attentionUser = async () => {
+
+        await API.followUser({
+            userId: this.props.userInfo.userId,
+            status: !this.state.hasAttention ? 1 : 0
+        })
+
         this.setState({
             hasAttention: !this.state.hasAttention
         })
     }
+
 
     render() {
         let {userInfo} = this.props
         return (
             <main>
                 <div className={Style['user-infos']}>
-                    <div className="avator" style={{'backgroundImage': `url(${userInfo.avatarUrl})`}}></div>
+                    <div className="avator" style={{ 'backgroundImage': `url(${userInfo.avatarUrl})`}}></div>
                     <div className="user-infos">
 
                     {
-                        this.state.isSelf?
+                        this.props.isSelf?
                         <p className="operate">
                             <span className="user-account">{userInfo.username}</span>
                             <span className="modify" onClick={this.goEditAccounts}>编辑个人主页</span>
@@ -53,7 +52,7 @@ class UserInfos extends React.Component {
                         </p>
                         :
                         <p className="operate">
-                            <span className="user-account">{userInfo.account}</span>
+                            <span className="user-account">{userInfo.username}</span>
                             <span className={`modify ${!this.state.hasAttention && 'blue'}`} onClick={this.attentionUser}>
                                 {this.state.hasAttention?'已关注': '关注'}
                             </span>

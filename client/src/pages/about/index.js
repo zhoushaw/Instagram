@@ -28,14 +28,18 @@ import { withRouter } from 'react-router'
     }
 )
 class Detail extends React.Component {
-    constructor(props) {
-        super(props);
-        this.initBaseData()
+    state = {
+        userInfos: {}
     }
 
-    componentDidMount () {
+    constructor(props) {
+        super(props);
+    }
+
+    async componentDidMount () {
         let isSelf;
-        let params = this.props.location.params || {}
+        console.log(this.props)
+        let params = this.props.match.params || {}
         let userId = this.props.userInfo.userId
         let getUserId = params.userId
 
@@ -45,19 +49,29 @@ class Detail extends React.Component {
         } else {
             isSelf = false
         }
-        console.log(params, userId, getUserId)
+
+        let userInfos;
+        if (!isSelf) {
+            let response = await API.getUserInfo({params: {userId: getUserId}})
+            userInfos = response.data
+        }
+
         this.setState({
-            isSelf
+            isSelf,
+            userInfos
         })
+
+        // 获取帖子列表
+        this.initBaseData(isSelf ? userId : getUserId)
     }
     
-    async initBaseData () {
-        // API.getUserInfo().then(response => {
-        //     this.props.addUserInfo(response.data)
-        // })
+    async initBaseData(userId) {
+        let params = {
+            userId
+        }
         
         // 获取用户帖子列表
-        let response = await API.getPersonalInfo()
+        let response = await API.getPersonalInfo({ params })
         this.props.addPersonalInfo(response.data)
     }
 
@@ -69,15 +83,15 @@ class Detail extends React.Component {
                 <Nav />
                 <div className="page-container">
                 <div className={Style['personal-about']}>
-                    <UserInfos personalInfo={
+                        <UserInfos isSelf={this.state.isSelf} userInfo={this.state.isSelf ? this.props.userInfo : this.state.userInfos} personalInfo={
                             {
                                 topicCounts: topic.counts,
                                 fansCounts: fansCounts,
                                 followCounts: followCounts
                             }
                         } />
-                    <FavoriteList topicList={topic.topicList}/>
-                    <Footer />
+                        <FavoriteList topicList={topic.topicList}/>
+                        <Footer />
                 </div>
                 </div>
             </main>

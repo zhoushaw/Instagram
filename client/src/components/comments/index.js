@@ -93,6 +93,13 @@ class Comments extends React.Component {
         const CommentsList = () => {
             return (
                 <ul className={`comments-list ${this.props.dialog && 'fill'}`}>
+                    {
+                        this.props.dialog && this.props.discuss.length === 0 ?
+                            <li className="content">
+                                暂时没有评论哦~
+                            </li>
+                            : ""
+                    }
                     { 
                         this.props.discuss.map((item,index) => {
                             // 非弹窗展示三个

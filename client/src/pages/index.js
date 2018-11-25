@@ -50,10 +50,11 @@ class Intagram extends React.Component {
             <Router>
                 <Switch>
                     <Route exact path="/" component={Detail}/>
-                    <Route exact path="/login" component={Login}/>
-                    <Route exact path="/about" component={About}/>
-                    <Route exact path="/accounts" component={Accounts}/>
-                    <Route exact path = '*' component={NotFoundPage} />
+                    <Route path="/login" component={Login} />
+                    <Route path="/about/:userId" component={About} />
+                    <Route path="/about" component={About} />
+                    <Route path="/accounts" component={Accounts}/>
+                    <Route component={NotFoundPage} />
                 </Switch>
             </Router>
         )
