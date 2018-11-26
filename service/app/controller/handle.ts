@@ -10,7 +10,8 @@ class HandlerController extends Controller {
         const {ctx} = this
         let token = await ctx.service.qiniu.getQiniuToken()
         ctx.returnBody(200, "获取token成功", {
-            token: token
+            token: token,
+            baseUrl: 'https://cdn.dankal.cn'
         })
     }
 

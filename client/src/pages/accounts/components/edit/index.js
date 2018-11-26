@@ -4,6 +4,7 @@ import Style from './index.scss'
 import API from '@common/api.js'
 import { Row, Col } from 'antd';
 import { connect } from "react-redux";
+import Upload from '@components/upload'
 
 const { TextArea } = Input;
 const FormItem = Form.Item;
@@ -131,7 +132,8 @@ class RegistrationForm extends React.Component {
                     </Col>
                     <Col span={16}  className="user_abstract">
                         <div className={'username'}>{userInfo.account}</div>
-                        <div className={'notice'}>更换头像</div>
+                        <div className={'notice'}>更换头像<Upload  className={'notice'} /></div>
+                        
                     </Col>
                 </Row>
                 <Form onSubmit={this.handleSubmit}>

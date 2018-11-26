@@ -11,9 +11,7 @@ class UserInfos extends React.Component {
             topicCounts: 0,
             fansCounts: 20,
             followCounts: 100,
-            avator: '',
-            // 本人相关
-            hasAttention: true
+            avator: ''
         }
     }
 
@@ -26,12 +24,10 @@ class UserInfos extends React.Component {
 
         await API.followUser({
             userId: this.props.userInfo.userId,
-            status: !this.state.hasAttention ? 1 : 0
+            status: !this.props.hasFollow ? 1 : 0
         })
 
-        this.setState({
-            hasAttention: !this.state.hasAttention
-        })
+        this.props.toggleFollowStatus()
     }
 
 
@@ -53,8 +49,8 @@ class UserInfos extends React.Component {
                         :
                         <p className="operate">
                             <span className="user-account">{userInfo.username}</span>
-                            <span className={`modify ${!this.state.hasAttention && 'blue'}`} onClick={this.attentionUser}>
-                                {this.state.hasAttention?'已关注': '关注'}
+                            <span className={`modify ${!this.props.hasFollow && 'blue'}`} onClick={this.attentionUser}>
+                                {this.props.hasFollow?'已关注': '关注'}
                             </span>
                         </p>
                     }

@@ -93,13 +93,32 @@ class UserController extends Controller {
             status: 1
         })
 
+        // 非本人查询是否关注了登录人
+
+        let isSelf = !ctx.query.userId || ctx.query.userId === ctx.user.userId
+        // 查询已关注用户
+        let followList = []
+        if (!isSelf) {
+            followList  = await this.ctx.model.Follow.findAll({
+                attributes: ['userId'],
+                where: {
+                    followedId: ctx.user.userId,
+                    userId: ctx.query.userId,
+                    status: 1
+                }
+            })
+        }
+
+
         ctx.returnBody(200, "获取成功", {
             topic: {
                 counts: topics.count,
                 topicList
             },
             followCounts: followCounts.count,
-            fansCounts: fansCounts.count
+            fansCounts: fansCounts.count,
+            isSelf,
+            hasFollow: followList.length > 0
         })
     }
 }

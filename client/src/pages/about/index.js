@@ -12,8 +12,7 @@ import { withRouter } from 'react-router'
     store => {
         return {
             personalInfo: store.personalInfo,
-            userInfo: store.userInfo,
-            isSelf: true
+            userInfo: store.userInfo
         }
     },
     dispatch => {
@@ -29,7 +28,9 @@ import { withRouter } from 'react-router'
 )
 class Detail extends React.Component {
     state = {
-        userInfos: {}
+        userInfo: {},
+        hasFollow: false,
+        isSelf: true
     }
 
     constructor(props) {
@@ -37,32 +38,18 @@ class Detail extends React.Component {
     }
 
     async componentDidMount () {
-        let isSelf;
-        console.log(this.props)
         let params = this.props.match.params || {}
-        let userId = this.props.userInfo.userId
-        let getUserId = params.userId
+        let userId = params.userId
 
-        // 与当前登录用户userId不相同或没传输userId视为当前about页面不是本人信息
-        if (getUserId === userId || !getUserId) {
-            isSelf = true
-        } else {
-            isSelf = false
-        }
-
-        let userInfos;
-        if (!isSelf) {
-            let response = await API.getUserInfo({params: {userId: getUserId}})
-            userInfos = response.data
-        }
+        let response = await API.getUserInfo({params: {userId}})
+        let userInfo = response.data
 
         this.setState({
-            isSelf,
-            userInfos
+            userInfo
         })
 
         // 获取帖子列表
-        this.initBaseData(isSelf ? userId : getUserId)
+        this.initBaseData(userId)
     }
     
     async initBaseData(userId) {
@@ -72,9 +59,19 @@ class Detail extends React.Component {
         
         // 获取用户帖子列表
         let response = await API.getPersonalInfo({ params })
+        let {isSelf, hasFollow} = response.data
         this.props.addPersonalInfo(response.data)
+        this.setState({
+            isSelf,
+            hasFollow
+        })
     }
 
+    toggleFollowStatus = () => {
+        this.setState({
+            hasFollow: !this.state.hasFollow
+        })
+    }
 
     render() {
         let {topic, fansCounts, followCounts} = this.props.personalInfo
@@ -83,13 +80,18 @@ class Detail extends React.Component {
                 <Nav />
                 <div className="page-container">
                 <div className={Style['personal-about']}>
-                        <UserInfos isSelf={this.state.isSelf} userInfo={this.state.isSelf ? this.props.userInfo : this.state.userInfos} personalInfo={
-                            {
-                                topicCounts: topic.counts,
-                                fansCounts: fansCounts,
-                                followCounts: followCounts
-                            }
-                        } />
+                        <UserInfos 
+                            isSelf={this.state.isSelf} 
+                            hasFollow={this.state.hasFollow} 
+                            toggleFollowStatus={this.toggleFollowStatus}
+                            userInfo={this.state.userInfo} 
+                            personalInfo={
+                                {
+                                    topicCounts: topic.counts,
+                                    fansCounts: fansCounts,
+                                    followCounts: followCounts
+                                }
+                            } />
                         <FavoriteList topicList={topic.topicList}/>
                         <Footer />
                 </div>
