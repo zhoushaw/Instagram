@@ -24,6 +24,12 @@ const AutoCompleteOption = AutoComplete.Option;
                     type: "ADD_USERINFO",
                     info
                 })
+            },
+            changeAvatarUrl: info => {
+                dispatch({
+                    type: "CHANGE_AVATARURL",
+                    info
+                })
             }
         };
     }
@@ -85,6 +91,18 @@ class RegistrationForm extends React.Component {
         this.setState({ autoCompleteResult });
     }
 
+    changeAvatarCb = async (avatarUrl) => {
+        let info = {
+            avatarUrl
+        }
+        let response = await API.updatePersonalInfo(info);
+        notification.success({
+            message: response.message
+        })
+        
+        this.props.changeAvatarUrl(info)
+    }
+
     render() {
         const { getFieldDecorator } = this.props.form;
         const { autoCompleteResult } = this.state;
@@ -132,7 +150,7 @@ class RegistrationForm extends React.Component {
                     </Col>
                     <Col span={16}  className="user_abstract">
                         <div className={'username'}>{userInfo.account}</div>
-                        <div className={'notice'}>更换头像<Upload  className={'notice'} /></div>
+                        <div className={'notice'}>更换头像<Upload successCb={this.changeAvatarCb} className={'notice'} /></div>
                         
                     </Col>
                 </Row>

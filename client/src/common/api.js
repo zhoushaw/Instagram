@@ -68,3 +68,8 @@ exports.followUser = (data) => {
     return instance.post('/friend/follow', data);
 }
 
+
+// 关注
+exports.getToken = (data) => {
+    return instance.get('/handle/upload/get-token', data);
+}

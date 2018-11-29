@@ -10,12 +10,12 @@ interface qiniuOptioin {
 }
 
 export default class qiniuService extends Service {
-    private accessKey: string = 'Jyi6Ntprm38nI6n1heGjwXyQmzie8ZjY7l9Cq_Je';
-    private secretKey: string = 'eBqe82USZuB6gnqvjTsyg_qki6C6HwnkFIvNIH-y';
-    private publicBucketDomain = 'http://or9tdbe53.bkt.clouddn.com';
+    private accessKey: string = 'nIK8fxtGzShsw_w2jGJbtCTlo7fX3ze7y2i_QSfY';
+    private secretKey: string = 'jHk2Rft4VPBR2trH3BX4fvaBgFMMsKH17RNzQk-L';
+    private publicBucketDomain = 'http://piyhxgz90.bkt.clouddn.com';
 
     private options: qiniuOptioin = {
-        scope: 'dankal-cdn',
+        scope: 'instagram',
         expires: 7200
     }
 

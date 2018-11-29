@@ -6,14 +6,15 @@ import Avatar from '@components/avatar'
 import Carousel from '@components/carousel'
 import { notification} from 'antd';
 import API from '@common/api.js'
+import Upload from '@components/upload'
 
 
-let ImageUpload = ({ changeUploadStatus }) => {
+let ImageUpload = ({ changeUploadStatus, uploadImgSuccess }) => {
     return (
         <section className="image-upload">
             <div>
                 <span className="icon camera"></span>
-                <span>上传照片</span>
+                <span><Upload successCb={uploadImgSuccess} className={'placeholder'} />上传照片</span>
             </div>
             <div>
                 <span className="icon network" onClick={() => {changeUploadStatus(1)}}></span>
@@ -91,6 +92,15 @@ class PostTopic extends React.Component {
         })
     }
 
+
+    uploadImgSuccess = async (url) => {
+        this.setState({
+            imageList: [...this.state.imageList, url],
+            uploadStatus: 2
+        })
+        console.log(this.state.imageList)
+    }
+
     // 添加网络图片
     pushImgUrl = (event) => {
         if (event.key === 'Enter') {
@@ -154,7 +164,7 @@ class PostTopic extends React.Component {
 
         let InputUrl = () => {
             return (
-                <section className="input-url">
+                <section key={1} className="input-url">
                     {
                         this.state.showInputNotice ?
                             <div className="notice" onClick={this.changeInpurUrlStatus}>
@@ -182,17 +192,36 @@ class PostTopic extends React.Component {
             )
         }
 
-        let Upload = () => {
-            let view;
-            switch (this.state.uploadStatus) {
-                case 1:
-                    view = <InputUrl />;break;
-                default:
-                    view = <ImageUpload
-                        changeUploadStatus={this.changeUploadStatus}
-                    />;
-            }
-            return view;
+        let ImgUpload = () => {
+            return (
+                <section key={2} className="input-url">
+                    <div className="notice">
+                        <span className="close-circle" onClick={this.closeInputUrl}></span>
+                        <i className="icon"></i>
+                        <span><Upload successCb={this.uploadImgSuccess} className={'placeholder'} />添加另一张</span>
+                    </div>
+                </section>
+            )
+        }
+
+        let UploadPlaceholder = () => {
+            return (
+                <div>
+                    {
+                        this.state.uploadStatus === 1 ? <InputUrl /> : ''
+                    }
+                    {
+                        this.state.uploadStatus === 2 ? <ImgUpload /> : ''
+                    }
+                    {
+                        this.state.uploadStatus === 0 ? 
+                        <ImageUpload
+                            uploadImgSuccess={this.uploadImgSuccess}
+                            changeUploadStatus={this.changeUploadStatus}
+                        /> : ''
+                    }
+                </div>
+            )
         }
 
         return (
@@ -215,7 +244,7 @@ class PostTopic extends React.Component {
 
                     {/* 上次占位图 */}
                     <div className="upload-style">
-                        <Upload />
+                        <UploadPlaceholder />
                     </div>
 
                     <div className="descript">

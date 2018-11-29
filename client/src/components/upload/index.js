@@ -3,52 +3,65 @@ import PropTypes from "prop-types";
 import * as qiniu from 'qiniu-js'
 import Style from './index.scss'
 import { notification } from 'antd';
+import API from '@common/api.js'
 
 class Upload extends React.Component{
 
 
-    uploadFn = () => {
+    uploadFn = async () => {
+        let response = await API.getToken()
+        let {baseUrl, token} = response.data
         let files = this.refs.upload.files
-        let fileType = files[0].type;
-        if (/^image/.test(fileType)) {
-            // 读取结果在fileReader.result里面
-           
-        } else {
-            notification['error']({
-                message: "请选择图片类型文件"
-            })
-        }
-        
+
+        // 校验图片
+        if (!this.imageVerify) return
+
+
         var putExtra = {
             fname: "",
             params: {},
-            mimeType: [] || null
+            mimeType: ["image/png", "image/jpeg", "image/gif"]
         };
+
         var config = {
-            // useCdnDomain: true,
-            region: qiniu.region.z2
+            region: qiniu.region.z0
         };
-        let token = 'Jyi6Ntprm38nI6n1heGjwXyQmzie8ZjY7l9Cq_Je:pmA4lE0xsPRmnGO9s8cEkgTGJ-g=:eyJzY29wZSI6ImRhbmthbC1jZG4iLCJkZWFkbGluZSI6MTU0MzI1Mjk3M30='
-        var observable = qiniu.upload(files[0], null, token, putExtra, config)
+        
+        // 文件名
+        let key = new Date().getTime() + files[0].name;
+        var observable = qiniu.upload(files[0], key, token, putExtra, config)
 
         var observer = {
-            next(res){
-                console.log(res)
+            next: (res) => {
               // ...
             },
-            error(err){
-              // ...
+            error: (err) => {
+                notification.error({
+                    message: err
+                })
             }, 
-            complete(res){
-                console.log(res)
-              // ...
+            complete: (res) => {
+                let imgUrl = baseUrl + '/' + res.key
+                this.props.successCb(imgUrl)
             }
         }
 
         var subscription = observable.subscribe(observer) // 上传开始
 
-        console.log(this.refs.upload.files)
+    }
 
+    imageVerify = () => {
+        let files = this.refs.upload.files
+        let fileType = files[0].type;
+        if (/^image/.test(fileType)) {
+            // 读取结果在fileReader.result里面
+           return true
+        } else {
+            notification.error({
+                message: "请选择图片类型文件"
+            })
+            return false
+        }
     }
 
     render () {
@@ -63,6 +76,6 @@ class Upload extends React.Component{
 }
 
 Upload.defaultProps = {
-
+    successCb: () => {}
 }
 export default Upload
