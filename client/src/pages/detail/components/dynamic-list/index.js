@@ -57,6 +57,7 @@ class DynamicList extends React.Component {
                                     topicLikeFn={this.props.topicLikeFn}
                                     addComments={this.props.addComments}
                                     topicIndex={index}
+                                    createdAt={item.topic.created_at}
                                     discuss={item.discuss} 
                                     topicId={item.topic.topicId} 
                                     topicLike={item.topic.topicLike}

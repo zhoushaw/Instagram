@@ -115,6 +115,7 @@ class TopicDialog extends React.Component{
                             <Comments 
                                 topicLikeFn={this.topicLikeFn}
                                 addComments={this.addComments}
+                                createdAt={topic.created_at}
                                 store={store}
                                 topicIndex={topicIndex}
                                 discuss={this.state.discuss} 

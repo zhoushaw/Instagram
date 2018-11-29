@@ -89,6 +89,26 @@ class Comments extends React.Component {
         }
     }
 
+    // 评论时间处理
+    _handlerCommentTime = () => {
+        if (this.props.createdAt) {
+            // 距离现在过去了多少秒
+            let date = (new Date() - new Date(this.props.createdAt)) / 1000;
+            
+            // 过去了多少天
+            let days = Math.floor(date / (60 * 60 * 24))
+            let hours = Math.floor(date / (60 * 60))
+            let minutes = Math.floor(date / 60)
+            let second = Math.floor(date)
+
+            if (days) return days + '天前'
+            if (hours) return hours + '小时前'
+            if (minutes) return minutes + '分钟前'
+            if (second) return second + '秒前'
+        }
+        return ''
+    }
+
     render () {
         const CommentsList = () => {
             return (
@@ -159,7 +179,7 @@ class Comments extends React.Component {
                         <CommentsList />
                         :''
                 }
-                <div className="release-time u-f-lightblack2">3天前</div>
+                <div className="release-time u-f-lightblack2">{this._handlerCommentTime()}</div>
                 <div className="add-comments">
                     <input type="text" 
                         ref="textInput"

@@ -43,7 +43,7 @@ class Nav extends React.Component{
                         <div className="search-content">
                             <input className="search-input" type="text" placeholder="搜索" autoFocus={this.state.focusStatus}  onBlur={this.focusSearchInput.bind(this)} />
                             <span className="icon"></span>
-                            <span className="close active"></span>
+                            {/* <span className="close active"></span> */}
                         </div>
                         : 
                         <div className="search-block" onClick={this.focusSearchInput.bind(this)}>
