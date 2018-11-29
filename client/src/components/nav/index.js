@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import { Menu, Dropdown, notification } from 'antd';
 import API from '@common/api'
 import { withRouter } from 'react-router'
+import PropTypes from "prop-types";
 
 
 
@@ -12,10 +13,15 @@ class Nav extends React.Component{
         super(props)
         this.state = {
             toggle: true,
-            focusStatus: false
+            focusStatus: false,
+            search: ''
         }
     }
  
+    static contextTypes = {
+        router: PropTypes.object
+    }
+
     
     render () {
         const aboutMenu = (
@@ -41,7 +47,14 @@ class Nav extends React.Component{
                     {
                         this.state.focusStatus?
                         <div className="search-content">
-                            <input className="search-input" type="text" placeholder="搜索" autoFocus={this.state.focusStatus}  onBlur={this.focusSearchInput.bind(this)} />
+                            <input 
+                                className="search-input" 
+                                type="text" 
+                                onKeyPress={this.searchContent}
+                                placeholder="搜索" 
+                                onChange={this.handelChange.bind(this)} 
+                                autoFocus={this.state.focusStatus}  
+                                onBlur={this.focusSearchInput.bind(this)} />
                             <span className="icon"></span>
                             {/* <span className="close active"></span> */}
                         </div>
@@ -74,6 +87,22 @@ class Nav extends React.Component{
         this.setState({
             toggle: !(scroll_Y>58)
         })
+    }
+
+    searchContent = (event) => {
+        if (event.key === 'Enter') {
+            
+            let path = {
+                pathname: `/search/${this.state.search}`,
+                // params: data
+            }
+            this.context.router.history.push(path)
+        }
+
+    }
+
+    handelChange (event){
+        this.setState({search: event.target.value})
     }
 
     async signOut () {
