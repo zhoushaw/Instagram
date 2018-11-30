@@ -44,15 +44,9 @@ export default class TopicService extends Service {
      * @interface insertTopicParams
      */
     public async queryTopicList (query) {
-        let {ctx, app} = this
-        const sequelize = app.Sequelize
-        const Op = sequelize.Op;
+        let {ctx} = this
         return await ctx.model.Topic.findAll({
-            where: {
-                userId: {
-                    [Op.in]: query
-                }
-            },
+            where: query,
             order:  [['created_at', 'DESC']]
         })
     }

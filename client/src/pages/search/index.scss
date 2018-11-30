@@ -1,7 +1,26 @@
 
-:local(.search) {
+:local(.search-container) {
     box-sizing: border-box;
     width: 1010px;
     padding: 0 30px;
     margin: 0 auto;
+    header {
+        height: 152px;
+        margin-bottom: 50px;
+        .avatar {
+            border-radius: 50%;
+        }
+        .container {
+            height: 100%;
+            line-height: 15px;
+            margin-left: 40px;
+            color: #262626;
+            font-size: 25px;
+        }
+    }
+    .title {
+        padding-left: 15px;
+        color: #999;
+        font-weight: bold;
+    }
   }

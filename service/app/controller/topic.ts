@@ -82,7 +82,13 @@ class TopicController extends Controller {
         followList.push(userId)
 
         // 获取每个帖子详情、评论，发帖人信息
-        let topics = await ctx.service.topic.queryTopicList(followList)
+
+        const Op = this.app.Sequelize.Op
+        let topics = await ctx.service.topic.queryTopicList({
+            userId: {
+                [Op.in]: followList
+            }
+        })
         let topicList: any = [];
 
         // 将所有帖子处理完毕
@@ -122,6 +128,30 @@ class TopicController extends Controller {
             status: +status
         })
     }
+
+    /**
+     * 搜索帖子
+     */
+    public async searchTopic () {
+        const {search} = this.ctx.request.query
+
+        const Op = this.app.Sequelize.Op
+        let topics = await this.ctx.service.topic.queryTopicList({
+            topicTitle: {
+                [Op.like]: search
+            }
+        })
+        let topicList: any = [];
+
+        // 将所有帖子处理完毕
+        for (let topic of topics) {
+            let item = await this.ctx.service.topic.topicDetailHanderl(topic.topicId)
+            topicList.push(item)
+        }
+
+        this.ctx.returnBody(200, "成功", topicList)
+    }
+
 
     // 获取用户发布帖子数量
     public async queryTopic () {

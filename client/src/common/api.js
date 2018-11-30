@@ -54,6 +54,10 @@ exports.frientTopicList = (data) => {
 exports.addDiscuss = (data) => {
     return instance.post('/topic/discuss/add', data);
 }
+// 帖子
+exports.searchTopic = (data) => {
+    return instance.post('/topic/discuss/add', data);
+}
 
 
 

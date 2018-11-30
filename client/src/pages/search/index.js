@@ -72,7 +72,12 @@ class Detail extends React.Component {
             <main>
                 <Nav />
                 <div className="page-container">
-                    <div className={Style['search']}>
+                    <div className={Style['search-container']}>
+                            <header>
+                                <img className="avatar" height="150px" width="150px"/>
+                                <span className="container">#内容</span>
+                            </header>
+                            <h2 className="title">热门帖子</h2>
                             <TopicList topicList={topic.topicList}/>
                             <Footer />
                     </div>
