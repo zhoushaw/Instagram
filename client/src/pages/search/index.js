@@ -18,7 +18,7 @@ class Detail extends React.Component {
     state = {
         userInfo: {},
         search: '',
-        baseImgUrl: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543650526308&di=1029a2eec54305da24c39a978050f385&imgtype=0&src=http%3A%2F%2Fup.enterdesk.com%2Fedpic_source%2F45%2F73%2Fde%2F4573de61472198a6d2b03a8ac122ccec.jpg'
+        baseImgUrl: 'https://upload.wikimedia.org/wikipedia/commons/2/26/512pxIcon-sunset_photo_not_found.png'
     }
 
     constructor(props) {

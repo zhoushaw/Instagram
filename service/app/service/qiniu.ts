@@ -23,6 +23,9 @@ export default class qiniuService extends Service {
      * 获取七牛上传token
      */
     public async getQiniuToken () {
+        if (!this.accessKey || !this.secretKey || !this.publicBucketDomain) {
+            this.ctx.throw(400, '请配置七牛鉴权参数')
+        }
         let mac = new qiniu.auth.digest.Mac(this.accessKey, this.secretKey);
         let putPolicy = new qiniu.rs.PutPolicy(this.options);
         let uploadToken = putPolicy.uploadToken(mac);

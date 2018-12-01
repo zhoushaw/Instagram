@@ -3,7 +3,7 @@ const defaultValue = []
 const searchInfo = (state = defaultValue, action) => {
     switch (action.type) {
         case 'ADD_SEARCH_INFO':
-            return [...state, ...action.info]
+            return [...action.info]
         case 'ADD_SEARCH_COMMENT':
             return addComments(state,action.info)
         case 'TOPIC_SEARCH_LIKE':

@@ -23,9 +23,6 @@ class NormalLoginForm extends React.Component {
 			notification['success']({
 				message: response.message
             })
-            
-            // 登录成功后，获取用户基础数据
-            this.getUserinfo()
 
             const { history } = this.props;
 			// 跳转登录
@@ -34,15 +31,6 @@ class NormalLoginForm extends React.Component {
 			}, 500)
 		}
     });
-  }
-
-  getUserinfo () {
-    API.getUserInfo().then(response => {
-        store.dispatch({
-            type: 'ADD_USERINFO',
-            info: response.data
-        })
-    })
   }
 
   onChangeHandler (type, event) {

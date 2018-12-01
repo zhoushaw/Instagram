@@ -22,6 +22,12 @@ import { connect } from "react-redux";
                     type: 'ADD_SEARCH_INFO',
                     info: info
                 })
+            },
+            addUserInfo: info => {
+                dispatch({
+                    type: 'ADD_USERINFO',
+                    info
+                })
             }
         };
     }
@@ -138,7 +144,13 @@ class Nav extends React.Component{
         this.props.history.push('/login');
     }
 
-    componentDidMount(){
+    componentDidMount () {
+        // 获取用户基础数据
+        if (!this.props.userInfo.userId) {
+            API.getUserInfo().then(response => {
+                this.props.addUserInfo(response.data)
+            })
+        }
         window.addEventListener("scroll",this.onScroll)
     }
 

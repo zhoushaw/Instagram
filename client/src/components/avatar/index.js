@@ -15,12 +15,15 @@ class Avatar extends React.Component{
 
     goAbout = () => {
         let userId = this.props.userInfo.userId;
-
-        let path = {
-            pathname: `/about/${userId}`,
-            // params: data
+        try {
+            let path = {
+                pathname: `/about/${userId}`,
+                // params: data
+            }
+            this.context.router.history.push(path)
+        } catch(err) {
+            console.log(err)
         }
-        this.context.router.history.push(path)
     }
 
     render () {

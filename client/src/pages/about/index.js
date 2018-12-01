@@ -40,7 +40,6 @@ class Detail extends React.Component {
     async componentDidMount () {
         let params = this.props.match.params || {}
         let userId = params.userId
-        console.log(this.props)
         let response = await API.getUserInfo({params: {userId}})
         let userInfo = response.data
 

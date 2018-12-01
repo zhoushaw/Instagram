@@ -19,31 +19,11 @@ import { connect } from "react-redux";
         return {
             userInfo: store.userInfo
         }
-    },
-    dispatch => {
-        return {
-            addUserInfo: info => {
-                dispatch({
-                    type: 'ADD_USERINFO',
-                    info: info
-                })
-            }
-        };
     }
 )
 class Intagram extends React.Component {
     constructor(props) {
         super(props);
-    }
-
-    componentDidMount () {
-        let pathname = location.pathname
-        let allowPath = ['/accounts','/about', '/']
-        if (allowPath.indexOf(pathname) !== -1) {
-            API.getUserInfo().then(response => {
-                this.props.addUserInfo(response.data)
-            })
-        }
     }
 
     render() {
