@@ -5,9 +5,27 @@ import { Menu, Dropdown, notification } from 'antd';
 import API from '@common/api'
 import { withRouter } from 'react-router'
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 
 
+@connect(
+    store => {
+        return {
+            userInfo: store.userInfo
+        }
+    },
+    dispatch => {
+        return {
+            addSearchInfo: info => {
+                dispatch({
+                    type: 'ADD_SEARCH_INFO',
+                    info: info
+                })
+            }
+        };
+    }
+)
 class Nav extends React.Component{
     constructor(props){
         super(props)
@@ -89,11 +107,18 @@ class Nav extends React.Component{
         })
     }
 
-    searchContent = (event) => {
+    searchContent = async (event) => {
         if (event.key === 'Enter') {
+            let search = this.state.search
+            // 获取用户帖子列表
+            let response = await API.searchTopic({ 
+                params: {search}
+            })
+            this.props.addSearchInfo(response.data)
             
+
             let path = {
-                pathname: `/search/${this.state.search}`,
+                pathname: `/search/${search}`,
                 // params: data
             }
             this.context.router.history.push(path)

@@ -56,7 +56,7 @@ exports.addDiscuss = (data) => {
 }
 // 帖子
 exports.searchTopic = (data) => {
-    return instance.post('/topic/discuss/add', data);
+    return instance.get('/topic/search', data);
 }
 
 

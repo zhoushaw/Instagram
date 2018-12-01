@@ -55,8 +55,8 @@ class Intagram extends React.Component {
                     <Route path="/about/:userId" component={About} />
                     <Route path="/about" component={About} />
                     <Route path="/accounts" component={Accounts}/>
+                    <Route path="/search/:content" component={Search}/>
                     <Route path="/search" component={Search}/>
-                    <Route path="/search/:search" component={Search}/>
                     <Route component={NotFoundPage} />
                 </Switch>
             </Router>

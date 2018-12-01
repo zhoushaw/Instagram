@@ -138,7 +138,7 @@ class TopicController extends Controller {
         const Op = this.app.Sequelize.Op
         let topics = await this.ctx.service.topic.queryTopicList({
             topicTitle: {
-                [Op.like]: search
+                [Op.regexp]: search
             }
         })
         let topicList: any = [];

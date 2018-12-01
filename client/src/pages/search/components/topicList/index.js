@@ -16,13 +16,13 @@ import { connect } from 'react-redux'
         return {
             addComments: info => {
                 dispatch({
-                    type: 'ADD_PERSONAL_COMMENT',
+                    type: 'ADD_SEARCH_COMMENT',
                     info
                 })
             },
             topicLikeFn: info => {
                 dispatch({
-                    type: 'TOPIC_PERSONAL_LIKE',
+                    type: 'TOPIC_SEARCH_LIKE',
                     info
                 })
             }
