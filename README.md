@@ -25,7 +25,7 @@
 
 > 登录
 
-<img src="https://s10.mogucdn.com/mlcdn/c45406/181201_52de0c9705a17c2k141h1498a95fd_600x377.gif" width="665" height="369"/> 
+<img src="https://s10.mogucdn.com/mlcdn/c45406/181201_4bge1k2c4l22ec994hjb496digb2f_419x264.gif" width="665" height="369"/> 
 
 > 关注
 
@@ -49,7 +49,6 @@
 <img src="https://s10.mogucdn.com/mlcdn/c45406/181201_6ghc2k2807ih876b0dlibk7a2i463_600x377.gif" width="665" height="369">
 
 
-> 如果对您有帮助，您可以点右上角 "Star" 支持一下 谢谢！ ^_^
 
 
 ## 运行项目
@@ -131,5 +130,7 @@ class Upload extends React.Component{
 - [X] 搜索帖子  -- 完成
 - [X] 上传头像  -- 完成
 - [X] 发帖  -- 完成
-- [] 收藏  -- 未完成
+- [X] 收藏  -- 未完成
 
+
+> 如果对您有帮助，您可以点右上角 "Star" 支持一下 谢谢！ ^_^
