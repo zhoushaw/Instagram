@@ -70,21 +70,21 @@ export default class TopicService extends Service {
 
         // 查询帖子评论
         let discuss = await ctx.service.topic.queryDiscuss({
-            topicId: +topicId, // 帖子id
-            userId: ctx.user.userId
+            topicId: +topicId // 帖子id
+            // userId: ctx.user.userId
         })
 
         // 查询用户是否已点赞
         let topicLike = await ctx.service.topic.queryTopicLike({
             topicId: +topicId, // 帖子id
-            userId: ctx.user.userId,
+            // userId: ctx.user.userId,
             status: 1
         })
 
         // 查询点赞数量
         let topicLikeCounts = await ctx.service.topic.queryTopicLikeCounts({
             topicId: +topicId, // 帖子id
-            userId: ctx.user.userId,
+            // userId: ctx.user.userId,
             status: 1
         })
 
