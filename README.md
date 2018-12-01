@@ -60,8 +60,12 @@
 
 > 运行后端项目
 
-* 首先新建learn数据库，并将/db/learn.sql，导入learn库中
-*  配置数据库信息
+* 请确保本地已装mysql，并配置全局变量
+* mysql -u root -p 并输入数据库密码
+* create database learn; 创建learn数据库
+* use learn;  切换数据库
+* source learn.sql的路径; 例如：source /Users/shawzhou/Desktop/learning/instagram/db/learn.sql;
+* 配置egg.js连接数据库信息
 
 ```javascript
 // 前往service/config/config.local.ts，配置你的数据库信息
