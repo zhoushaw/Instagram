@@ -10,8 +10,8 @@ interface qiniuOptioin {
 }
 
 export default class qiniuService extends Service {
-    private accessKey: string = 'nIK8fxtGzShsw_w2jGJbtCTlo7fX3ze7y2i_QSfY';
-    private secretKey: string = 'jHk2Rft4VPBR2trH3BX4fvaBgFMMsKH17RNzQk-L';
+    private accessKey: string = '';
+    private secretKey: string = '';
     private publicBucketDomain = 'http://piyhxgz90.bkt.clouddn.com';
 
     private options: qiniuOptioin = {
