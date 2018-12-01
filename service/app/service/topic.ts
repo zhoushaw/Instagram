@@ -77,7 +77,7 @@ export default class TopicService extends Service {
         // 查询用户是否已点赞
         let topicLike = await ctx.service.topic.queryTopicLike({
             topicId: +topicId, // 帖子id
-            // userId: ctx.user.userId,
+            userId: ctx.user.userId,
             status: 1
         })
 
