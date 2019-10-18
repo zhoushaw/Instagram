@@ -44,7 +44,7 @@
     "egg-bin": "^4.9.0",
     "egg-ci": "^1.8.0",
     "egg-mock": "^3.16.0",
-    "egg-ts-helper": "^1.11.0",
+    "egg-ts-helper": "^1.10.0",
     "sequelize-cli": "^4.1.1",
     "tslib": "^1.9.0",
     "tslint": "^4.0.0",
