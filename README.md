@@ -10,7 +10,7 @@
 - egg.js
 - mysql
 
-Before and after the end of the separation of development mode, the front-end and back-end projects belong to different projects
+Before and after the end of the separation of development mode, the front-end and back-end projects belong to different projects
 
 ```javascript
 // instagram/client The front-end engineering
