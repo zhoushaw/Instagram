@@ -39,7 +39,7 @@
     "webpack-dev-server": "^3.1.7"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "prop-types": "^15.6.2",
     "qiniu-js": "^2.5.3",
     "react": "^16.4.2",
